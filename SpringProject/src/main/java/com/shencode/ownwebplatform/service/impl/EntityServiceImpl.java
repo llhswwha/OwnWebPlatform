@@ -1,7 +1,8 @@
 package com.shencode.ownwebplatform.service.impl;
 
 import com.shencode.ownwebplatform.entity.BaseEntity;
-import com.shencode.ownwebplatform.entity.Message;
+import com.shencode.ownwebplatform.entity.IEntity;
+import com.shencode.ownwebplatform.model.Message;
 import com.shencode.ownwebplatform.module.condition.ConditionQuery;
 import com.shencode.ownwebplatform.module.condition.ui.ConditionModel;
 import com.shencode.ownwebplatform.module.condition.ui.OrderBy;
@@ -17,7 +18,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.*;
 
-public abstract class EntityServiceImpl<T extends BaseEntity<ID>,ID> implements EntityService<T,ID> {
+public abstract class EntityServiceImpl<T extends BaseEntity> implements EntityService<T,Integer> {
 
     private Class <T> entityClass;
 
@@ -36,7 +37,7 @@ public abstract class EntityServiceImpl<T extends BaseEntity<ID>,ID> implements 
     }
 
     @Override
-    public abstract EntityRepository<T, ID> getRepository();//抽象方法，强迫子类必须重写，提供自己的实现
+    public abstract EntityRepository<T, Integer> getRepository();//抽象方法，强迫子类必须重写，提供自己的实现
 
     @Override
     public List<T> getAll() {
@@ -49,7 +50,7 @@ public abstract class EntityServiceImpl<T extends BaseEntity<ID>,ID> implements 
         System.out.println(entityNew);
         Message<T> message = null;
         try {
-            ID id=entityNew.getId();
+            Integer id=entityNew.getId();
             if(id==null){//一般路径
                 T result = getRepository().save(entityNew);
                 message = new Message(0, "成功");
@@ -120,7 +121,7 @@ public abstract class EntityServiceImpl<T extends BaseEntity<ID>,ID> implements 
         Message<T> msg=null;
         try{
             Object id=map.get("id");
-            T entity=get((ID)id);
+            T entity=get(Integer.parseInt(id+""));
             if(entity==null){
             }else{
                 MapUtil.mapToObject(map,entity);//
@@ -135,7 +136,7 @@ public abstract class EntityServiceImpl<T extends BaseEntity<ID>,ID> implements 
     }
 
     @Override
-    public Message<T> deleteById(ID id) {
+    public Message<T> deleteById(Integer id) {
         T entity=get(id);
         Message<T> message =null;
         if(entity!=null){
@@ -181,7 +182,7 @@ public abstract class EntityServiceImpl<T extends BaseEntity<ID>,ID> implements 
     }
 
     @Override
-    public T get(ID id) {
+    public T get(Integer id) {
         Optional<T> op = getRepository().findById(id);
         if(op.isPresent()){
             return op.get();

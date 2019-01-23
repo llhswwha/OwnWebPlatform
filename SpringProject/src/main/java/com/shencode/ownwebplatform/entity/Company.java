@@ -4,19 +4,19 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="t_company")
-public class Company implements BaseEntity<Integer>{
-    @Id
+public class Company extends BaseEntity {
+    /*@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private Integer id;*/
     @Column(name = "pid")
     private Integer pid;
     @Column(name = "name")
     private String name;
 
-    public void setId(Integer id) {
+   /* public void setId(Integer id) {
         this.id = id;
-    }
+    }*/
 
 
 
@@ -24,9 +24,9 @@ public class Company implements BaseEntity<Integer>{
         this.name = name;
     }
 
-    public Integer getId() {
-        return id;
-    }
+//    public Integer getId() {
+//        return id;
+//    }
 
     public void setPid(Integer pid) {
         this.pid = pid;

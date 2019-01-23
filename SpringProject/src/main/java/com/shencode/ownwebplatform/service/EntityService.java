@@ -1,17 +1,17 @@
 package com.shencode.ownwebplatform.service;
 
 import com.shencode.ownwebplatform.entity.BaseEntity;
-import com.shencode.ownwebplatform.entity.Message;
+import com.shencode.ownwebplatform.entity.IEntity;
+import com.shencode.ownwebplatform.model.Message;
 import com.shencode.ownwebplatform.module.condition.ui.ConditionModel;
 import com.shencode.ownwebplatform.repository.EntityRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 import java.util.Map;
 
-public interface EntityService<T extends BaseEntity<ID>,ID> {
+public interface EntityService<T extends BaseEntity,ID> {
     public EntityRepository<T, ID> getRepository();
     public Message<T> add(T entity);
 

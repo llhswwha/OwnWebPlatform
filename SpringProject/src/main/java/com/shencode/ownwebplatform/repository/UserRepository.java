@@ -9,9 +9,9 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface UserRepository   extends  EntityRepository<User,String> {
+public interface UserRepository   extends  EntityRepository<User,Integer> {
 
-   public   User findByLoginName(String loginname);
+   public   User findByLoginName(String loginName);
 
    public List<User> findAll();
 

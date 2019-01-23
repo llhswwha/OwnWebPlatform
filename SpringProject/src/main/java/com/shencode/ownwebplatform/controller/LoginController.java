@@ -1,6 +1,6 @@
 package com.shencode.ownwebplatform.controller;
 
-import com.shencode.ownwebplatform.entity.Message;
+import com.shencode.ownwebplatform.model.Message;
 import com.shencode.ownwebplatform.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

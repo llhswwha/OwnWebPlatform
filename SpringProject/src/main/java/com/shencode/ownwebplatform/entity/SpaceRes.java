@@ -4,35 +4,34 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "t_spaceres")
-public class SpaceRes implements BaseEntity<Integer> {
-@Id
-@GeneratedValue(strategy = GenerationType.AUTO)
-@Column(name = "id")
-    private Integer id;
-@Column(name = "name",nullable = false)
+public class SpaceRes extends BaseEntity {
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @Column(name = "id")
+//    private Integer id;
+    @Column(name = "name", nullable = false)
     private String name;
-@Column(name = "area")
+    @Column(name = "area")
     private String area;
 /*@Column(name = "companyid")
     private String companyID;*/
 
-@ManyToOne
-@JoinColumn(name = "companyid")
-private Company company;
+    @ManyToOne
+    @JoinColumn(name = "companyid")
+    private Company company;
 
-@Column(name = "companyname")
+    @Column(name = "companyname")
     private String companyName;
-@Column(name = "code")
+    @Column(name = "code")
     private String code;
-@Column(name = "address")
+    @Column(name = "address")
     private String address;
-@Column(name = "charge")
+    @Column(name = "charge")
     private String charge;
-@Column(name = "tel")
+    @Column(name = "tel")
     private String tel;
-@Column(name = "devnum")
+    @Column(name = "devnum")
     private Integer devNum;
-
 
 
     public void setCompany(Company company) {
@@ -43,9 +42,9 @@ private Company company;
         return company;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+//    public void setId(Integer id) {
+//        this.id = id;
+//    }
 
     public void setName(String name) {
         this.name = name;
@@ -81,9 +80,9 @@ private Company company;
         this.devNum = devNum;
     }
 
-    public Integer getId() {
-        return id;
-    }
+//    public Integer getId() {
+//        return id;
+//    }
 
     public String getName() {
         return name;

@@ -8,17 +8,17 @@ import java.util.Set;
 //菜单表
 @Entity
 @Table(name = "t_menu")
-public class Menu {
+public class Menu extends BaseEntity {
 
-    @Id
+    /*@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private  Integer   id;
+    private  Integer   id;*/
     @Column(name = "name")
     private String name;
     @Column(name = "code")
     private String code;
-    @Column(name = "showorder")
+    @Column(name = "showOrder")
     private String showOrder;
     @Column(name = "pid")
     private String pid;
@@ -29,15 +29,15 @@ public class Menu {
 
     @ManyToMany(fetch=FetchType.LAZY)
     @JoinTable(name = "t_menurole"                          //中间表
-            ,joinColumns ={@JoinColumn(name = "menuid")}     //与本表关联字段
-            ,inverseJoinColumns = {@JoinColumn(name="roleid")})    //与角色表关联字段
+            ,joinColumns ={@JoinColumn(name = "menuId")}     //与本表关联字段
+            ,inverseJoinColumns = {@JoinColumn(name="roleId")})    //与角色表关联字段
     @JsonIgnore
     private Set<Role>  roleSet;
 
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+//    public void setId(Integer id) {
+//        this.id = id;
+//    }
 
     public void setRoleSet(Set<Role> roleSet) {
         this.roleSet = roleSet;
@@ -67,9 +67,9 @@ public class Menu {
         this.represent = represent;
     }
 
-    public Integer getId() {
-        return id;
-    }
+//    public Integer getId() {
+//        return id;
+//    }
 
     public String getName() {
         return name;

@@ -1,4 +1,4 @@
-package com.shencode.ownwebplatform.entity;
+package com.shencode.ownwebplatform.model;
 
 import java.util.List;
 

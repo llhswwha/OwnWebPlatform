@@ -2,21 +2,20 @@ package com.shencode.ownwebplatform.controller;
 
 
 import com.shencode.ownwebplatform.entity.BaseEntity;
-import com.shencode.ownwebplatform.entity.Message;
+import com.shencode.ownwebplatform.entity.IEntity;
+import com.shencode.ownwebplatform.model.Message;
 import com.shencode.ownwebplatform.module.condition.ui.ConditionModel;
 import com.shencode.ownwebplatform.service.EntityService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.criteria.Predicate;
 import java.util.List;
 import java.util.Map;
 
-public abstract class EntityController<T extends BaseEntity<ID>,ID> {
+public abstract class EntityController<T extends BaseEntity,ID> {
 
     public abstract EntityService<T, ID> getService();//抽象方法，强迫子类必须重写，提供自己的实现
 

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 @Service
-public class CompanyServiceImpl extends EntityServiceImpl<Company,Integer> implements CompanyService {
+public class CompanyServiceImpl extends EntityServiceImpl<Company> implements CompanyService {
 
     @Resource
     private CompanyRepository repository;

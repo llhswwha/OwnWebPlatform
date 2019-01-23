@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import javax.annotation.Resource;
 
-public class SpaceResServiceImpl extends EntityServiceImpl<SpaceRes,Integer> implements SpaceResService {
+public class SpaceResServiceImpl extends EntityServiceImpl<SpaceRes> implements SpaceResService {
     @Resource
     private SpaceResRepository spaceResRepository;
 

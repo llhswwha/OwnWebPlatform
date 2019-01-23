@@ -1,6 +1,6 @@
 package com.shencode.ownwebplatform;
 
-import com.shencode.ownwebplatform.entity.Message;
+import com.shencode.ownwebplatform.model.Message;
 import com.shencode.ownwebplatform.entity.User;
 import com.shencode.ownwebplatform.service.UserService;
 import org.junit.Test;

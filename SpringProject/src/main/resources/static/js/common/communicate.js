@@ -65,6 +65,16 @@ function EntityDao(name) {
             return result;
         }
     }
+    if (typeof this.getOne != "function") {
+        EntityDao.prototype.getOne = function (id) {
+            //alert(this.name);
+            console.log("getOne");
+            var url=name+"/"+id;
+            var ajax=new Ajax();
+            var result=ajax.put(url,id);
+            return result;
+        }
+    }
     if (typeof this.getAll != "function") {
         EntityDao.prototype.getAll = function () {
             //alert(this.name);

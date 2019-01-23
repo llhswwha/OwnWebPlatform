@@ -34,5 +34,14 @@ $(function () {
         var result=dao.getAll();
         console.log(result);
     });
+
+    $("#getAll").click(function () {
+        var entityName='users';
+        var data=getData();
+        console.log('add');
+        var dao=new EntityDao(entityName);
+        var result=dao.getAll();
+        console.log(result);
+    });
 })
 

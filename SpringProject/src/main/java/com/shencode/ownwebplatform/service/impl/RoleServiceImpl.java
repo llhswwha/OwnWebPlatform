@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class RoleServiceImpl extends EntityServiceImpl<Role,Integer> implements RoleService {
+public class RoleServiceImpl extends EntityServiceImpl<Role> implements RoleService {
      @Resource
      private RoleRepository roleRepository;
     @Override

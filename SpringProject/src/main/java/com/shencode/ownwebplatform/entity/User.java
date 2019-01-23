@@ -5,57 +5,56 @@ import java.util.Set;
 
 @Entity
 @Table(name="t_user")
-public class User implements BaseEntity<String> {
+public class User extends BaseEntity {
 
-    @Id
+    //@Id
     // @GeneratedValue(strategy = GenerationType.) int 自增
-    @Column(name = "loginName")
+    @Column(name = "loginName",unique = true)
     private String loginName;
     @Column(name = "name")
     private String name;
-    @Column(name = "pw")
-    private String pw;
-    @Column(name = "sex")
-    private String sex;
+    @Column(name = "password")
+    private String password;
+    @Column(name = "gender")
+    private String gender;//性别
     @Column(name = "birthday")
     private String birthday;
 /*    @Column(name="company")
     private String company;*/
 
     @Transient
-    private  Integer companyid;
+    private  Integer companyId;
     @Transient
-    public void setCompanyid(Integer companyid) {
-        this.companyid = companyid;
+    public void setCompanyId(Integer companyId) {
+        this.companyId = companyId;
     }
     @Transient
-    public Integer getCompanyid() {
-        return companyid;
+    public Integer getCompanyId() {
+        return companyId;
     }
 
     @ManyToOne
     @JoinColumn(name = "company")
-    private Company company;
-
+    private Company company;//公司
     @Column(name = "dep")
-    private String dep;
-    @Column(name = "cpzj")
-    private String cpzj;
-    @Column(name = "homeZJ")
-    private String homeZJ;
-    @Column(name = "cpTel")
-    private String cpTel;
-    @Column(name = "tel")
-    private String tel;
-    @Column(name = "cpEmail")
-    private String cpEmail;
-    @Column(name = "email")
-    private String email;
+    private String dep;//部门
+    @Column(name = "companyPhone")
+    private String companyPhone;//公司座机号码
+    @Column(name = "homePhone")
+    private String homePhone;//家里座机号码
+    @Column(name = "workPhone")
+    private String workPhone;//工作手机号
+    @Column(name = "privatePhone")
+    private String privatePhone;//私人手机号
+    @Column(name = "workEmail")
+    private String workEmail;//工作邮箱
+    @Column(name = "privateEmail")
+    private String privateEmail;//私人邮箱
     @Column(name = "represent")
-    private String represent;
+    private String represent;//???
 
-    public void setCpzj(String cpzj) {
-        this.cpzj = cpzj;
+    public void setCompanyPhone(String companyPhone) {
+        this.companyPhone = companyPhone;
     }
 
     public void setRepresent(String represent) {
@@ -66,8 +65,8 @@ public class User implements BaseEntity<String> {
         this.roleSet = roleSet;
     }
 
-    public String getCpzj() {
-        return cpzj;
+    public String getCompanyPhone() {
+        return companyPhone;
     }
 
     public String getRepresent() {
@@ -84,7 +83,7 @@ public class User implements BaseEntity<String> {
     private int state;
 
     @ManyToMany
-    @JoinTable(name = "t_userrole",joinColumns = {@JoinColumn(name = "loginName")},inverseJoinColumns = {@JoinColumn(name = "roleid")})
+    @JoinTable(name = "t_userrole",joinColumns = {@JoinColumn(name = "userId")},inverseJoinColumns = {@JoinColumn(name = "roleId")})
     private Set<Role> roleSet;
     @Transient
     private List<Integer> roleIdList;
@@ -116,12 +115,12 @@ public class User implements BaseEntity<String> {
         return company;
     }
 
-    public void setPw(String pw) {
-        this.pw = pw;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex;
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public void setBirthday(String birthday) {
@@ -133,27 +132,27 @@ public class User implements BaseEntity<String> {
     }
 
     public void setCpZJ(String cpZJ) {
-        this.cpzj = cpZJ;
+        this.companyPhone = cpZJ;
     }
 
-    public void setHomeZJ(String homeZJ) {
-        this.homeZJ = homeZJ;
+    public void setHomePhone(String homePhone) {
+        this.homePhone = homePhone;
     }
 
-    public void setCpTel(String cpTel) {
-        this.cpTel = cpTel;
+    public void setWorkPhone(String workPhone) {
+        this.workPhone = workPhone;
     }
 
-    public void setTel(String tel) {
-        this.tel = tel;
+    public void setPrivatePhone(String privatePhone) {
+        this.privatePhone = privatePhone;
     }
 
-    public void setCpEmail(String cpEmail) {
-        this.cpEmail = cpEmail;
+    public void setWorkEmail(String workEmail) {
+        this.workEmail = workEmail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setPrivateEmail(String privateEmail) {
+        this.privateEmail = privateEmail;
     }
 
     public void setDescribe(String represent) {
@@ -176,12 +175,12 @@ public class User implements BaseEntity<String> {
         return name;
     }
 
-    public String getPw() {
-        return pw;
+    public String getPassword() {
+        return password;
     }
 
-    public String getSex() {
-        return sex;
+    public String getGender() {
+        return gender;
     }
 
     public String getBirthday() {
@@ -193,27 +192,27 @@ public class User implements BaseEntity<String> {
     }
 
     public String getCpZJ() {
-        return cpzj;
+        return companyPhone;
     }
 
-    public String getHomeZJ() {
-        return homeZJ;
+    public String getHomePhone() {
+        return homePhone;
     }
 
-    public String getCpTel() {
-        return cpTel;
+    public String getWorkPhone() {
+        return workPhone;
     }
 
-    public String getTel() {
-        return tel;
+    public String getPrivatePhone() {
+        return privatePhone;
     }
 
-    public String getCpEmail() {
-        return cpEmail;
+    public String getWorkEmail() {
+        return workEmail;
     }
 
-    public String getEmail() {
-        return email;
+    public String getPrivateEmail() {
+        return privateEmail;
     }
 
     public String getDescribe() {
@@ -229,28 +228,28 @@ public class User implements BaseEntity<String> {
     }
 
 
-    @Override
+    /*@Override
     public String getId() {
         return loginName;
-    }
+    }*/
 
     @Override
     public String toString() {
         return "User{" +
                 "loginname='" + loginName + '\'' +
                 ", name='" + name + '\'' +
-                ", pw='" + pw + '\'' +
-                ", sex='" + sex + '\'' +
+                ", password='" + password + '\'' +
+                ", gender='" + gender + '\'' +
                 ", birthday='" + birthday + '\'' +
-                ", companyid=" + companyid +
+                ", companyid=" + companyId +
                 ", company=" + company +
                 ", dep='" + dep + '\'' +
-                ", cpzj='" + cpzj + '\'' +
-                ", homeZJ='" + homeZJ + '\'' +
-                ", cpTel='" + cpTel + '\'' +
-                ", tel='" + tel + '\'' +
-                ", cpEmail='" + cpEmail + '\'' +
-                ", email='" + email + '\'' +
+                ", companyPhone='" + companyPhone + '\'' +
+                ", homePhone='" + homePhone + '\'' +
+                ", workPhone='" + workPhone + '\'' +
+                ", privatePhone='" + privatePhone + '\'' +
+                ", workEmail='" + workEmail + '\'' +
+                ", privateEmail='" + privateEmail + '\'' +
                 ", represent='" + represent + '\'' +
                 ", validSityData='" + validSityData + '\'' +
                 ", state=" + state +

@@ -32,7 +32,7 @@
                     <img alt="" src="<%=basePath%>images/Login.png" class="login-topicon"/>
                     <span class="login-toptip">公安部门设备管理系统</span>
                     <div style="height:40px;width:300px;margin-top: 28px;">
-                    <input type="text" value="" placeholder="用户名/编号" style="margin-left:17px" class="form-control" id="loginName"/>
+                    <input type="text" value="" placeholder="用户名/编号" style="margin-left:17px" class="form-control" id="userId"/>
                     </div>
                     <div style="height:40px;width:300px;padding-top:20px;">
                         <input type="text" value="" placeholder="请输入登录密码" style="margin-left:17px" class="form-control" id="passWord" />
@@ -96,8 +96,8 @@
                 		type: "post",
                         url: "${url}/GetData/text/Servlet_TbUser?who=DoLogin",
                         data: {
-                        	loginName:$("#loginName").val(),
-                            pw:$("#passWord").val()
+                        	userId:$("#userId").val(),
+                            password:$("#passWord").val()
                         },
                         async: false,
                         success:function(e){ 

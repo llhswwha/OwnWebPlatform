@@ -1,7 +1,7 @@
 package com.shencode.ownwebplatform.service.impl;
 
 import com.shencode.ownwebplatform.entity.Company;
-import com.shencode.ownwebplatform.entity.Message;
+import com.shencode.ownwebplatform.model.Message;
 import com.shencode.ownwebplatform.entity.Role;
 import com.shencode.ownwebplatform.entity.User;
 import com.shencode.ownwebplatform.repository.CompanyRepository;
@@ -12,7 +12,6 @@ import com.shencode.ownwebplatform.service.UserService;
 import com.shencode.ownwebplatform.util.MD5Util;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -22,7 +21,7 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-public class UserServiceImpl extends EntityServiceImpl<User,String> implements UserService {
+public class UserServiceImpl extends EntityServiceImpl<User> implements UserService {
     @Resource
     private UserRepository userRepository = null;
     @Resource
@@ -32,7 +31,7 @@ public class UserServiceImpl extends EntityServiceImpl<User,String> implements U
     private  RoleRepository roleRepository;
 
     @Override
-    public EntityRepository<User, String> getRepository() {
+    public EntityRepository<User, Integer> getRepository() {
         return userRepository;
     }
 
@@ -45,7 +44,7 @@ public class UserServiceImpl extends EntityServiceImpl<User,String> implements U
         }
         else
         {
-            if(MD5Util.getMD5String(password)==user.getPw())
+            if(MD5Util.getMD5String(password)==user.getPassword())
             {
                 if(user.getState()==0)
                 {
@@ -64,37 +63,37 @@ public class UserServiceImpl extends EntityServiceImpl<User,String> implements U
     }
 
     @Override
-    public Page<User> getUserbyName(String name, Pageable pageable) {
+    public Page<User> getUserByName(String name, Pageable pageable) {
         return  userRepository.getUserbyName(name,pageable);
     }
 
     @Override
     public Message<User> addUser(User user) {
-        List<Integer> integerList=new ArrayList<>();
+        SetRoles(user);
+        SetCompany(user);
+        return add(user);
+    }
+
+    private void SetCompany(User user){
+        Company company=companyRepository.findById(user.getCompanyId()).get();
+        user.setCompany(company);
+    }
+
+    private void SetRoles(User user){
+        List<Integer> roleIdList=user.getRoleIdList();
         Set<Role> roleSet=new HashSet<>();
-        for (int i=0;i<integerList.size();i++)
+        for (int i=0;i<roleIdList.size();i++)
         {
-            Role role= roleRepository.findById(integerList.get(i)).get();
+            Role role= roleRepository.findById(roleIdList.get(i)).get();
             roleSet.add(role);
         }
-        Company company=companyRepository.findById(user.getCompanyid()).get();
         user.setRoleSet(roleSet);
-        user.setCompany(company);
-        return add(user);
     }
 
     @Override
     public Message<User> updateUser(User user) {
-        List<Integer> integerList=new ArrayList<>();
-        Set<Role> roleSet=new HashSet<>();
-        for (int i=0;i<integerList.size();i++)
-        {
-            Role role= roleRepository.findById(integerList.get(i)).get();
-            roleSet.add(role);
-        }
-        Company company=companyRepository.findById(user.getCompanyid()).get();
-        user.setRoleSet(roleSet);
-        user.setCompany(company);
+        SetRoles(user);
+        SetCompany(user);
         return update(user);
     }
 

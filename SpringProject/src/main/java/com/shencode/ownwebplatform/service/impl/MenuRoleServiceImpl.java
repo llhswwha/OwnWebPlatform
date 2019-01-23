@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 @Service
-public class MenuRoleServiceImpl extends EntityServiceImpl<MenuRole,Integer> implements MenuRoleService {
+public class MenuRoleServiceImpl extends EntityServiceImpl<MenuRole> implements MenuRoleService {
     @Resource
     private MenuRoleRepository menuRoleRepository;
 
