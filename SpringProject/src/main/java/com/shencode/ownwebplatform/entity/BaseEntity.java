@@ -2,13 +2,11 @@ package com.shencode.ownwebplatform.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 
+@MappedSuperclass
 public abstract class BaseEntity implements IEntity<Integer> {
 
     @Id
