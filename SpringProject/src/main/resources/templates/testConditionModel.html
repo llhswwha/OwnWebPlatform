@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TestConditionModel</title>
+    <script type="text/javascript" src="js/plugin/jquery-1.11.3.js"></script>
+</head>
+<body>
+<h2>TestConditionModel</h2>
+<button id="users_findPage">users/findPage(post) 分页</button>
+<button id="users_findPage2">users/findPage(get) get方式分页</button>
+<button id="users_findPage3">users/queryAll 查询全部</button>
+<button id="users_findPage4">users/queryPage 分页查询</button>
+<script>
+    console.log("1");
+
+    var map=new Object();
+    map['loginname-lk']='4';
+    map.name='aa';
+    var sort=new Object();
+    sort['loginname']='asc';
+    sort['name']='asc';
+    var conditionModel=new Object();
+    conditionModel.page=0;
+    conditionModel.size=2;
+    conditionModel.map=map;
+    conditionModel.sort=sort;
+
+    var user=new Object();
+    user.roleList=[];
+    user.roleList.push(1);
+    user.roleList.push(2);
+
+    var orderBy
+
+    $('#users_findPage').on('click',function(){
+        $.ajax({
+            url:'test/findPage',
+            type:'POST',
+            data:conditionModel,
+            dataType:'json',
+            success:function (data) {
+                console.log(data);
+                alert('创建成功')
+            },
+            error:function () {
+                alert('创建失败')
+            },
+        })
+        console.log("test1");
+    });
+    $('#users_findPage2').on('click',function(){
+        $.ajax({
+            url:'test/findPage2',
+            type:'GET',
+            data:conditionModel,
+            dataType:'json',
+            success:function (data) {
+                console.log(data);
+                alert('创建成功')
+            },
+            error:function () {
+                alert('创建失败')
+            },
+        })
+        console.log("test1");
+    });
+    $('#users_findPage3').on('click',function(){
+        $.ajax({
+            url:'users/queryAll',
+            type:'POST',
+            data:conditionModel,
+            dataType:'json',
+            success:function (data) {
+                console.log(data);
+                alert('创建成功')
+            },
+            error:function () {
+                alert('创建失败')
+            },
+        })
+        console.log("test1");
+    });
+
+    var param2=new Object();
+    var condition=new Object();
+    condition['a']=1;
+    condition['b']=3;
+    param2.condition=condition;
+
+    $('#users_findPage4').on('click',function(){
+        $.ajax({
+            url:'users/queryPage',
+            type:'POST',
+            dataType:'json',
+            data:conditionModel,
+            success:function (data) {
+                console.log(data);
+                alert('创建成功')
+            },
+            error:function () {
+                alert('创建失败')
+            },
+        })
+        console.log("test1");
+    });
+</script>
+</body>
+</html>

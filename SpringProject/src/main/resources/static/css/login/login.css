@@ -1,0 +1,190 @@
+@CHARSET "UTF-8";
+    /* 样式部分 */
+    input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #181240 inset;
+    -webkit-text-fill-color: #fbfbfb;
+    border: 0px solid #CCC!important;
+    height: 21px!important;
+    line-height: 21px!important;
+    /*border-radius: 0 4px 4px 0;*/
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+    }
+  
+    button{
+        cursor:pointer
+    }
+
+    a, button, input {
+        outline: none;
+    }
+   
+    .login_fields_submit {
+        padding-top:20px;
+    }
+    .login_fields_submit .btn_dl {
+        height: 40px;
+        width: 300px;
+        margin-left:30px;
+        background-color:#4c94ff;
+        line-height:40px;
+        font-size:14px;
+        border:none;
+        color: #fff;
+        transition:all 0.3s;
+    }
+    .login_fields_submit .btn_dl:hover{
+        color:#fff;
+        background-color:#599cff;
+        border:1px #FFFFFF solid;
+    }
+    
+    
+      /*首页样式更改开始*/
+.All{
+	position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    min-width: 900px;
+    min-height: 700px;
+    background-size: cover;
+}
+.login-top{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 10%;
+}
+.login-tophei{
+	display: inline-block;
+    height: 100%;
+    vertical-align: middle;  
+}
+.login-topicon{
+    width: 72px;
+    height: 79px;
+    margin: 40px 0 0 144px;
+    vertical-align: middle;
+}
+.login-toptip{
+	display: block;
+    font-size: 24px;
+    color: #1a2e4a;
+    vertical-align: middle;
+    text-align:center;
+    margin-top:8px;
+}
+.login-content {
+	position: absolute;
+	top: 0%;
+	left: 0;
+	right: 0;
+	bottom: 16%;
+	
+}
+.login_bg {
+	position: absolute;
+	right: 360px;
+	top: 155px;
+	width: 360px;
+	height: 480px;
+	background-color: #fff;
+	z-index: 50;
+}
+ul>li{
+	list-style: none;
+}
+.login_fields_user {
+	position: relative;
+}
+/*图标*/
+.icon-identifying,.icon-password,.icon-user{
+    float:left;
+    margin:12px 10px 0 10px;
+    color:#485AB3;
+}
+.icon-gm{
+    color:#FFFFFF;
+}
+.login-bottom{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 16%;
+    min-height: 60px;
+    max-height:200px;
+    overflow: hidden;
+}
+.login-bottom p{
+	text-align: center;
+    margin-top: 30px;
+}
+/*首页样式更改结束*/
+
+/*验证码CSS开始*/
+.auth_code {
+	display: inline-block;
+	background-color: #211C54;
+	font-family: Arial;
+	font-style: italic;
+	color: #FBFBFB;
+	font-size: 20px;
+	border: 1px solid #ddd;
+	letter-spacing: 2px;
+	font-weight: bolder;
+	cursor: pointer;
+	width: 80px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	vertical-align: middle;
+	margin-left: 20px;
+}
+
+a {
+	text-decoration: none;
+	font-size: 12px;
+	color: #288bc4;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+#form1 {
+	position: relative;
+}
+
+#inputCode {
+	display: inline-block;
+	margin-left: 17px;
+	width: 120px;
+	height: 30px;
+	padding: 4px 12px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #555;
+	background-color: #fff;
+	background-image: none;
+	border: 1px solid #ccc;
+}
+/*验证码CSS结束*/
+.form-control{
+  display: block;
+  width: 100%;
+  height: 30px;
+  padding: 4px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+}

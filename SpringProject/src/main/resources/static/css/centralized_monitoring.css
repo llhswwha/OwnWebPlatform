@@ -1,0 +1,82 @@
+
+/*.syscontent .sysmain{*/
+    /*display: none;*/
+/*}*/
+/*.syscontent .sysmain.active{*/
+    /*display: block;*/
+/*}*/
+/*弹窗底部按钮*/
+.butn_list{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    padding: 10px 10px;
+    background: #f6f9ff;
+}
+.btn-custom{
+    cursor: pointer;
+}
+html,body,.contentbox{
+    height: 100%;
+    width: 100%;
+}
+body{
+    box-sizing: border-box;
+    padding: 20px;
+    background: #eef2f8;
+}
+.outbox{
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+.leftbox,.rightbox{
+    float: left;
+    width: 258px;
+    background: #fff;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+}
+.leftbox .left_content,.rightbox .right_content{
+    width: 100%;
+    height: 100%;
+border: 1px solid #cfd5e5;
+}
+.rightbox{
+    width: 298px;
+float: right;
+}
+
+.mbox{
+    height: 100%;
+    float: left;
+  box-sizing: border-box;
+    padding: 20px;
+    width: calc(100% - 580px);
+    margin-left: 10px;
+    background: #fff;
+}
+.mbox .m_content{
+    width: 100%;
+    height: 100%;
+    border: 1px solid #cfd5e5;
+}
+.rightbox table{
+    width: 100%;
+}
+.rightbox table td{
+    border: 1px solid #cfd5e5;
+}
+
+.rightbox .right_content{
+    overflow: auto;
+}
+
+
+
+
+
+
+
+

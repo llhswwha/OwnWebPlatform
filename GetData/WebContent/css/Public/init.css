@@ -1,0 +1,752 @@
+﻿@charset "UTF-8";
+/*css 初始化 */
+html,
+body,
+ul,
+li,
+ol,
+dl,
+dd,
+dt,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+form,
+fieldset,
+legend,
+img {
+    margin: 0;
+    padding: 0;
+}
+fieldset,
+img,
+input,
+button {
+    border: none;
+    padding: 0;
+    margin: 0;
+    outline-style: none;
+}
+ul,
+ol
+{
+    list-style:none;
+}
+input {
+    padding-top: 0;
+    padding-bottom: 0;
+    font-family: "SimSun","微软雅黑";
+}
+select,
+input {
+    vertical-align: middle;
+}
+select,
+input,
+textarea {
+    font-size: 12px;
+    margin: 0;
+}
+textarea {
+    resize: none; /*防止拖动*/
+}
+img {
+    border: 0;/*  去掉图片底部默认的3像素空白缝隙*/
+    vertical-align: middle;
+}
+table {
+    border-collapse: collapse;
+}
+body {
+    font-size: 12px;
+    color:#666;
+}
+/*清楚浮动*/
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+.clearfix:after{
+    clear: both;
+}
+.clearfix{
+    *zoom: 1;/*IE/7/6*/
+}
+a {
+    color: #666;
+    text-decoration: none;
+}
+a:hover{
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-decoration: none;
+    font-weight: normal;
+    font-size: 100%;
+}
+s,
+i,
+em{
+    font-style: normal;
+    text-decoration: none;
+}
+/*公共类*/
+.container {
+    width: 1200px;
+    margin: 0 auto;
+}
+.left {
+    float: left;
+}
+.right{
+    float: right;
+}
+.hide {
+    display: none;
+}
+
+/*清除默认样式*/
+.clearfix:before,.clearfix:after {
+    content:"";
+    display:table;
+}
+.clearfix:after{clear:both;}
+.clearfix{
+    *zoom:1;/*IE/7/6*/
+}
+body .container{
+    width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+
+/*弹窗*/
+.etui{
+    display: none;
+}
+fieldset{
+    padding-top: 10px;
+    position: relative;
+}
+fieldset>span{
+    display: inline-block;
+    width:130px;
+    text-align: right;
+    margin: 10px 15px;
+}
+
+fieldset>select{
+     border:1px #cfd5e5  solid;
+}
+fieldset>.commonality-box>select{
+     border:1px #cfd5e5 solid;
+}
+fieldset>.commonality-box>select{
+     width:177px;
+     height:30px;
+     margin:2px 0;
+}
+fieldset>select{
+     width:200px;
+     height:33px;
+     padding: 4px 5px;
+     margin:2px 0;
+}
+textarea{
+    margin-top:5px;
+}
+#modal-body>span>i,fieldset>.commonality-box>i{
+    width:5px;
+    height:5px;
+    display: inline-block;
+    color:#FE5D5E;
+}
+
+#qr_code{
+    width:65px;
+    height:25.98px;
+    text-align:center;
+    line-height:25.98px;
+}
+/*ie兼容下拉框*/
+.commonality-box{
+    position:relative;
+    display:inline-block;
+}
+.commonality-h4{
+    width:150px;
+    height:30px;
+    position:absolute;
+    left: 30px;
+    /*top:2px;
+    left:0px;*/
+}
+/*日历input*/
+#buyTime,#buyTime-md{
+    width:132px;
+}
+/*资源调度服务器 input 资源管理服务器 input 综合查询下面 工单查询*/
+#vague-name,#vague-cpu,#vague-memory,#vague-Code,#vague-AskUser,#vague-BusName{
+    /*border:1px #70B6F6 solid;
+    height: 18px;
+    line-height: 18px;
+    width: 110px;
+    margin:4px 0*/
+}
+/*IP段拆分操作*/
+#add_data_boxes_ul>li{
+    margin-top:10px;
+}
+#add_data_boxes_ul>li>span{
+    display:inline-block;
+    width:100px;
+    text-align:center;
+}
+#add_data_boxes_ul>li>input{
+    width:100px;
+    border:1px #C9E0FB solid;
+    height:18px;
+}
+/*........................................不可编辑状态(btn input textarea select).......................................................*/
+.forbid {  
+    background-color: #f5f7fa !important;
+    color: #dadde5;
+}
+/*.forbid:hover {
+    border: 1px #cfd5e5 solid;
+}*/
+/*.forbid:active {
+    color: #dadde5;
+}*/
+/*.forbid:disabled {
+    border: 12px #24b29b solid;
+}*/
+/*........................................btn.......................................................*/
+.btn-custom {
+        display: inline-block;
+        height: 30px;
+        line-height: 30px;
+        padding: 0 20px;
+        /*behavior: url(../../Page/PIE/PIE.htc);
+        position: relative;*/
+        border-radius: 2px;
+        margin-right: 10px;
+}
+.btn-blue {
+        background-color: #5184ff;
+        color: #ffffff;
+}
+.btn-blue:hover {
+    background-color: #5e8fff;
+}
+.btn-blue:active {
+    background-color: #5184ff;
+    behavior: url(../../Page/PIE/PIE.htc);
+    position: relative;
+    box-shadow: 0 1px 4px #3874ff inset;
+}
+.btn-white {
+        background-color: #fafbff;
+        color: #596477;
+        border: 1px #cfd5e5 solid;
+}
+.btn-white:hover {
+    background-color: #ffffff;
+}
+.btn-white:active {
+    background-color: #fafbff;
+    behavior: url(../../Page/PIE/PIE.htc);
+    position: relative;
+    box-shadow: 0 1px 4px #dce1e5 inset;
+}
+.btn-green {
+    background-color: #2bd9bc;
+    color: #ffffff;
+}
+.btn-green:hover {
+    background-color: #2ee5c7;
+}
+.btn-green:active {
+    background-color: #2bd9bc;
+    behavior: url(../../Page/PIE/PIE.htc);
+    position: relative;
+    box-shadow: 0 1px 4px #1dbfa4 inset;
+}
+.btn-red {
+        background-color: #ff596f;
+        color: #ffffff;
+}
+.btn-red:hover {
+    background-color: #ff7385;
+}
+.btn-red:active {
+    background-color: #ff596f;
+    behavior: url(../../Page/PIE/PIE.htc);
+    position: relative;
+    box-shadow: 0 1px 4px #e5223c inset;
+}
+.btn-unable {
+    background-color: #f5f7fa;
+    color: #99a4bf;
+}
+.btn-gray{
+	background-color:#cad2de;
+	color:#fff;
+}
+/*........................................文本按钮.......................................................*/
+.link_normal {
+        color: #5184ff;
+}
+.link_normal:hover {
+       color: #5184ff;
+       text-decoration:underline
+}
+.link_normal:active {
+       color: #416bcc;
+       text-decoration:underline
+}
+/*........................................工具栏input.......................................................*/
+        .textbox{
+            border: 1px #cfd5e5 solid;
+            color: #596477;
+            height: 30px;
+            width: 160px;
+            line-height: 30px;
+            /*behavior: url(../../Page/PIE/PIE.htc);
+            position: relative;*/
+            border-radius: 2px;
+            padding-left: 15px;
+            font-size: 14px;
+        }
+        .textbox_normal::-webkit-input-placeholder {
+            color:#dadde5;
+        }
+        .textbox_normal:active {
+            border: 1px #5184ff solid;
+        }
+/*........................................textarea.......................................................*/
+        .richtextbox {
+            border: 1px #cfd5e5 solid;
+            color: #596477;
+            height:80px;
+            /*behavior: url(../../Page/PIE/PIE.htc);
+            position: relative;*/
+            border-radius: 2px;
+            padding: 10px;
+            float: left;
+        }
+        .richtextbox::-webkit-input-placeholder {
+            color:#dadde5;
+        }
+        .richtextbox_normal:active {
+            border: 1px #5184ff solid;
+            color: #596477;
+        }
+/*........................................alert dashed.......................................................*/
+        .top_gaine {
+            padding: 10px 30px;
+        }
+        .top_gaine span {
+            color: #5184ff;
+        }
+        .top_gaine i {
+            display: inline-block;
+             width: 410px; 
+             border-bottom: 1px #5184ff dashed; 
+             float: right; 
+             margin-top: 7px; 
+             margin-right: 20px;
+        }
+/*........................................select 不确定要不要用.......................................................*/
+.expander_normal {/*这里后面三角形图标未更改*/
+    border: 1px #cfd5e5 solid;
+    color: #596477;
+}
+.expander_normal::-webkit-input-placeholder {
+    color: #dadde5;
+}
+/*........................................其他按钮.......................................................*/
+    .tag {
+        display:inline-block;
+        padding:0 10px 0 10px;
+        height: 24px;
+        line-height: 24px;
+        /*behavior: url(../../Page/PIE/PIE.htc);
+        position: relative;*/
+        border-radius: 2px;
+        }
+        .tag .center_icon {
+        margin-right: 6px;
+        display: inline-block;
+        /*behavior: url(../../Page/PIE/PIE.htc);
+        position: relative;*/
+        border-radius: 50%;
+        width: 10px;
+        height: 10px;
+        }
+        .tag_red {
+        background-color: #ffebed;
+        color: #ff596f;
+        }
+        .tag .icon_red{
+            background-color: #ff596f;
+        }
+        .tag_green {
+        background-color: #e4f7f4;
+        color: #2bd9bc;
+        }
+        .tag .icon_green{
+            background-color: #2bd9bc;
+        }
+        .tag_yellow {
+        background-color: #fcf5e3;
+        color: #ffc233;
+        }
+        .tag .icon_yellow{
+            background-color: #ffc233;
+        }
+        .tag_blue {
+        background-color: #ebf1ff;
+        color: #5184ff;
+        }
+        .tag .icon_blue{
+            background-color: #5184ff;
+        }
+        .tag_unable {
+        background-color: #edeff2;
+        color: #99a4bf;
+        }
+        .tag .icon_unable{
+            background-color: #99a4bf;
+        }
+
+/*........................................带有按钮的input.......................................................*/
+.combine {
+     border:1px #cfd5e5 solid;
+     height:32px;
+     width:200px;
+}
+.left_portion {
+    width: 151px;
+    height: 80%;
+    float: left;
+}
+.right_portion {
+     float: left;
+     padding: 0 8px;
+     height: 100%;
+     background-color: #fafbff;
+     color: #596477;
+     border: 1px #cfd5e5 solid;
+}
+/*不可编辑状态下input引用上面.forbid 后面btn使用.forbid_btn*/
+.forbid_btn {
+    background-color: #e9eef7;
+    color: #b8becc;
+}
+/*........................................alert.......................................................*/
+.tip-msg {
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1050;
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+    outline: 0;
+}
+.cat{
+    /*width:400px;*/
+  /*  height:100px;*/
+    margin:300px auto;
+}
+.cat_s{
+    width:400px;
+    height:50px;
+    margin:100px auto;
+    text-align: center;
+    line-height: 50px;
+}
+.cat .d_head{width:100%;height:30px;}
+.cat .d_head span{line-height:48px;font-size: 14px;}
+.cat .d_head span a{float:right;margin-right:10px;display:block;width:30px;height:30px;}
+.cat .d_head .left_icon{
+    float: left;
+    margin: 17px 0px 0 15px;
+}
+.cat_s .d_head .left_icon{
+    position: relative;
+    top: 2px;
+    margin-right: 4px;
+}
+.cat .d_head .close{
+    float: right;
+    margin: -10px 8px 0 0px;
+    cursor:pointer;
+    font-size: 20px;
+}
+.cat .d_icon{color:green;width:50px;height:120px;float:left;margin-left:30px;margin-top:20px;}
+
+.cat .d_content{
+    margin-top:20px;
+    margin-bottom: 20px;
+    padding-left:13%;
+    font-size:12px;
+    font-family:"微软雅黑";
+    width:87%;
+    word-wrap: break-word;
+    color: #333333;
+}
+
+.info{
+    background:#f7faff;
+    border:1px solid #5184ff;
+    box-shadow: 0px 1px 2px rgba(81, 132, 255, 0.4);
+    position: relative; 
+    behavior: url(../../Page/PIE/PIE.htc);
+}
+.cat .d_head .top_info{
+    color:#5184ff;
+}
+.cat_s .d_head .top_info{
+    color:#5184ff;
+}
+
+.error{
+    background:#fff7f8;
+    border:1px solid #ff596f;
+    box-shadow: 0px 1px 2px rgba(255, 89, 111, 0.4);
+    position: relative; 
+    behavior: url(../../Page/PIE/PIE.htc);
+}
+.cat .d_head .top_error{
+    color:#ff596f;
+}
+.cat .d_head .top_error{
+    color:#ff596f;
+}
+
+.success{
+    background:#f7fffe;
+    border:1px solid #2bd9bc;
+    box-shadow: 0px 1px 2px rgba(43, 217, 188, 0.4);
+    position: relative; 
+    behavior: url(../../Page/PIE/PIE.htc);
+}
+.cat .d_head .top_success{
+    color:#2bd9bc;
+}
+.cat .d_head .top_success{
+    color:#2bd9bc;
+}
+
+.warn{
+    background:#fffdf7;
+    border:1px solid #ffc233;
+    box-shadow: 0px 1px 2px rgba(255, 194, 51, 0.4);
+    position: relative; 
+    behavior: url(../../Page/PIE/PIE.htc);
+}
+.cat .d_head .top_warn{
+    color:#ffc233;
+}
+.cat .d_head .top_warn{
+    color:#ffc233;
+}
+
+/*  hover/active( × ) */
+.top_info .close:hover{
+     color:#99b8ff;
+ }
+.top_info .close:active{
+    color:#416bcc;
+}
+
+.top_error .close:hover{
+    color:#ff99a7;
+}
+.top_error .close:active{
+    color:#cc4759;
+}
+
+.top_success .close:hover{
+    color:#73e5d2;
+}
+.top_success .close:active{
+    color:#24b29b;
+}
+
+.top_warn .close:hover{
+    color:#ffd97f;
+}
+.top_warn .close:active{
+    color:#d9a52b;
+}
+
+
+
+.paper {
+    margin: 20px;
+    border: 1px #cfd5e5 solid;
+}
+.paper input{
+    width:142px;
+    height:30px;
+    line-height: 30px;
+    line-height: 30px\9;
+    padding-left: 8px;
+    border:0;
+    background-color: #ffffff;
+        
+}
+.paper select{
+    width:142px;
+    height:30px;
+    line-height: 30px;
+    padding: 4px 0;
+    border:0;
+    background-color: #ffffff;
+        
+}
+.paper th {
+    border: 1px #cfd5e5 solid;
+}
+.paper .th{
+    /*width:90px;*/
+    background-color: #fafbff;
+    color: #333333;
+    font-size: 12px;
+    text-align: left;
+    padding: 0 6px 0 6px;
+}
+.paper .des{
+    width: 98%;
+    border: 0;
+    overflow:hidden;
+    height:30px;
+    padding-left: 8px;
+    resize:none;
+    background-color: #ffffff;
+}
+.paper i {
+    color: #FE5D5E;
+    display: inline-block;
+    width: 10px;
+    text-align: center;
+}
+
+.user_refresh {
+    width: 32px;
+    height: 32px;
+    line-height: 29px;
+    /*behavior: url(../../Page/PIE/PIE.htc);
+    position: relative;*/
+    border-radius: 2px;
+    margin-right: 10px;
+    cursor: pointer;
+    float: right;
+    margin-top: 8px;
+    margin-right: 20px;
+    text-align: center;
+}
+.user_refresh>img {
+    width: 20px;
+    height: 20px;
+}
+.user_refresh:hover {
+     background-color: #ffffff;
+}
+.user_refresh:active {
+    background-color: #fafbff;
+    behavior: url(../../Page/PIE/PIE.htc);
+    position: relative;
+    box-shadow: 0 1px 4px #dce1e5 inset;
+}
+
+#main .affix {
+    box-sizing: border-box;
+    float: left;
+    padding: 6px;
+    width: 950px;
+    z-index: 100;
+    position: relative; 
+    behavior: url(../../Page/PIE/PIE.htc);
+    background: white;
+    border: 1px solid #cfd5e5;
+    margin: 15px 15px 0 15px;
+    box-shadow: 0px 2px 0 rgba(207, 215, 229, 0.3);
+    /*filter: progid:DXImageTransform.Microsoft.Shadow(Strength=1, Direction=180, Color='#f1f3f7');*/
+}
+.affix h4 {
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+.affix ul li{
+    float: left;
+    padding: 5px 20px;
+    width: 105px;
+    text-align: center;
+    position: relative; 
+    behavior: url(../../Page/PIE/PIE.htc);
+    border-right: 1px solid #cfd5e5;
+}
+.affix ul li a{
+    color:#bdc0c6;
+}
+.affix ul li.user_active a{
+    color: #5184ff;
+}
+#main .right-body {
+    box-sizing: border-box;
+    height: 310px;
+    width: 950px;
+    /*padding: 20px 30px 30px 30px;*/
+    float: left;
+    position: absolute;
+    top: 92px;
+    left: 15px;
+    behavior: url(../../Page/PIE/PIE.htc);
+    background: white;
+    border-left: 1px solid #cfd5e5;
+    border-right: 1px solid #cfd5e5;
+    border-bottom: 1px solid #cfd5e5;
+}
+#main .right-body > div {
+    display: none;
+    height: 265px;
+    margin: 20px 20px 30px 30px;
+}
+#main .right-body > div.user_active {
+    display: block;
+}
+
+/* * */
+     .symbol_i {
+         display: inline-block;
+         width: 10px;
+         text-align: center;
+         color: #FE5D5E;
+     }
+
+
+
+
+
+
+
+
+
+      

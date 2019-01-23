@@ -1,0 +1,34 @@
+spring:
+ profiles:
+   active: local
+ thymeleaf:
+   cache: true
+   prefix: classpath:/templates/
+   suffix: .html
+
+  #文件上传尺寸
+  #单个文件最大请求尺寸
+ servlet:
+   multipart:
+     max-file-size: 5MB
+     max-request-size: 50MB
+
+#时间格式
+ mvc:
+   date-format: yyyy-MM-dd
+
+ jackson:
+   time-zone: GMT+8
+   date-format: yyyy-MM-dd HH:mm:ss
+   #json返回缩进
+   serialization:
+     indent-output:  true
+
+server:
+  servlet:
+    context-path: /ownwebplatform
+
+
+
+
+

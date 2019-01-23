@@ -1,0 +1,39 @@
+server:
+  port: 8080
+
+debug: true
+
+#日志配置
+#日志输出地址
+logging:
+  file: D:/JAVA/logs/msb.log
+
+  #只显示错误日志(org.springframework包)
+  level:
+    org:
+      springframework: error
+      apach: error
+
+#配置mysql
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/java_cs?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: 123456
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+  #自定义文件上传（归档）目录
+  servlet:
+    multipart:
+      location: d/:temp/
+  thymeleaf:
+    cache: false #禁用缓存
+app:
+  uploal:
+    location: d:/upload/
+

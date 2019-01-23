@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>登录</title>
+    <script type="text/javascript" src="js/plugin/jquery-1.11.3.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/icon.css">
+    <link rel="stylesheet" type="text/css" href="css/public/reset.css"/>
+    <link rel="stylesheet" type="text/css" href="css/login/login.css"/>
+</head>      
+<body style="overflow: hidden">
+<script type="text/javascript">
+</script>
+<div class="All">
+    <div class="login-content" style="background-image:url(images/bg.png)">
+        <ul class="login_bg">
+            <li class="login_fields_user" style="z-index:1000">
+                <form id="form" action="${pageContext.request.contextPath}/checkCode" method="post">
+                    <img alt="" src="images/Login.png" class="login-topicon"/>
+                    <span class="login-toptip">公安部门设备管理系统</span>
+                    <div style="height:40px;width:300px;margin-top: 28px;">
+                    <input type="text" value="" placeholder="用户名/编号" style="margin-left:17px" class="form-control" id="loginName"/>
+                    </div>
+                    <div style="height:40px;width:300px;padding-top:20px;">
+                        <input type="text" value="" placeholder="请输入登录密码" style="margin-left:17px" class="form-control" id="passWord" />
+                    </div>              
+                    <!--验证码-->
+                    <div id="auth-code-box" style="padding-top:20px;">
+                        <input type="text" id="inputCode" autocomplete="off" placeholder="验证码"  />
+                      <!--  <img id="imgObj" alt="验证码"src="${pageContext.request.contextPath}/getCode">-->
+                        <img id="img" src="getImage" />
+                        <span style="font-size:14px;color:#41a0f1;margin-left:20px;cursor: pointer;" onclick="changeImg()">换一组</span>
+                    </div>
+                </form>
+                <!-- 登录按钮 重置按钮 -->
+                <div class="login_fields_submit">
+                    <button class="btn_dl" id="login"  type="submit">登录</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="login-bottom">
+        <p>杭州莘科信息技术有限公司大平台项目</p>
+    </div>
+</div>
+    <!-- 底部 -->
+<script type="text/javascript">
+
+    function changeImg() {
+      /*  var imgSrc = $("#imgObj");
+        var src = imgSrc.attr("src");
+        imgSrc.attr("src", chgUrl(src));*/
+        var img = document.getElementById("img");
+        img.src = "getImage?date=" + new Date();
+
+    }
+
+    // 时间戳
+    // 为了使每次生成图片不一致，即不让浏览器读缓存，所以需要加上时间戳
+    function chgUrl(url) {
+        var timestamp = (new Date()).valueOf();
+        url = url.substring(0, 20);
+        if ((url.indexOf("&") >= 0)) {
+            url = url + "×tamp=" + timestamp;
+        } else {
+            url = url + "?timestamp=" + timestamp;
+        }
+        return url;
+    }
+    $("#login").click(function(){
+
+var login_text="";
+    	$.ajax({
+    		type: "get",
+            url: "validImage?code="+$("#inputCode").val(),
+            success: function (data) {
+                login_text=data;
+                if(login_text!="success"){
+                    alert("验证码错误："+login_text);
+                    return;
+                }else {
+                    login();
+                }
+            }
+
+    	});
+function login (){
+    $.ajax({
+        type: "post",
+        url: "/ownwebplatform/login/DbLogin",
+        data:{loginName: $("#loginName").val(),password:$("#passWord").val()},
+        success: function (data) {
+            login_text=data;
+            alert(data);
+            console.log(data);
+        }
+
+    });
+}
+
+
+
+
+
+
+    });
+    
+    
+</script>
+
+</body>
+</html>

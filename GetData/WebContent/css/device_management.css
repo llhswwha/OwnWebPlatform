@@ -1,0 +1,124 @@
+
+/*.syscontent .sysmain{*/
+    /*display: none;*/
+/*}*/
+/*.syscontent .sysmain.active{*/
+    /*display: block;*/
+/*}*/
+/*弹窗底部按钮*/
+.butn_list{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    padding: 10px 10px;
+    background: #f6f9ff;
+}
+.btn-custom{
+    cursor: pointer;
+}
+html,body,.contentbox{
+    height: 100%;
+    width: 100%;
+}
+body{
+    box-sizing: border-box;
+    padding: 20px;
+    background: #eef2f8;
+}
+.outbox{
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    background: #fff;
+    padding: 20px;
+}
+.action_bar{
+    width: 100%;
+    height: 42px;
+}
+.btn-custom{
+    box-sizing: border-box;
+}
+.out_write{
+    margin-left: 22px;
+}
+.action_bar .page_search{
+    vertical-align: top;
+    height: 32px;
+    box-sizing: border-box;
+    border: 1px #cfd5e5 solid;
+    padding-left: 14px;
+    width: 253px;
+}
+.btn-blue:hover{
+    color: #fff;
+}
+
+.action_bar .icon-shuaxin,.action_bar .icon-sousuo{
+    height: 30px;
+    border: 1px #cfd5e5 solid;
+    display: inline-block;
+    width: 30px;
+    cursor: pointer;
+    text-align: center;
+
+}
+.action_bar .icon-sousuo{
+    margin-left: -4px;
+}
+.action_bar .icon-shuaxin{
+float: right;
+}
+#Device_attribute{
+    box-sizing: border-box;
+    padding: 20px;
+}
+#Device_attribute .box{
+    width: 100%;
+    height: 100%;
+    border: 1px solid #cfd5e5;
+}
+#Device_attribute .content_div{
+    float: left;
+    height: 100%;
+}
+#Device_attribute .left{
+    width: 219px;
+    border-right: 1px solid #cfd5e5;
+}
+#Device_attribute .Middle{
+    width: 319px;
+    border-right: 1px solid #cfd5e5;
+}
+#Device_attribute .right{
+    width: 258px;
+    overflow: auto;
+}
+#Device_attribute .right table{
+    width: 100%;
+}
+#Device_attribute .right table td{
+    border: 1px solid #f4f6fc;
+    width: 50%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

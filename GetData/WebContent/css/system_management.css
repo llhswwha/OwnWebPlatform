@@ -1,0 +1,18 @@
+
+/*.syscontent .sysmain{*/
+    /*display: none;*/
+/*}*/
+/*.syscontent .sysmain.active{*/
+    /*display: block;*/
+/*}*/
+
+.butn_list{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    padding: 10px 10px;
+    background: #f6f9ff;
+}
+.btn-custom{
+    cursor: pointer;
+}

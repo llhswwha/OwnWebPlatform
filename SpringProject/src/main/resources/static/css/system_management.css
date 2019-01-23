@@ -1,0 +1,78 @@
+
+/*.syscontent .sysmain{*/
+    /*display: none;*/
+/*}*/
+/*.syscontent .sysmain.active{*/
+    /*display: block;*/
+/*}*/
+
+.butn_list{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    padding: 10px 10px;
+    background: #f6f9ff;
+}
+.btn-custom{
+    cursor: pointer;
+}
+
+#organ_amend_content{
+    width:100%;
+    height:auto;
+}
+#organ_amend_content tr{
+    padding-top:10px;
+}
+#organ_amend_content tr .easyui-textbox , #organ_amend_content tr .sex{
+    height: 30px;
+    width: 178px;
+    border:1px solid #cfd5e5;
+    margin-top:5px;
+
+}
+#organ_amend_content tr td{
+    width:113px;
+    position:relative;
+}
+
+#GetDutiesListboxk , #GetRoletListboxk , #GetPostListboxk ,  #input_orgIDbox{
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:100%;
+    height:100%;
+}
+
+#organ_amend_content tr td textarea{
+    width:400px;
+    height:60px;
+    margin-top:10px;
+}
+#GetDutiesListbox , #GetRoletListbox , #GetPostListbox , #Sel_CompanyName{
+    position:absolute;
+    top:28px;
+    left:0;
+    width:172px;
+    height:150px;
+    z-index:100;
+    background:#fff;
+    border:1px solid #666666;
+    display:none;
+
+}
+#GetDutiesListbox , #GetRoletListbox , #GetPostListbox{
+    overflow-x:hidden;
+    overflow-y:scroll;
+}
+#GetDutiesListbox li , #GetRoletListbox li, #GetPostListbox li{
+    list-style-type:none;
+}
+.inputxin{
+    position:absolute;
+    left:-15px;
+    top:9px;
+    color:red;
+    width:5px;
+    height:5px;
+}

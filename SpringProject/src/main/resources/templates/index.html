@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>首页</title>
+	<script type="text/javascript" src="js/plugin/apiv2.0.min.js"></script>
+	<link rel="stylesheet" href="css/index.css">
+	<script type="text/javascript" src="js/plugin/jquery-1.11.3.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/easyui.css">
+	<link rel="stylesheet" type="text/css" href="css/icon.css">
+	<script type="text/javascript" src="js/plugin/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="js/plugin/easyui-lang-zh_CN.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/public/init.css"/>
+	<link rel="stylesheet" href="css/public/reset.css">
+	<link rel="stylesheet" href="css/iconfont.css">
+	<link rel="stylesheet" type="text/css" href="css/datagridZD.css"/>
+	<script type="text/javascript" src="js/plugin/textIconOverlay_min.js"></script>
+    <script type="text/javascript" src="js/plugin/markerClusterer_min.js"></script>
+<!--点聚合-->
+<link rel="stylesheet" type="text/css" href="css/bmap.css"/>
+
+</head>
+<body>
+<header>
+    <div class="top">
+    <span class="icon iconfont icon-caidan"></span>
+    <span class="title_name">杭州莘科自有平台项目</span>
+    <span class="right user_name">admin</span>
+    <span  class="right icon iconfont icon-yonghu" ></span>
+    <span  class="right" >22</span>
+    <span  class="right" >在线人数：</span>
+    <span  class="right icon iconfont icon-sousuo" ></span>
+    <input class="right search"  type="text" placeholder="模糊匹配菜单引用">
+
+    </div>
+    <nav>
+    <ul class="title_box">
+    <li class="title_list"><a href="javascript:" class="alist active" value="container">首页</a></li>
+    <li class="title_list" ><a href="javascript:" class="alist" value="space">空间资源管理</a>
+
+
+	</li>
+    <li class="title_list" ><a href="javascript:"  value="device_management" class="alist">设备管理</a>
+		<div class="sec_nav">
+			<div class="sec_navlist"><a href="javascript:"  value="device_management">设备类型管理</a></div>
+			<div class="sec_navlist"><a href="javascript:"  value="device">设备资源管理</a></div>
+
+		</div>
+	</li>
+    <li class="title_list"><a value="system_management" class="alist" href="javascript:;">系统管理</a></li>
+    <li class="title_list"><a value="centralized_monitoring" class="alist" href="javascript:;">集中监控展示管理</a></li>
+      <li class="title_list"><a href="javascript:;"  value="device_warning">告警管理</a></li>
+    </ul>
+    </nav>
+</header>
+<div class="left_nav_box">
+	<div class="left_main"></div>
+	<ul class="leftnave">
+		<li class="leftnavlist"><a href="javascript:"  value="container">首页</a></li>
+		<li class="leftnavlist"><a href="javascript:"  value="space">空间资源管理</a></li>
+		<li class="leftnavlist"><a href="javascript:"  value="device_management">设备管理 <i class="icon iconfont icon-youbian"></i></a>
+			<div class="secleft_nav">
+				<div class="secleft_navlist"><a href="javascript:"  value="device_management">设备类型管理</a></div>
+				<div class="secleft_navlist"><a href="javascript:" value="device">设备资源管理</a></div>
+			</div>
+		</li>
+		<li class="leftnavlist"><a href="javascript:"  value="system_management" >系统管理</a></li>
+		<li class="leftnavlist"><a href="javascript:" value="centralized_monitoring">集中监控展示管理</a></li>
+		 <li class="leftnavlist"><a href="javascript:"  value="device_warning">告警管理</a></li>
+	</ul>
+</div>
+
+
+
+    <div class="contentbox">
+		<div class="contentlist active" id="container"></div>
+    </div>
+ <script type="text/javascript" src="js/index.js"></script>
+	
+</body>
+</html>

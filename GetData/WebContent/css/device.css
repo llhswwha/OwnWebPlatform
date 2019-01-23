@@ -1,0 +1,44 @@
+@CHARSET "UTF-8";
+html,body,.contentbox{
+    height: 100%;
+    width: 100%;
+}
+body{
+    box-sizing: border-box;
+    padding: 20px;
+    background: #eef2f8;
+}
+.contentlist{
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    background: #fff;
+    padding: 20px;
+}
+.deviece-top{
+	height: 100%;
+    width: 100%;
+}
+.device-select{
+	width:200px;
+	height:32px;
+	line-height:32px;
+	padding-left:15px;
+	vertical-align: inherit;
+	border: 1px solid #ccc;
+	color:#555;  
+}
+.icon-shuaxin{
+	float:right;
+	height: 30px;
+    border: 1px #cfd5e5 solid;
+    display: inline-block;
+    width: 30px;
+    cursor: pointer;
+    text-align: center;
+}
+/* 设备资源弹窗样式 */
+fieldset>select{
+	width:200px;
+	padding-left:10px;
+}
