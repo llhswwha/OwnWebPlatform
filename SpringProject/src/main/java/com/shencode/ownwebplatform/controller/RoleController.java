@@ -20,8 +20,6 @@ public class RoleController {
     @Resource
    private RoleService     roleService;
 
-    @Resource
-    private MenuRoleService menuRoleService;
 
     @GetMapping("/allRoles")
     @ResponseBody
@@ -33,10 +31,10 @@ public class RoleController {
 
 //添加修改删除公共控制器已有，不需要重写
 
-    //添加角色菜单表
+/*    //添加角色菜单表
     @PostMapping("/addMenuRole")
     public  Message<MenuRole>  addMenuRole(MenuRole menuRole)
     {
            return   menuRoleService.add(menuRole);
-    }
+    }*/
 }

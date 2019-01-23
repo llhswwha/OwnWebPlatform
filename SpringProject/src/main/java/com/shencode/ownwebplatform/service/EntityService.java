@@ -17,7 +17,8 @@ public interface EntityService<T extends BaseEntity<ID>,ID> {
 
     //更新，是更新全部属性
     public Message<T> update(T entity);
-    public Message<T> delete(ID id);
+    public Message<T> deleteById(ID id);
+    public Message<T> delete(T entity);
     public List<T> getAll();
     public T get(ID id);
 

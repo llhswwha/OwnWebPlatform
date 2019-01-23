@@ -132,7 +132,7 @@ public abstract class EntityServiceImpl<T extends BaseEntity<ID>,ID> implements 
     }
 
     @Override
-    public Message<T> delete(ID id) {
+    public Message<T> deleteById(ID id) {
         T entity=get(id);
         Message<T> message =null;
         if(entity!=null){
@@ -149,6 +149,26 @@ public abstract class EntityServiceImpl<T extends BaseEntity<ID>,ID> implements 
         }
         return message;
     }
+    //根据类删除（存在关联关系的多表删除）
+    @Override
+    public Message<T>  delete(T entity)
+    {
+        Message<T> message=null;
+        try {
+            T entityOld=get(entity.getId());
+            if (entityOld != null) {
+                getRepository().delete(entity);
+                message = new Message(0, "成功");
+                message.setData(entity);
+            } else {
+                message = new Message(1, "未找到该条数据! id="+entity.getId());
+            }
+        } catch (Exception e) {
+            message = new Message(1, e.toString());
+        }
+        return  message;
+    }
+
 
     @Override
     public List<T> deleteAll() {

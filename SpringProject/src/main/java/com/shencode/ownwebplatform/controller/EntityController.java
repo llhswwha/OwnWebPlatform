@@ -41,9 +41,15 @@ public abstract class EntityController<T extends BaseEntity<ID>,ID> {
         return getService().update(map);
     }
 
+    @DeleteMapping("deleteById")
+    public Message<T> deleteByID(ID id) {
+        return getService().deleteById(id);
+    }
+
     @DeleteMapping("delete")
-    public Message<T> delete(ID id) {
-        return getService().delete(id);
+    public Message<T> delete(T entity)
+    {
+        return  getService().delete(entity);
     }
 
     @GetMapping("")

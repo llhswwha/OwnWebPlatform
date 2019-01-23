@@ -1,7 +1,10 @@
 package com.shencode.ownwebplatform.entity;
 
 
+import com.sun.xml.internal.bind.v2.model.core.ID;
+
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -22,6 +25,17 @@ public class User implements BaseEntity<String> {
     private String birthday;
 /*    @Column(name="company")
     private String company;*/
+
+    @Transient
+    private  Integer companyid;
+    @Transient
+    public void setCompanyid(Integer companyid) {
+        this.companyid = companyid;
+    }
+    @Transient
+    public Integer getCompanyid() {
+        return companyid;
+    }
 
     @ManyToOne
     @JoinColumn(name = "company")
@@ -74,8 +88,18 @@ public class User implements BaseEntity<String> {
     private int state;
 
     @ManyToMany
-    @JoinTable(name = "t_userrole",joinColumns = {@JoinColumn(name = "loginname")},inverseJoinColumns = {@JoinColumn(name = "roleid")})
+    @JoinTable(name = "t_userrole",joinColumns = {@JoinColumn(name = "loginName")},inverseJoinColumns = {@JoinColumn(name = "roleid")})
     private Set<Role> roleSet;
+    @Transient
+    private List<Integer> roleIdList;
+    @Transient
+    public void setRoleIdList(List<Integer> roleIdList) {
+        this.roleIdList = roleIdList;
+    }
+    @Transient
+    public List<Integer> getRoleIdList() {
+        return roleIdList;
+    }
 
     //private List<Integer> roleList;
     //roleList:[1,2,3]}

@@ -8,7 +8,7 @@ public class UserRole {
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    @Column(name = "id")
    private  Integer id;
-    @Column(name = "loginname")
+    @Column(name = "loginName")
    private  String loginName;
     @Column(name = "roleid")
    private  Integer roleId;

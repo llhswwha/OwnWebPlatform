@@ -6,6 +6,7 @@ import com.shencode.ownwebplatform.entity.Role;
 import com.shencode.ownwebplatform.entity.User;
 import com.shencode.ownwebplatform.repository.CompanyRepository;
 import com.shencode.ownwebplatform.repository.EntityRepository;
+import com.shencode.ownwebplatform.repository.RoleRepository;
 import com.shencode.ownwebplatform.repository.UserRepository;
 import com.shencode.ownwebplatform.service.UserService;
 import com.shencode.ownwebplatform.util.MD5Util;
@@ -15,6 +16,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Service
 public class UserServiceImpl extends EntityServiceImpl<User,String> implements UserService {
@@ -22,6 +27,9 @@ public class UserServiceImpl extends EntityServiceImpl<User,String> implements U
     private UserRepository userRepository = null;
     @Resource
     private CompanyRepository companyRepository;
+
+    @Resource
+    private  RoleRepository roleRepository;
 
     @Override
     public EntityRepository<User, String> getRepository() {
@@ -60,22 +68,38 @@ public class UserServiceImpl extends EntityServiceImpl<User,String> implements U
         return  userRepository.getUserbyName(name,pageable);
     }
 
-  //新增用户
-  @Override
-    public Message<User> add(User user,Integer companyid)
-  {
-      Company company=companyRepository.findById(companyid).get();
-      user.setCompany(company);
-      return add(user);
-  }
-
-    //修改用户
     @Override
-    public Message<User> update(User user, Integer companyid) {
-        Company company=companyRepository.findById(companyid).get();
+    public Message<User> addUser(User user) {
+        List<Integer> integerList=new ArrayList<>();
+        Set<Role> roleSet=new HashSet<>();
+        for (int i=0;i<integerList.size();i++)
+        {
+            Role role= roleRepository.findById(integerList.get(i)).get();
+            roleSet.add(role);
+        }
+        Company company=companyRepository.findById(user.getCompanyid()).get();
+        user.setRoleSet(roleSet);
+        user.setCompany(company);
+        return add(user);
+    }
+
+    @Override
+    public Message<User> updateUser(User user) {
+        List<Integer> integerList=new ArrayList<>();
+        Set<Role> roleSet=new HashSet<>();
+        for (int i=0;i<integerList.size();i++)
+        {
+            Role role= roleRepository.findById(integerList.get(i)).get();
+            roleSet.add(role);
+        }
+        Company company=companyRepository.findById(user.getCompanyid()).get();
+        user.setRoleSet(roleSet);
         user.setCompany(company);
         return update(user);
     }
+
+
+
 
 
 }

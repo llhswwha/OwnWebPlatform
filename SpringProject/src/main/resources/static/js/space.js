@@ -26,11 +26,36 @@ $(document).ready(function (){
     	 $("#message-city .etui").show();
     	 $("#message-city").dialog("open");
      });
+     // 添加城市模态框
+     $("#addCity").click(function () {
+		 $(".city-list").append('<li><span contenteditable="true" class="count"></span></li>');
+	 });
+	$("#btn-sure").click(function () {
+		addCity();
+	})
 });
+// 界面自适应函数
 function changeMargin(){
 	var contentboxheight = $(document.body).height();
     $(".contentbox").css("height",contentboxheight+"px");
     var ResourcesRight = $(document.body).width();
     $(".contentbox").css("width",ResourcesRight+"px");
     $(".Resources-right").css("width",(ResourcesRight-250)+"px"); 
+}
+//添加城市名称
+ function addCity(){
+	 var list = [];
+	 var cityName = $(".count");
+	 cityName.each(function () {
+		 list.push($(this).text());
+	 })
+	 console.log(list);
+	 $.ajax({
+		 type:"post",
+		 url:url,
+		 data:list,
+		 success:function (result) {
+			 alert(result);
+		 }
+	 })
 }

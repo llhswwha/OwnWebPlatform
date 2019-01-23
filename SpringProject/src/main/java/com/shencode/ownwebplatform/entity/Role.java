@@ -28,7 +28,8 @@ public class Role implements BaseEntity<Integer> {
     private Set<Menu> menuSet;
 
     @ManyToMany
-    @JoinTable(name = "t_userrole",joinColumns = {@JoinColumn(name = "roleid")},inverseJoinColumns = {@JoinColumn(name = "loginname")})
+    @JoinTable(name = "t_userrole",joinColumns = {@JoinColumn(name = "roleid")},inverseJoinColumns = {@JoinColumn(name = "loginName")})
+    //@JsonIgnore
     private  Set<User>  userSet;
 
 

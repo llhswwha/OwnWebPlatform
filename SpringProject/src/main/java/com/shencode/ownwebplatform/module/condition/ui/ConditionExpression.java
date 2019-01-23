@@ -5,18 +5,18 @@ import org.apache.commons.beanutils.ConvertUtils;
 import org.springframework.util.StringUtils;
 
 public class ConditionExpression {
-    public static final String EQ = "eq";
-    public static final String GT = "gt";
-    public static final String GE = "ge";
-    public static final String LT = "lt";
-    public static final String LE = "le";
-    public static final String LK = "lk";
-    public static final String LKS = "lks";
-    public static final String LKE = "lke";
-    public static final String IN = "in";
-    public static final String NEQ = "nq";
-    public static final String NULL = "nul";
-    public static final String NOT_NULL = "nnl";
+    public static final String EQ = "eq";            //相等
+    public static final String GT = "gt";            //大于
+    public static final String GE = "ge";            //大于等于
+    public static final String LT = "lt";            //小于
+    public static final String LE = "le";            //小于等于
+    public static final String LK = "lk";             // like  模糊查询
+    public static final String LKS = "lks";           // likestart    like 'aa%'
+    public static final String LKE = "lke";           // likeend      like '%aa'
+    public static final String IN = "in";             // in            where id  in (..)
+    public static final String NEQ = "nq";             //           where id <> 不等于
+    public static final String NULL = "nul";          // null         where  id=null
+    public static final String NOT_NULL = "nnl";      // not null     where   id is not null
     public static final String START_MATCH = "startMatch";
     public static final String END_MATCH = "endMatch";
     public static final String ANY_MATCH = "anyMatch";
