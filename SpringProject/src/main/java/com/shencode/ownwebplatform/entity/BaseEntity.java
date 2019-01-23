@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 
-@MappedSuperclass
+@MappedSuperclass //这个MappedSuperclass注解没有的话会有问题
 public abstract class BaseEntity implements IEntity<Integer> {
 
     @Id
