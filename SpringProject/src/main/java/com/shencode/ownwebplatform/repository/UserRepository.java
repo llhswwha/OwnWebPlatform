@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface UserRepository   extends  EntityRepository<User,String> {
 
-   public   User findByLoginname(String loginname);
+   public   User findByLoginName(String loginname);
 
    public List<User> findAll();
 

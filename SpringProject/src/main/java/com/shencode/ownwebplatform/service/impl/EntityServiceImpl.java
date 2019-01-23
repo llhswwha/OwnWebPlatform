@@ -45,6 +45,8 @@ public abstract class EntityServiceImpl<T extends BaseEntity<ID>,ID> implements 
     //单挑添加
     @Override
     public Message<T> add(T entityNew) {
+        System.out.println("add");
+        System.out.println(entityNew);
         Message<T> message = null;
         try {
             ID id=entityNew.getId();
@@ -66,6 +68,7 @@ public abstract class EntityServiceImpl<T extends BaseEntity<ID>,ID> implements 
             }
 
         } catch (Exception e) {
+            System.out.println(e.toString());
             message = new Message(1, e.toString());
         }
         return message;

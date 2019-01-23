@@ -9,14 +9,90 @@ function Person(name, sex) {
         }
     }
 }
-var man =new Person ("凯撒", "男");
-man.say();//凯撒
+
+//var man =new Person ("凯撒", "男");
+//man.say();//凯撒
 
 function EntityDao(name) {
     this.name=name;
     if (typeof this.add != "function") {
-        Person.prototype.add = function (entity) {
-            alert(this.name);
+        EntityDao.prototype.add = function (entity) {
+            //alert(this.name);
+            console.log("add");
+            var url=name+"/add";
+            var ajax=new Ajax();
+            var result=ajax.post(url,entity);
+            return result;
+        }
+    }
+    if (typeof this.update != "function") {
+        EntityDao.prototype.update = function (entity) {
+            //alert(this.name);
+            console.log("update");
+            var url=name+"/update";
+            var ajax=new Ajax();
+            var result=ajax.post(url,entity);
+            return result;
+        }
+    }
+    if (typeof this.put != "function") {
+        EntityDao.prototype.put = function (entity) {
+            //alert(this.name);
+            console.log("put");
+            var url=name+"/put";
+            var ajax=new Ajax();
+            var result=ajax.put(url,entity);
+            return result;
+        }
+    }
+    if (typeof this.patch != "function") {
+        EntityDao.prototype.patch = function (entity) {
+            //alert(this.name);
+            console.log("patch");
+            var url=name+"/patch";
+            var ajax=new Ajax();
+            var result=ajax.patch(url,entity);
+            return result;
+        }
+    }
+    if (typeof this.getOne != "function") {
+        EntityDao.prototype.getOne = function (id) {
+            //alert(this.name);
+            console.log("getOne");
+            var url=name+"/"+id;
+            var ajax=new Ajax();
+            var result=ajax.put(url,id);
+            return result;
+        }
+    }
+    if (typeof this.getAll != "function") {
+        EntityDao.prototype.getAll = function () {
+            //alert(this.name);
+            console.log("getAll");
+            var url=name+"/";
+            var ajax=new Ajax();
+            var result=ajax.get(url);
+            return result;
+        }
+    }
+    if (typeof this.getPage != "function") {
+        EntityDao.prototype.getPage = function () {
+            //alert(this.name);
+            console.log("getAll");
+            var url=name+"/";
+            var ajax=new Ajax();
+            var result=ajax.get(url);
+            return result;
+        }
+    }
+    if (typeof this.queryAll != "function") {
+        EntityDao.prototype.queryAll = function () {
+            //alert(this.name);
+            console.log("getAll");
+            var url=name+"/";
+            var ajax=new Ajax();
+            var result=ajax.get(url);
+            return result;
         }
     }
 }

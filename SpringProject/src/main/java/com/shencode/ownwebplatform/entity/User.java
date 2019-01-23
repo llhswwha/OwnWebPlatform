@@ -1,8 +1,4 @@
 package com.shencode.ownwebplatform.entity;
-
-
-import com.sun.xml.internal.bind.v2.model.core.ID;
-
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
@@ -14,7 +10,7 @@ public class User implements BaseEntity<String> {
     @Id
     // @GeneratedValue(strategy = GenerationType.) int 自增
     @Column(name = "loginName")
-    private String loginname;
+    private String loginName;
     @Column(name = "name")
     private String name;
     @Column(name = "pw")
@@ -105,7 +101,7 @@ public class User implements BaseEntity<String> {
     //roleList:[1,2,3]}
 
     public void setLoginName(String loginName) {
-        this.loginname = loginName;
+        this.loginName = loginName;
     }
 
     public void setName(String name) {
@@ -173,7 +169,7 @@ public class User implements BaseEntity<String> {
     }
 
     public String getLoginName() {
-        return loginname;
+        return loginName;
     }
 
     public String getName() {
@@ -235,6 +231,31 @@ public class User implements BaseEntity<String> {
 
     @Override
     public String getId() {
-        return loginname;
+        return loginName;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "loginname='" + loginName + '\'' +
+                ", name='" + name + '\'' +
+                ", pw='" + pw + '\'' +
+                ", sex='" + sex + '\'' +
+                ", birthday='" + birthday + '\'' +
+                ", companyid=" + companyid +
+                ", company=" + company +
+                ", dep='" + dep + '\'' +
+                ", cpzj='" + cpzj + '\'' +
+                ", homeZJ='" + homeZJ + '\'' +
+                ", cpTel='" + cpTel + '\'' +
+                ", tel='" + tel + '\'' +
+                ", cpEmail='" + cpEmail + '\'' +
+                ", email='" + email + '\'' +
+                ", represent='" + represent + '\'' +
+                ", validSityData='" + validSityData + '\'' +
+                ", state=" + state +
+                ", roleSet=" + roleSet +
+                ", roleIdList=" + roleIdList +
+                '}';
     }
 }

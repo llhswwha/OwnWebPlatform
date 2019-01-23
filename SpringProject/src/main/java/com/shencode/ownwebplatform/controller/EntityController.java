@@ -41,16 +41,16 @@ public abstract class EntityController<T extends BaseEntity<ID>,ID> {
         return getService().update(map);
     }
 
-    @DeleteMapping("deleteById")
-    public Message<T> deleteByID(ID id) {
+    @DeleteMapping("delete/{id}")
+    public Message<T> delete(@PathVariable("id") ID id) {
         return getService().deleteById(id);
     }
 
-    @DeleteMapping("delete")
+    /*@DeleteMapping("delete")
     public Message<T> delete(T entity)
     {
         return  getService().delete(entity);
-    }
+    }*/
 
     @GetMapping("")
     public List<T> getAll() {

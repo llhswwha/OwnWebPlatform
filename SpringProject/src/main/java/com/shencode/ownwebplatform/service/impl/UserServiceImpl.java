@@ -38,7 +38,7 @@ public class UserServiceImpl extends EntityServiceImpl<User,String> implements U
 
     @Override
     public Message login(String loginName, String password) {
-        User user=userRepository.findByLoginname(loginName);
+        User user=userRepository.findByLoginName(loginName);
         if(user==null)
         {
             return  new Message(0,"用户不存在");
