@@ -14,7 +14,7 @@ public class Menu extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private  Integer   id;*/
-    @Column(name = "name")
+    @Column(name = "name",nullable = false)
     private String name;
     @Column(name = "code")
     private String code;

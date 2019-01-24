@@ -1,10 +1,10 @@
 package com.shencode.ownwebplatform.service.impl;
 
-import com.shencode.ownwebplatform.entity.Company;
+import com.shencode.ownwebplatform.entity.City;
 import com.shencode.ownwebplatform.model.Message;
 import com.shencode.ownwebplatform.entity.Role;
 import com.shencode.ownwebplatform.entity.User;
-import com.shencode.ownwebplatform.repository.CompanyRepository;
+import com.shencode.ownwebplatform.repository.CityRepository;
 import com.shencode.ownwebplatform.repository.EntityRepository;
 import com.shencode.ownwebplatform.repository.RoleRepository;
 import com.shencode.ownwebplatform.repository.UserRepository;
@@ -15,7 +15,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -25,7 +24,7 @@ public class UserServiceImpl extends EntityServiceImpl<User> implements UserServ
     @Resource
     private UserRepository userRepository = null;
     @Resource
-    private CompanyRepository companyRepository;
+    private CityRepository cityRepository;
 
     @Resource
     private  RoleRepository roleRepository;
@@ -34,6 +33,7 @@ public class UserServiceImpl extends EntityServiceImpl<User> implements UserServ
     public EntityRepository<User, Integer> getRepository() {
         return userRepository;
     }
+
 
     @Override
     public Message login(String loginName, String password) {
@@ -75,8 +75,8 @@ public class UserServiceImpl extends EntityServiceImpl<User> implements UserServ
     }
 
     private void SetCompany(User user){
-        Company company=companyRepository.findById(user.getCompanyId()).get();
-        user.setCompany(company);
+        City city = cityRepository.findById(user.getCityId()).get();
+        user.setCity(city);
     }
 
     private void SetRoles(User user){

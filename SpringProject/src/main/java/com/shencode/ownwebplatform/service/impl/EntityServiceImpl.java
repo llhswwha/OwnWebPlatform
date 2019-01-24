@@ -1,7 +1,6 @@
 package com.shencode.ownwebplatform.service.impl;
 
 import com.shencode.ownwebplatform.entity.BaseEntity;
-import com.shencode.ownwebplatform.entity.IEntity;
 import com.shencode.ownwebplatform.model.Message;
 import com.shencode.ownwebplatform.module.condition.ConditionQuery;
 import com.shencode.ownwebplatform.module.condition.ui.ConditionModel;
@@ -39,11 +38,19 @@ public abstract class EntityServiceImpl<T extends BaseEntity> implements EntityS
     @Override
     public abstract EntityRepository<T, Integer> getRepository();//抽象方法，强迫子类必须重写，提供自己的实现
 
-    @Override
-    public List<T> getAll() {
-        return getRepository().findAll();
-    }
-    //单挑添加
+
+
+     //获取所有数据（已过滤active）
+     @Override
+     public  List<T> getAll()
+     {
+        // return  getRepository().findAll();
+         return  getRepository().findAllByActive(true);
+     }
+
+
+
+    //单条添加
     @Override
     public Message<T> add(T entityNew) {
         System.out.println("add");
@@ -52,12 +59,13 @@ public abstract class EntityServiceImpl<T extends BaseEntity> implements EntityS
         try {
             Integer id=entityNew.getId();
             if(id==null){//一般路径
+                //创建时间，数据库自动获取当前时间，无需添加
                 T result = getRepository().save(entityNew);
                 message = new Message(0, "成功");
                 message.setData(result);
             }
             else{//用户添加路径
-                T entity = get(id);
+                T entity = getEntity(id);
                 if (entity != null) {
                     message = new Message(1, "已存在！");//用户不能重复添加，并且用户名相同时，save就会变成修改原来的用户属性了。
                     message.setData(entity);
@@ -102,8 +110,9 @@ public abstract class EntityServiceImpl<T extends BaseEntity> implements EntityS
     public Message<T> update(T entity) {
         Message<T> message =null;
         try {
-            T entityOld=get(entity.getId());
+            T entityOld=getEntity(entity.getId());
             if (entityOld != null) {
+                entity.setModifyTime(new Date());  //修改时间
                 getRepository().save(entity);
                 message = new Message(0, "成功");
                 message.setData(entity);
@@ -121,10 +130,10 @@ public abstract class EntityServiceImpl<T extends BaseEntity> implements EntityS
         Message<T> msg=null;
         try{
             Object id=map.get("id");
-            T entity=get(Integer.parseInt(id+""));
+            T entity=getEntity(Integer.parseInt(id+""));
             if(entity==null){
             }else{
-                MapUtil.mapToObject(map,entity);//
+                MapUtil.mapToObject(map,entity);//设置属性后，似乎自动回保存到数据库？
             }
             msg=new Message(0,"成功");
             msg.setData(entity);
@@ -134,14 +143,18 @@ public abstract class EntityServiceImpl<T extends BaseEntity> implements EntityS
 
         return msg;
     }
-
+    //根据ID删除数据（单表）
     @Override
     public Message<T> deleteById(Integer id) {
-        T entity=get(id);
+        T entity=getEntity(id);
         Message<T> message =null;
         if(entity!=null){
             try {
-                getRepository().delete(entity);
+//                getRepository().delete(entity);
+                //使用逻辑删除，修改数据状态
+                entity.setActive(false);  //删除状态
+                entity.setDeleteTime(new Date()); //删除时间
+                getRepository().save(entity);
                 message = new Message(0, "成功");
                 message.setData(entity);
             } catch (Exception e) {
@@ -159,9 +172,13 @@ public abstract class EntityServiceImpl<T extends BaseEntity> implements EntityS
     {
         Message<T> message=null;
         try {
-            T entityOld=get(entity.getId());
+            T entityOld=getEntity(entity.getId());
             if (entityOld != null) {
-                getRepository().delete(entity);
+//                getRepository().delete(entity);
+                //使用逻辑删除，修改数据状态
+                entity.setActive(false);  //删除状态
+                entity.setDeleteTime(new Date()); //删除时间
+                getRepository().save(entity);
                 message = new Message(0, "成功");
                 message.setData(entity);
             } else {
@@ -173,7 +190,7 @@ public abstract class EntityServiceImpl<T extends BaseEntity> implements EntityS
         return  message;
     }
 
-
+//全部删除（物理删除，慎用）
     @Override
     public List<T> deleteAll() {
         List<T> all=getAll();
@@ -181,14 +198,41 @@ public abstract class EntityServiceImpl<T extends BaseEntity> implements EntityS
         return all;
     }
 
+
+
     @Override
-    public T get(Integer id) {
+    public Message<T> get(Integer id) {
+        Message<T> msg=null;
+        //T entity=getEntity(id);
+        //过滤Active
+        T entity=getActiveEntity(id,true);
+        if(entity==null){
+            msg=new Message<>(1,"未找到该条数据! id="+id);
+        }
+        else{
+            msg=new Message<>(0,"成功");
+            msg.setData(entity);
+        }
+        return msg;
+    }
+
+
+    public T getEntity(Integer id) {
         Optional<T> op = getRepository().findById(id);
         if(op.isPresent()){
             return op.get();
         }
         return null;
     }
+
+     public  T getActiveEntity(Integer id,Boolean active)
+     {
+         Optional<T> op = getRepository().findByIdAndActive(id,active);
+         if(op.isPresent()){
+             return op.get();
+         }
+         return null;
+     }
 
     @Override
     public Page<T> getPage(Pageable pageable) {
@@ -226,5 +270,12 @@ public abstract class EntityServiceImpl<T extends BaseEntity> implements EntityS
         }
         Pageable pageable =PageRequest.of (condition.getPage(),condition.getSize(),Sort.by(orders));
         return pageable;
+    }
+
+    public Message<Long> getCount(){
+        Long count= getRepository().count();
+        Message<Long> msg=new Message<>(1,"成功");
+        msg.setData(count);
+        return msg;
     }
 }

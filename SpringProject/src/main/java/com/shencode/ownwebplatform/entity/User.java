@@ -11,31 +11,31 @@ public class User extends BaseEntity {
     // @GeneratedValue(strategy = GenerationType.) int 自增
     @Column(name = "loginName",unique = true)
     private String loginName;
-    @Column(name = "name")
+    @Column(name = "name",nullable = false)
     private String name;
-    @Column(name = "password")
+    @Column(name = "password",nullable = false)
     private String password;
     @Column(name = "gender")
     private String gender;//性别
     @Column(name = "birthday")
     private String birthday;
-/*    @Column(name="company")
-    private String company;*/
+/*    @Column(name="city")
+    private String city;*/
 
     @Transient
-    private  Integer companyId;
+    private  Integer cityId;
     @Transient
-    public void setCompanyId(Integer companyId) {
-        this.companyId = companyId;
+    public void setCityId(Integer cityId) {
+        this.cityId = cityId;
     }
     @Transient
-    public Integer getCompanyId() {
-        return companyId;
+    public Integer getCityId() {
+        return cityId;
     }
 
     @ManyToOne
-    @JoinColumn(name = "company")
-    private Company company;//公司
+    @JoinColumn(name = "city")
+    private City city;//公司
     @Column(name = "dep")
     private String dep;//部门
     @Column(name = "companyPhone")
@@ -46,7 +46,7 @@ public class User extends BaseEntity {
     private String workPhone;//工作手机号
     @Column(name = "privatePhone")
     private String privatePhone;//私人手机号
-    @Column(name = "workEmail")
+    @Column(name = "workEmail",nullable = false)
     private String workEmail;//工作邮箱
     @Column(name = "privateEmail")
     private String privateEmail;//私人邮箱
@@ -79,7 +79,7 @@ public class User extends BaseEntity {
 
     @Column(name = "validSityData")
     private String validSityData;
-    @Column(name = "state")
+    @Column(name = "state",nullable = false,columnDefinition = " INT  default 1")
     private int state;
 
     @ManyToMany
@@ -107,12 +107,12 @@ public class User extends BaseEntity {
         this.name = name;
     }
 
-    public void setCompany(Company company) {
-        this.company = company;
+    public void setCity(City city) {
+        this.city = city;
     }
 
-    public Company getCompany() {
-        return company;
+    public City getCity() {
+        return city;
     }
 
     public void setPassword(String password) {
@@ -241,8 +241,8 @@ public class User extends BaseEntity {
                 ", password='" + password + '\'' +
                 ", gender='" + gender + '\'' +
                 ", birthday='" + birthday + '\'' +
-                ", companyid=" + companyId +
-                ", company=" + company +
+                ", cityId=" + cityId +
+                ", city=" + city +
                 ", dep='" + dep + '\'' +
                 ", companyPhone='" + companyPhone + '\'' +
                 ", homePhone='" + homePhone + '\'' +

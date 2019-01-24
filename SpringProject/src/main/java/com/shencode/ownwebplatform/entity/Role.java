@@ -16,7 +16,7 @@ public class Role extends BaseEntity {
     @Column(name = "id")
     private Integer id;*/
 
-    @Column(name = "name")
+    @Column(name = "name",nullable = false,length = 40)
     private String name;
     @Column(name = "represent")
     private String represent;

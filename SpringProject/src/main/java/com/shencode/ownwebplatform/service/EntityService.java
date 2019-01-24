@@ -1,7 +1,6 @@
 package com.shencode.ownwebplatform.service;
 
 import com.shencode.ownwebplatform.entity.BaseEntity;
-import com.shencode.ownwebplatform.entity.IEntity;
 import com.shencode.ownwebplatform.model.Message;
 import com.shencode.ownwebplatform.module.condition.ui.ConditionModel;
 import com.shencode.ownwebplatform.repository.EntityRepository;
@@ -20,7 +19,11 @@ public interface EntityService<T extends BaseEntity,ID> {
     public Message<T> deleteById(ID id);
     public Message<T> delete(T entity);
     public List<T> getAll();
-    public T get(ID id);
+
+    public Message<T> get(ID id);
+
+
+
 
     public Message<List<T>> adds(List<T> tList);
 
@@ -36,4 +39,6 @@ public interface EntityService<T extends BaseEntity,ID> {
 
     //条件查询分页
     public Page<T> queryPage(ConditionModel condition);
+
+    public Message<Long> getCount();
 }

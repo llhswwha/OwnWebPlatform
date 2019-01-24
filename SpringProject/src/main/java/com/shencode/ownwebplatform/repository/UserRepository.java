@@ -19,4 +19,5 @@ public interface UserRepository   extends  EntityRepository<User,Integer> {
    public Page<User> getUserbyName(@Param("n") String name, Pageable pageable);
 
 
+
 }

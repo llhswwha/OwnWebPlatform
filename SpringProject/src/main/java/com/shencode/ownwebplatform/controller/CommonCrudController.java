@@ -7,7 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class CommonCrudController {
 
     @RequestMapping("testCommonCrud")
-    public String index(){
+    public String testCommonCrud(){
         return "testCommonCrud";
+    }
+
+    @RequestMapping("testOtherDao")
+    public String testOtherDao(){
+        return "testOtherDao";
     }
 }

@@ -10,36 +10,46 @@ public class SpaceRes extends BaseEntity {
 //    @Column(name = "id")
 //    private Integer id;
     @Column(name = "name", nullable = false)
-    private String name;
+    private String name;  //空间资源名称
     @Column(name = "area")
-    private String area;
+    private String area; //面积（平方公里）
 /*@Column(name = "companyid")
     private String companyID;*/
 
     @ManyToOne
-    @JoinColumn(name = "companyid")
-    private Company company;
-
-    @Column(name = "companyname")
-    private String companyName;
-    @Column(name = "code")
-    private String code;
-    @Column(name = "address")
-    private String address;
-    @Column(name = "charge")
-    private String charge;
-    @Column(name = "tel")
-    private String tel;
-    @Column(name = "devnum")
-    private Integer devNum;
+    @JoinColumn(name = "city")
+    private City city;  //所属地市列表
 
 
-    public void setCompany(Company company) {
-        this.company = company;
+    @Transient
+    private  Integer cityId;  //所属地市ID
+    @Transient
+    public void setCityId(Integer cityId) {
+        this.cityId = cityId;
+    }
+    @Transient
+    public Integer getCityId() {
+        return cityId;
     }
 
-    public Company getCompany() {
-        return company;
+    @Column(name = "code")
+    private String code;    //行政区划编码
+    @Column(name = "address")
+    private String address;   //政府地址
+    @Column(name = "charge")
+    private String charge;   //负责人
+    @Column(name = "tel")
+    private String tel;     //联系方式
+    @Column(name = "devnum")
+    private Integer devNum;  //设备数量
+
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
+    public City getCity() {
+        return city;
     }
 
 //    public void setId(Integer id) {
@@ -56,9 +66,6 @@ public class SpaceRes extends BaseEntity {
 
     //public void setCompanyID(String companyID) { this.companyID = companyID; }
 
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
 
     public void setCode(String code) {
         this.code = code;
@@ -94,9 +101,6 @@ public class SpaceRes extends BaseEntity {
 
     //public String getCompanyID() { return companyID; }
 
-    public String getCompanyName() {
-        return companyName;
-    }
 
     public String getCode() {
         return code;

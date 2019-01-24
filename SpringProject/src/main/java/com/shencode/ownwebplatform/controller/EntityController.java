@@ -2,22 +2,39 @@ package com.shencode.ownwebplatform.controller;
 
 
 import com.shencode.ownwebplatform.entity.BaseEntity;
-import com.shencode.ownwebplatform.entity.IEntity;
 import com.shencode.ownwebplatform.model.Message;
 import com.shencode.ownwebplatform.module.condition.ui.ConditionModel;
 import com.shencode.ownwebplatform.service.EntityService;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import com.shencode.ownwebplatform.util.TUtil;
+import org.apache.commons.lang3.ClassUtils;
+import org.codehaus.jackson.map.util.ClassUtil;
+import org.springframework.data.domain.*;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
 
 public abstract class EntityController<T extends BaseEntity,ID> {
 
+    private Class <T> entityClass;
+
+    public EntityController(){
+        //从泛型T，获取到Class<T>，后续需要用到
+        entityClass= TUtil.getClassT(this);
+    }
+
+
     public abstract EntityService<T, ID> getService();//抽象方法，强迫子类必须重写，提供自己的实现
+
+    //返回模板给前端
+    @GetMapping("template")
+    public T getTemplate() throws IllegalAccessException, InstantiationException {
+        T entity=entityClass.newInstance();
+        return entity;
+    }
 
     @PostMapping("add")
     public Message<T> add(T entity) {
@@ -40,24 +57,18 @@ public abstract class EntityController<T extends BaseEntity,ID> {
         return getService().update(map);
     }
 
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("{id}") //因为有DeleteMapping了 "{id}"改成 {id}
     public Message<T> delete(@PathVariable("id") ID id) {
         return getService().deleteById(id);
     }
 
-    /*@DeleteMapping("delete")
-    public Message<T> delete(T entity)
-    {
-        return  getService().delete(entity);
-    }*/
-
-    @GetMapping("")
+    @GetMapping("list")
     public List<T> getAll() {
         return getService().getAll();
     }
 
     @GetMapping("{id}")
-    public T get(@PathVariable("id") ID id) {
+    public Message<T> get(@PathVariable("id") ID id) {
         return getService().get(id);
     }
 
@@ -78,6 +89,11 @@ public abstract class EntityController<T extends BaseEntity,ID> {
         System.out.println("queryList");
         System.out.println(condition);
         return getService().queryPage(condition);
+    }
+
+    @GetMapping("count")
+    public Message<Long> getCount() {
+        return getService().getCount();
     }
 
   /*  @GetMapping("users")

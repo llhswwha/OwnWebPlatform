@@ -1,6 +1,6 @@
 package com.shencode.ownwebplatform.testController;
 
-import com.shencode.ownwebplatform.entity.Company;
+import com.shencode.ownwebplatform.entity.City;
 import com.shencode.ownwebplatform.module.condition.ui.ConditionModel;
 import com.shencode.ownwebplatform.util.MD5Util;
 import org.springframework.stereotype.Controller;
@@ -25,16 +25,16 @@ public class testController {
 
 @GetMapping("test/findCompany")
     @ResponseBody
-    public List<Company> users()
+    public List<City> users()
     {
-        List<Company> list=new LinkedList<Company>();
+        List<City> list=new LinkedList<City>();
         String pwname="123456";
         for (int i=0;i<2;i++)
         {
-        Company company=new Company();
-        company.setPid(1);
-        company.setName(MD5Util.getMD5String(pwname));
-        list.add(company);
+        City city =new City();
+        city.setPid(1);
+        city.setName(MD5Util.getMD5String(pwname));
+        list.add(city);
         }
         return list;
     }

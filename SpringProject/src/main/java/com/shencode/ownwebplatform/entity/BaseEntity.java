@@ -7,18 +7,18 @@ import java.util.Date;
 
 
 @MappedSuperclass //这个MappedSuperclass注解没有的话会有问题
-public abstract class BaseEntity implements IEntity<Integer> {
+public abstract class BaseEntity /*implements IEntity<Integer>*/ {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     protected Integer id;
 
-    @Column(name = "active")
+    @Column(name = "active",columnDefinition = " bit default true")
     protected Boolean active=true;
 
     //@JsonIgnore
-    @Column(name = "createTime")
+    @Column(name = "createTime",columnDefinition = " datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP")
     protected Date createTime;
 
     //@JsonIgnore
@@ -29,7 +29,7 @@ public abstract class BaseEntity implements IEntity<Integer> {
     @Column(name = "deleteTime")
     protected Date deleteTime;
 
-    @Override
+    //@Override
     public Integer getId() {
         return id;
     }

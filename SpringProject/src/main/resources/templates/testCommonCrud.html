@@ -5,26 +5,80 @@
     <title>testCommonCrud</title>
     <script type="text/javascript" src="js/plugin/jquery-1.11.3.js"></script>
     <script type="text/javascript" src="js/common/communicate.js"></script>
+    <script type="text/javascript" src="js/common/commonUI.js"></script>
     <script type="text/javascript" src="js/testCommonCrud.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/easyui.css">
+    <script type="text/javascript" src="js/plugin/jquery.easyui.min.js"></script>
 </head>
 <body>
 testCommonCrud<br/>
-实体类列表<select id="entityList"></select><br/>
+实体类列表
+<select id="entityList">
+    <option selected="selected">user</option>
+    <option>role</option>
+    <option>city</option>
+    <option>menu</option>
+    <option>spaceRes</option>
+</select><br/>
 属性列表<select id="propertyList"></select><br/>
-<textarea id="result" tstyle="with:100px;height:100px;">
+<br/>
+<button id="btnTemplate">获取模板</button>
+<button id="btnGetAll">获取全部</button>
+<button id="btnGetCount">获取数量</button>
+<br/>
+<!--<button id="btnGetEntityList">getEntityList</button>-->
+<button id="btnAdd">添加</button>
+<button id="btnUpdate">修改(update)</button>
+<button id="btnPut">修改(put)</button>
+<button id="btnPatch">局部修改(patch)</button>
+<br/>
+Id:<Input id="txtId" value="1"></Input>
+<button id="btnDelete">删除</button>
+<button id="btnGet">获取</button>
+<br/>
+第几页:<input type="text" id="txtPage" value="1"></input>
+行数:<input type="text" id="txtSize" value="5"></input>
+<button id="btnGetPage">获取分页</button>
+<br/>
 
+条件:
+<!--<input type="text" id="inputCondition" value="name-lk:1"></input>-->
+<select id="conditionProperty"></select>
+<select id="conditionOp">
+    <option value="lk">lk</option>
+    <option value="eq">eq</option>
+    <option value="gt">gt</option>
+    <option value="ge">ge</option>
+    <option value="lt">lt</option>
+    <option value="le">le</option>
+    <option value="gt">gt</option>
+    <option value="le">le</option>
+    <option value="in">in</option>
+    <option value="nq">nq</option>
+    <option value="nul">nul</option>
+    <option value="nnl">nnl</option>
+    <option value="lks">lks</option>
+    <option value="lke">lke</option>
+</select>
+<input type="text" id="inputConditionValue" value="1"></input>
+<button id="btnAddMap">添加条件</button>
+<br/>
+排序属性:<select id="sortProperty"></select>
+<input name="sortType" type="radio" value="asc" checked="checked">正序</input>
+<input name="sortType" type="radio" value="desc">倒序</input>
+<button id="btnAddSort">添加排序</button>
+<br/>
+查询条件<button id="btnClearCondition">清空条件</button>
+<button id="btnShowCondition">显示条件</button>
+<textarea id="txtCondition" style="width:100%;height:100px;">
 </textarea>
 <br/>
-<button id="getEntityList">getEntityList</button>
-<button id="add">添加</button>
-<button id="update">修改(update)</button>
-<button id="put">修改(put)</button>
-<button id="patch">局部修改(patch)</button>
-<button id="delete">删除</button>
-<button id="getOne">获取一个</button>
-<button id="getAll">获取全部</button>
-<button id="getPage">获取分页</button>
-<button id="queryAll">查询全部</button>
-<button id="queryPage">查询分页</button>
+<button id="btnQueryAll">查询全部</button>
+<button id="btnQueryPage">查询分页</button>
+<div id="dataGrid_entityList"></div>
+结果
+<textarea id="txtResult" style="width:100%;height:150px;">
+</textarea>
 </body>
 </html>

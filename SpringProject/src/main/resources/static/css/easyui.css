@@ -440,7 +440,7 @@ overflo.panel {
 .combobox-item-selected {
     /*background-color: #5184ff;*/
     color: #000000;
-    background: url(images/check_normal.png) no-repeat 130px;
+    background: url(../images/easyUI/check_normal.png) no-repeat 130px;
 }
 
     .combobox-item-selected:hover {
@@ -1039,7 +1039,7 @@ a.l-btn span span.l-btn-text {
     padding: 0;
     margin: 0;
 }
-/*³Ì ÌáÊ¾´°°´Å¥ ¿ªÊ¼*/
+/*ï¿½ï¿½ ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½Å¥ ï¿½ï¿½Ê¼*/
 a.l-btn-messager span span.l-btn-text {
     display: inline-block;
     height: 32px;
@@ -1060,7 +1060,7 @@ a.l-btn-messager span span.l-btn-text:active {
     position: relative;
     box-shadow: 0 1px 4px #3874ff inset;
 }
-/*³Ì ÌáÊ¾´°°´Å¥ ½áÊø*/
+/*ï¿½ï¿½ ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½Å¥ ï¿½ï¿½ï¿½ï¿½*/
 a.l-btn span span.l-btn-icon-left {
     padding: 0 0 0 20px;
     background-position: left center;
@@ -1282,7 +1282,7 @@ a:hover.l-btn-plain-selected {
     padding: 0;
     overflow: auto;
     zoom: 1;
-    background: url('../../../../../img/zd.jpg');
+    background: url('../images/easyUI/zd.jpg');
 }
 
 .datagrid-view1 .datagrid-body-inner {
@@ -2168,7 +2168,7 @@ a:hover.l-btn-plain-selected {
 
     .slider-v .slider-rule span {
         width: 5px;
-        height: 'auto';
+        height:auto;
         border-left: 0;
         border-width: 1px 0 0 0;
         border-style: solid;
