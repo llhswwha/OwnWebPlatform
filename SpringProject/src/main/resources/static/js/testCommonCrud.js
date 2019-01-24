@@ -46,7 +46,7 @@ function getCondition() {
     console.log(json);
     condition=new Condition();
     if(json!='' && typeof(condition) != 'undefined'){
-        condition.parseJson(json);//直接Json反序列化的话，不是Condition类型了，无法使用Condition类型的方法
+        condition.setPropertyByJson(json);//直接Json反序列化的话，不是Condition类型了，无法使用Condition类型的方法
     }
 
     console.log('type:'+typeof(condition));
@@ -252,12 +252,12 @@ $(function () {
     });
 
     $('#btnQueryAll').click(function () {
-        //var entityName=getEntityName();
+        var entityName=getEntityName();
         var condition=getCondition();
         console.log('test.queryAll');
         console.log(condition);
-        //var dao=new EntityDao(entityName);
-        //var result=dao.queryAll(condition,showResult);
+        var dao=new EntityDao(entityName);
+        var result=dao.queryAll(condition,showResult);
     });
 
     $('#btnQueryPage').click(function () {

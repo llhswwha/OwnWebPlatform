@@ -130,7 +130,7 @@ public class ConditionModel {
         if (!CollectionUtils.isEmpty(sortMap)) {
             for(Iterator i$ = sortMap.keySet().iterator(); i$.hasNext();) {
                 String key = (String)i$.next();
-                String v = (String)map.get(key).toLowerCase();
+                String v = sortMap.get(key).toLowerCase();
                 //考虑前端asc,desc没写或者写错的情况。
                 if(v.equals("desc")){//倒叙
                     addOrder(key,v);

@@ -23,41 +23,52 @@ function Condition(page,size) {
     }
     this.map=new Object();
     this.sort=new Object();
-    if (typeof this.parseJson != "function") {
-        Condition.prototype.parseJson = function (json) {
-            console.log('parseJson');
-            console.log(json);
-            var obj=JSON.parse(json);
-            this.page=obj.page;
-            this.size=obj.size;
-            this.map=obj.map;
-            this.sort=obj.sort;
+    if (typeof this.setPropertyByJson != "function") {
+        Condition.prototype.setPropertyByJson = function (json) {
+            console.log('condition.setPropertyByJson');
+            if (typeof (json) == 'undefined') return;
+            var obj = JSON.parse(json);
+            this.page = obj.page;
+            this.size = obj.size;
+            this.map = obj.map;
+            this.sort = obj.sort;
+
         }
     }
     if (typeof this.setPage != "function") {
         Condition.prototype.setPage = function (page,size) {
+            console.log('condition.setPage');
+            if (typeof (page) == 'undefined') return;
             this.page=page;
             this.size=size;
         }
     }
     if (typeof this.addMap != "function") {
         Condition.prototype.addMap = function (column,op,value) {
+            console.log('condition.addMap');
+            if (typeof (column) == 'undefined') return;
             var key=column+'-'+op;
             this.map[key]=value;
         }
     }
     if (typeof this.addSort != "function") {
         Condition.prototype.addSort = function (column,sortType) {
+            console.log('condition.addSort');
+            if (typeof (column) == 'undefined') return;
             this.sort[column]=sortType;
         }
     }
     if (typeof this.asc != "function") {
         Condition.prototype.asc = function (column) {
+            console.log('condition.asc');
+            if (typeof (column) == 'undefined') return;
             this.sort[column]='asc';
         }
     }
     if (typeof this.desc != "function") {
         Condition.prototype.desc = function (column) {
+            console.log('condition.desc');
+            if (typeof (column) == 'undefined') return;
             this.sort[column]='desc';
         }
     }
@@ -139,14 +150,21 @@ function EntityDao(name) {
     if (typeof this.queryAll != "function") {
         EntityDao.prototype.queryAll = function (condition,callBack) {
             console.log("dao.queryAll");
-            var url=this.name+"/";
+            var url=this.name+"/queryAll";
+
+            console.log(condition);
+            var json=JSON.stringify(condition);
+            console.log(json);
+            condition=JSON.parse(json);
+            console.log(condition);
             this.ajax.post(url,condition,callBack);
         }
     }
     if (typeof this.queryPage != "function") {
         EntityDao.prototype.queryPage = function (condition,callBack) {
             console.log("dao.queryPage");
-            var url=this.name+"/";
+            var url=this.name+"/queryPage";
+
             this.ajax.post(url,condition,callBack);
         }
     }
@@ -214,6 +232,8 @@ function Ajax() {
     }
     if (typeof this.post != "function") {
         Ajax.prototype.post = function (url,data,callBack) {
+            console.log('ajax.post:'+url);
+            console.log(data);
             $.ajax({
                 url:url,
                 type:'POST',
