@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 
 @RestController
-@RequestMapping("/City")
+@RequestMapping("/city")
 public class CityController extends EntityController<City,Integer> {
 
     @Resource

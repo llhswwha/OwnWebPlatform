@@ -6,14 +6,10 @@ import com.shencode.ownwebplatform.model.Message;
 import com.shencode.ownwebplatform.module.condition.ui.ConditionModel;
 import com.shencode.ownwebplatform.service.EntityService;
 import com.shencode.ownwebplatform.util.TUtil;
-import org.apache.commons.lang3.ClassUtils;
-import org.codehaus.jackson.map.util.ClassUtil;
 import org.springframework.data.domain.*;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
 
@@ -78,14 +74,14 @@ public abstract class EntityController<T extends BaseEntity,ID> {
     }
 
     @PostMapping("queryAll")
-    public List<T> queryList(ConditionModel condition) {
-        System.out.println("queryList");
+    public Message<List<T>> queryList(ConditionModel condition) {
+        System.out.println("queryAll");
         System.out.println(condition);
         return getService().queryAll(condition);
     }
 
     @PostMapping("queryPage")
-    public Page<T> queryPage(ConditionModel condition) {
+    public Message<Page<T>> queryPage(ConditionModel condition) {
         System.out.println("queryList");
         System.out.println(condition);
         return getService().queryPage(condition);

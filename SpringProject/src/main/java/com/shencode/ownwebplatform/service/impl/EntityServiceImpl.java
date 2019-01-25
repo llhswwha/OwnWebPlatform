@@ -145,35 +145,22 @@ public abstract class EntityServiceImpl<T extends BaseEntity> implements EntityS
     }
     //根据ID删除数据（单表）
     @Override
-    public Message<T> deleteById(Integer id) {
-        T entity=getEntity(id);
-        Message<T> message =null;
-        if(entity!=null){
-            try {
-//                getRepository().delete(entity);
-                //使用逻辑删除，修改数据状态
-                entity.setActive(false);  //删除状态
-                entity.setDeleteTime(new Date()); //删除时间
-                getRepository().save(entity);
-                message = new Message(0, "成功");
-                message.setData(entity);
-            } catch (Exception e) {
-                message = new Message(1, e.toString());
-            }
-        }
-        else{
-            message = new Message(1, "未找到该条数据! id="+id);
-        }
-        return message;
+    public Message<T> deleteById(Integer id)
+    {
+      return  getMessage(getEntity(id));
     }
     //根据类删除（存在关联关系的多表删除）
     @Override
     public Message<T>  delete(T entity)
     {
+        T entityOld=getEntity(entity.getId());
+        return  getMessage(entityOld);
+    }
+    private  Message<T> getMessage(T entity)
+    {
         Message<T> message=null;
         try {
-            T entityOld=getEntity(entity.getId());
-            if (entityOld != null) {
+            if (entity != null) {
 //                getRepository().delete(entity);
                 //使用逻辑删除，修改数据状态
                 entity.setActive(false);  //删除状态
@@ -189,6 +176,7 @@ public abstract class EntityServiceImpl<T extends BaseEntity> implements EntityS
         }
         return  message;
     }
+
 
 //全部删除（物理删除，慎用）
     @Override
@@ -235,28 +223,43 @@ public abstract class EntityServiceImpl<T extends BaseEntity> implements EntityS
      }
 
     @Override
-    public Page<T> getPage(Pageable pageable) {
-        return getRepository().findAll(pageable);
+    public Page<T> getPage(Pageable pageable)
+    {
+       // return getRepository().findAll(pageable);
+        return  getRepository().findAllByActive(pageable,true);
     }
 
     @Resource
     private EntityManager entityManager;//必须有
 
     @Override
-    public List<T> queryAll(ConditionModel condition){
-        ConditionQuery queryUtil=new ConditionQuery(entityManager,entityClass,condition);
-        return queryUtil.findList();
+    public Message<List<T>> queryAll(ConditionModel condition){
+        Message<List<T>> msg=new Message<>();
+        try{
+            ConditionQuery queryUtil=new ConditionQuery(entityManager,entityClass,condition);
+            List<T> list= queryUtil.findList();
+            msg.SetSuccess(list);
+        }catch (Exception ex){
+            msg.SetFailture(ex);
+        }
+        return msg;
     }
 
     @Override
-    public Page<T> queryPage(ConditionModel condition){
-        ConditionQuery queryUtil=new ConditionQuery(entityManager,entityClass,condition);
-        Pageable pageable=getPageable(condition);
-        Page<T> page=getRepository().findAll((itemRoot,query,criteriaBuilder)->{  //需要JpaSpecificationExecutor接口
-            Predicate result=queryUtil.getPredicate(itemRoot,query,criteriaBuilder);
-            return result;
-        },pageable);
-        return page;
+    public Message<Page<T>> queryPage(ConditionModel condition){
+        Message<Page<T>> msg=new Message<>();
+        try{
+            ConditionQuery queryUtil=new ConditionQuery(entityManager,entityClass,condition);
+            Pageable pageable=getPageable(condition);
+            Page<T> page=getRepository().findAll((itemRoot,query,criteriaBuilder)->{  //需要JpaSpecificationExecutor接口
+                Predicate result=queryUtil.getPredicate(itemRoot,query,criteriaBuilder);
+                return result;
+            },pageable);
+            msg.SetSuccess(page);
+        }catch (Exception ex){
+            msg.SetFailture(ex);
+        }
+        return msg;
     }
 
     private Pageable getPageable(ConditionModel condition){
@@ -273,7 +276,9 @@ public abstract class EntityServiceImpl<T extends BaseEntity> implements EntityS
     }
 
     public Message<Long> getCount(){
-        Long count= getRepository().count();
+//        Long count= getRepository().count();
+        //过滤Active
+        Long count=getRepository().countByActive(true);
         Message<Long> msg=new Message<>(1,"成功");
         msg.setData(count);
         return msg;

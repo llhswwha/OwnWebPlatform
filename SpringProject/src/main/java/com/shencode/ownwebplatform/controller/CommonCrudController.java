@@ -15,4 +15,19 @@ public class CommonCrudController {
     public String testOtherDao(){
         return "testOtherDao";
     }
+
+    @RequestMapping("testBootstrap")
+    public String testBootstrap(){
+        return "testBootstrap";
+    }
+
+    @RequestMapping("bootstrapTemplate")
+    public String bootstrapTtemplate(){
+        return "bootstrap_template";
+    }
+
+    @RequestMapping("bootstrapHello")
+    public String bootstrapHello(){
+        return "bootstrap_hello";
+    }
 }

@@ -5,9 +5,7 @@ $(".top .icon-caidan,.left_main").click(function (e) {
 $(".left_nav_box").click(function (e) {
 	e.stopPropagation();
 })
-$("body").click(function () {
-	$(".left_nav_box,.top .icon-caidan").removeClass("show");
-})
+
 
 //加载菜单对应html
 $(".title_box .title_list a").click(function () {
@@ -19,7 +17,11 @@ $(".title_box .title_list a").click(function () {
 		return;
 	}
 	$(".title_box .title_list a,.contentlist").removeClass("active");
-
+	if(valuee=="container"){ //地图(container)把后面的iframe挤下去了 所以需要隐藏掉
+		$("#container").show();
+	}else{
+		$("#container").hide();
+	}
 	$(this).addClass("active")
 
 	if($("#"+valuee).length==0){
@@ -37,9 +39,20 @@ $(".leftnave .leftnavlist a").click(function () {
 	if(valuee=="0"){
 		return;
 	}
+	if(valuee=="container"){ //地图(container)把后面的iframe挤下去了 所以需要隐藏掉
+		$("#container").show();
+	}else{
+		$("#container").hide();
+	}
 	if($("#"+valuee).length==0){
 		$(".contentlist").removeClass("active");
-		$('.contentbox').append('<iframe id='+valuee+' class="contentlist active" src="'+valuee+'.html" frameborder="0" scrolling="no" style="width: 100%; height: 100%;"></iframe>');
+	$('.contentbox').append(
+			'<iframe id='
+			+valuee+
+			' class="contentlist active" src="'
+			+valuee+
+			'.html" frameborder="0" scrolling="no" style="width: 100%; height: 100%;"></iframe>'
+		);
 	}else {
 		$(".contentlist").removeClass("active");
 		$("#"+valuee).addClass("active");
@@ -55,10 +68,10 @@ $(window).resize(function(){
 // 百度地图API功能 点聚合 $(document.body).height()
 
 $(document).ready(function () {
-var map = new BMap.Map("container",{minZoom:10,maxZoom:12,enableMapClick:false});
+var map = new BMap.Map("container",{minZoom:10,maxZoom:17,enableMapClick:false});
 	map.centerAndZoom(new BMap.Point(118.797239,32.06442), 12);
 	map.enableScrollWheelZoom();
-	map.addControl(new BMap.NavigationControl());			//缩放按钮
+	//map.addControl(new BMap.NavigationControl());			//缩放按钮
 	map.disableDoubleClickZoom();//禁止双击缩放
 
 var myIcon2 = new BMap.Icon("tb1_0.png", new BMap.Size(30, 40));
@@ -95,10 +108,14 @@ function addClickHandler(content,marker){
 			var p = e.target;
 			textjd = p.getPosition().lng;
 			textwd = p.getPosition().lat;
-			alert("marker的位置是" + p.getPosition().lng + "," + p.getPosition().lat);
+		//	alert("marker的位置是" + p.getPosition().lng + "," + p.getPosition().lat);
 		}
 	);
 }
+
+	$("#container").append('<div class="mapnav"><input  class="mapSearch" type="text" placeholder="搜索资源、地点、设备" ><button class="icon iconfont icon-sousuo"></button></div><select class="mapCity"><option>南京市</option></select>'
+
+		+ '<div class="mapNavRight"></div>');
 $("body").on("click",".BMap_Marker",function (e) {
 
 	$(".addbox").remove();
@@ -106,6 +123,15 @@ $("body").on("click",".BMap_Marker",function (e) {
 	var 	boxtop  = $(this).css("top");
 	//	$(this).parent("div").append("<div class='addbox' style='left: "+boxleft+";top:"+boxtop+"'>"+textjd+","+textwd+"</div>")
 	$(this).append("<div class='addbox' style=''>"+textjd+","+textwd+"</div>")
-
+	e.stopPropagation();
 })
+
+	$("body").on("click",".addbox",function (e) {
+		e.stopPropagation();
+	});
+
+	$("body").click(function () {
+		$(".left_nav_box,.top .icon-caidan").removeClass("show");
+		$(".addbox").remove();
+	})
 })

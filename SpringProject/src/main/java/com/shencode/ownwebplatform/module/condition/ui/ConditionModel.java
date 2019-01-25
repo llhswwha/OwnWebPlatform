@@ -336,6 +336,9 @@ public class ConditionModel {
     }
 
     public String toString() {
+        if(map==null){
+            return toJsonString();
+        }
         if(map.size()>0&&hashCondition.size()==0){
             generate();
         }
@@ -359,12 +362,13 @@ public class ConditionModel {
 
     public String toJsonString() {
         return "MyCondition{" +
-                "jsonMap=" + map+
+                "map=" + map+
+                ", map=" + map+
                 ", hashAlias=" + hashAlias +
                 ", hashCondition=" + hashCondition +
                 ", hashOrderBy=" + hashOrderBy +
-                ", start=" + page +
-                ", limit=" + size +
+                ", page=" + page +
+                ", size=" + size +
                 '}';
     }
 

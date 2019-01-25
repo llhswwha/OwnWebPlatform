@@ -120,11 +120,13 @@ function showResult(result){
     console.log('r4:'+r4);*/
 
     var data=getResultData(result);
-
+    if(data==null){
+        data=result;
+    }
     var json=JSON.stringify(data);
     $('#txtResult').text(json);
 
-    if(isDefined(data.id)){//id is undefined
+    if(isDefined(data.id)){//单个数据
         setId(data.id);
 
         var propertyList=[];
@@ -133,13 +135,14 @@ function showResult(result){
         }
         console.log('propertyList');
         console.log(propertyList);
-        setComboBoxData("#propertyList",propertyList);
-        selectComboValueByValue("#propertyList",'id');
-        setComboBoxData("#sortProperty",propertyList);
-        selectComboValueByValue("#sortProperty",'id');
-        setComboBoxData("#conditionProperty",propertyList);
-        selectComboValueByValue("#conditionProperty",'id');
-    }else{ //单个数据
+        setComboBoxListData(["#propertyList","#sortProperty","#conditionProperty"],propertyList);
+        //setComboBoxData("#propertyList",propertyList);
+        selectComboValueByValue("#propertyList",'name');
+        //setComboBoxData("#sortProperty",propertyList);
+        selectComboValueByValue("#sortProperty",'name');
+        //setComboBoxData("#conditionProperty",propertyList);
+        selectComboValueByValue("#conditionProperty",'name');
+    }else{
 
     }
 

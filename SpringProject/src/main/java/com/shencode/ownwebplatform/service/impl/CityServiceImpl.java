@@ -16,12 +16,10 @@ public class CityServiceImpl extends EntityServiceImpl<City> implements CityServ
     private CityRepository repository;
 
     @Override
-    public EntityRepository<City, Integer> getRepository() {
+    public EntityRepository<City, Integer> getRepository()
+    {
         return repository;//提供对应的repository
     }
-
-
-
 
     //...其他功能实现
 }

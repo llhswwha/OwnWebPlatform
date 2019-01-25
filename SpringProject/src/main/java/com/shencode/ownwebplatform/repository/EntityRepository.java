@@ -1,6 +1,8 @@
 package com.shencode.ownwebplatform.repository;
 
 import com.shencode.ownwebplatform.entity.BaseEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
@@ -16,5 +18,8 @@ public interface EntityRepository<T,ID> extends JpaRepository<T,ID>, JpaSpecific
        List<T> findAllByActive(Boolean active);
 
         Optional<T> findByIdAndActive(Integer id,boolean active);
+        public  long countByActive(Boolean active);
+
+        public Page<T>  findAllByActive(Pageable pageable,boolean active);
 
 }

@@ -124,8 +124,12 @@ public class ConditionQuery<T> {
             } else {
                 val = "%" + val + "%";
             }
+            //val="'"+val+"'";//加上单引号
             //predicate = Restrictions.sqlRestriction("{alias}." + alias.replaceAll("\\.", "_") + " like ?", val, Hibernate.STRING);
+
             predicate = criteriaBuilder.like(expression,val);
+            //现在有个问题 数字类型 用 like查询的话会出现 Parameter value [%1%] did not match expected type [java.lang.Integer (n/a)]
+            //发现JPA就是不知道这么操作的 因为有些数据库不支持这种转换的 参考:https://stackoverflow.com/questions/5535084/jpa-like-operator-with-integer
         } else if (ConditionExpression.EQ.equals(op)) {
             predicate = criteriaBuilder.equal(expression, v);
 

@@ -8,15 +8,19 @@ public class Message<T> {
     private  int state;
     private  String describe;
 
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data = data;
-    }
+    private  String exception;
 
     private T data;
+
+    public Message(){
+
+    }
+
+    public Message(int state,String describe)
+    {
+        this.state=state;
+        this.describe=describe;
+    }
 
     public void setState(int state) {
         this.state = state;
@@ -34,11 +38,29 @@ public class Message<T> {
         return describe;
     }
 
-    public Message(int state,String describe)
-    {
-         this.state=state;
-         this.describe=describe;
+    public String getException() {
+        return exception;
     }
 
+    public void setException(String exception) {
+        this.exception = exception;
+    }
+    public T getData() {
+        return data;
+    }
 
+    public void setData(T data) {
+        this.data = data;
+    }
+
+    public void SetSuccess(T data){
+        setData(data);
+        this.state=0;
+        this.describe="成功";
+    }
+    public void SetFailture(Exception ex){
+        this.state=1;
+        this.describe="失败";
+        this.exception=ex.toString();
+    }
 }

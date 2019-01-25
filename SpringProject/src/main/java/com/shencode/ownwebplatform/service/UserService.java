@@ -12,10 +12,6 @@ public interface UserService extends EntityService<User,Integer> {
 
     public Page<User> getUserByName(String name, Pageable pageable);
 
-    public Message<User> addUser(User user);
-
-    public Message<User> updateUser(User user);
-
 
 
 

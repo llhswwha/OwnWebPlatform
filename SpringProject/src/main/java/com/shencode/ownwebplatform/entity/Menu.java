@@ -3,6 +3,7 @@ package com.shencode.ownwebplatform.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 //菜单表
@@ -38,6 +39,20 @@ public class Menu extends BaseEntity {
 //    public void setId(Integer id) {
 //        this.id = id;
 //    }
+
+    @Transient
+    private List<Integer> roleIdList;
+    @Transient
+    public void setRoleIdList(List<Integer> roleIdList)
+    {
+        this.roleIdList = roleIdList;
+    }
+    @Transient
+    public List<Integer> getRoleIdList()
+    {
+        return roleIdList;
+    }
+
 
     public void setRoleSet(Set<Role> roleSet) {
         this.roleSet = roleSet;

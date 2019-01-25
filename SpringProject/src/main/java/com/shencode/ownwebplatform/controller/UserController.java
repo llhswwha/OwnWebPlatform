@@ -64,7 +64,22 @@ public class UserController extends EntityController<User,Integer> {
         List<Integer>  integerList=new ArrayList<>();
         integerList.add(1);
         user.setRoleIdList(integerList);*/
-        return  userService.addUser(user);
+        return  null;//userService.addUser(user);
+    }
+
+    //修改用户
+    @PostMapping("/updateUser")
+    public  Message  updateUser(User user)
+    {
+        return  null;// userService.updateUser(user);
+    }
+
+
+    //删除用户
+    @PostMapping("/deleteUserById")
+    public  Message  deleteUserById(Integer id)
+    {
+        return  userService.deleteById(id);
     }
 
 }

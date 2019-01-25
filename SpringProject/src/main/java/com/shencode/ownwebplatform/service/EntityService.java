@@ -35,10 +35,10 @@ public interface EntityService<T extends BaseEntity,ID> {
     public Message<T> update(Map<String,Object> map);
 
     //条件查询列表
-    public List<T> queryAll(ConditionModel condition);
+    public Message<List<T>> queryAll(ConditionModel condition);
 
     //条件查询分页
-    public Page<T> queryPage(ConditionModel condition);
+    public Message<Page<T>> queryPage(ConditionModel condition);
 
     public Message<Long> getCount();
 }

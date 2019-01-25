@@ -15,6 +15,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -22,21 +25,24 @@ import java.util.Set;
 @Service
 public class UserServiceImpl extends EntityServiceImpl<User> implements UserService {
     @Resource
-    private UserRepository userRepository = null;
+    private UserRepository userRepository;
     @Resource
     private CityRepository cityRepository;
+
 
     @Resource
     private  RoleRepository roleRepository;
 
     @Override
-    public EntityRepository<User, Integer> getRepository() {
+    public EntityRepository<User, Integer> getRepository()
+    {
         return userRepository;
     }
 
-
+    //用户登录验证
     @Override
-    public Message login(String loginName, String password) {
+    public Message login(String loginName, String password)
+    {
         User user=userRepository.findByLoginName(loginName);
         if(user==null)
         {
@@ -46,13 +52,38 @@ public class UserServiceImpl extends EntityServiceImpl<User> implements UserServ
         {
             if(MD5Util.getMD5String(password)==user.getPassword())
             {
-                if(user.getState()==0)
+                if(user.getValidSityData()==null)
                 {
-                    return  new Message(1,"成功");
+                    if(user.getState()==0)
+                    {
+                        return  new Message(1,"成功");
+                    }
+                    else
+                    {
+                        return  new Message(0,"用户不可用");
+                    }
+
                 }
-                else
+               else
                 {
-                    return  new Message(0,"用户不可用");
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    try {
+                        Date nowDate = new Date();
+                        Date validSityData = format.parse(user.getValidSityData());
+
+                        int compareTo = nowDate.compareTo(validSityData);
+                        if(compareTo==-1)//当前时间小于有效期， 账号无效
+                        {
+                            return  new Message(0,"账号无效");
+                        }
+                        else
+                        {
+                            return  new Message(1,"成功！");
+                        }
+
+                    } catch (ParseException e) {
+                        return  new Message(0,e.toString());
+                    }
                 }
             }
             else
@@ -67,15 +98,18 @@ public class UserServiceImpl extends EntityServiceImpl<User> implements UserServ
         return  userRepository.getUserbyName(name,pageable);
     }
 
+
+
+    //添加用户
     @Override
-    public Message<User> addUser(User user) {
+    public Message<User> add(User user) {
         SetRoles(user);
-        SetCompany(user);
-        return add(user);
+        SetCity(user);
+        return super.add(user);
     }
 
-    private void SetCompany(User user){
-        City city = cityRepository.findById(user.getCityId()).get();
+    private void SetCity(User user){
+        City city = cityRepository.findByIdAndActive(user.getCityId(),true).get();
         user.setCity(city);
     }
 
@@ -90,15 +124,20 @@ public class UserServiceImpl extends EntityServiceImpl<User> implements UserServ
         user.setRoleSet(roleSet);
     }
 
+    //修改用户
     @Override
-    public Message<User> updateUser(User user) {
+    public Message<User> update(User user) {
         SetRoles(user);
-        SetCompany(user);
-        return update(user);
+        SetCity(user);
+        return super.update(user);
     }
 
-
-
-
-
+    //删除用户
+    @Override
+    public Message<User> deleteById(Integer id) {
+        //return super.deleteById(id);
+        User user=getEntity(id);
+        user.getRoleSet().clear();
+        return  delete(user);
+    }
 }
