@@ -26,13 +26,16 @@
         $('#table').bootstrapTable({
             columns: [{
                 field: 'id',
-                title: 'Item ID'
+                title: 'ID'
             }, {
                 field: 'name',
-                title: 'Item Name'
+                title: '昵称'
             }, {
-                field: 'price',
-                title: 'Item Price'
+                field: 'loginName',
+                title: '登录名'
+            }, {
+                field: 'password',
+                title: '密码'
             }],
             data: data
         })
