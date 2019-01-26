@@ -109,12 +109,15 @@ public class UserServiceImpl extends EntityServiceImpl<User> implements UserServ
     }
 
     private void SetCity(User user){
-        City city = cityRepository.findByIdAndActive(user.getCityId(),true).get();
+        Integer cityId=user.getCityId();
+        if(cityId==null)return;
+        City city = cityRepository.findByIdAndActive(cityId,true).get();
         user.setCity(city);
     }
 
     private void SetRoles(User user){
         List<Integer> roleIdList=user.getRoleIdList();
+        if(roleIdList==null)return;
         Set<Role> roleSet=new HashSet<>();
         for (int i=0;i<roleIdList.size();i++)
         {

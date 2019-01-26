@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap/all.css">
+    <link rel="stylesheet" href="bootstrap/bootstrap-table.min.css">
+    <title>Hello, Bootstrap Table!</title>
+</head>
+<body>
+<table id="table"></table>
+<!-- jQuery first, then Popper.js, then Bootstrap JS, and then Bootstrap Table JS -->
+<script src="bootstrap/jquery.min.js"></script>
+<script src="bootstrap/popper.min.js"></script>
+<script src="bootstrap/bootstrap.min.js"></script>
+<script src="bootstrap/core.min.js"></script>
+<script src="bootstrap/bootstrap-table.min.js"></script>
+<script src="js/common/communicate.js"></script>
+<script>
+    function showPageData(result){
+        var data=getResultData(result);
+        $('#table').bootstrapTable({
+            columns: [{
+                field: 'id',
+                title: 'Item ID'
+            }, {
+                field: 'name',
+                title: 'Item Name'
+            }, {
+                field: 'price',
+                title: 'Item Price'
+            }],
+            data: data
+        })
+    }
+    function loadDataTable(){
+        var dao=new EntityDao("user");
+        dao.getAll(showPageData);
+    }
+    loadDataTable();
+</script>
+
+</body>
+</html>

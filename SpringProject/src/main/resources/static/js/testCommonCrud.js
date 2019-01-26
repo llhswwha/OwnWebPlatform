@@ -6,10 +6,11 @@ function getEntityData(entityName){
     if(json==''){
         data.name='用户'+new Date().getMilliseconds()+new Date().getSeconds();
         data.loginName='user'+new Date().getMilliseconds()+new Date().getSeconds();
-        data.pw='1235';
+        data.password='1235';
         //data.id='1';
-        data.sex='1';
+        data.gender='1';
         data.birthday='123';
+        data.workEmail='work@work.com';
     }
     else{
         data=JSON.parse(json);
@@ -57,47 +58,6 @@ function getCondition() {
     console.log(condition);
     return condition;
 }
-
-function isUndefined(obj) {
-    console.log('isUndefined');
-    console.log(typeof (obj));
-    //if (obj == null) return true;
-    if (typeof (obj) == "undefined") {
-        return true;
-    } else {
-        return false;
-    }
-}
-function isDefined(obj) {
-    console.log('isDefined');
-    console.log(typeof (obj));
-    //if (obj == null) return true;
-    if (typeof (obj) == "undefined") {
-        return false;
-    } else {
-        return true;
-    }
-}
-
-function getResultData(result) {
-    var data=result;
-    if(isDefined(result.state)){
-        if(result.state==0){
-            alert('成功!');
-        }
-        else{
-            alert(result.describe);
-        }
-        console.log('data');
-        console.log(result.data);
-        if(isDefined(result.data)) {//data is undefined User属性中有个state并且等于0
-            data=result.data;
-        }
-        console.log(data);
-    }
-    return data;
-}
-
 
 function showResult(result){
     console.log('showResult');

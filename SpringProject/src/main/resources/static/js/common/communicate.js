@@ -1,13 +1,47 @@
 console.log('communicate.js')
-//动态原型方式和原型/构造混合方式的原理相似，唯一的区别就是赋予对象方法的位置
-function Person(name, sex) {
-    this.name = name;
-    this.sex = sex;
-    if (typeof this.say != 'function') {
-        Person.prototype.say = function () {
-            alert(this.name);
-        }
+
+function isDefined(obj) {
+    console.log('isDefined');
+    console.log(typeof (obj));
+    //if (obj == null) return true;
+    if (typeof (obj) == "undefined") {
+        return false;
+    } else {
+        return true;
     }
+}
+
+function ClassObjectParse() {
+
+}
+
+String.prototype.startWith=function(str){
+    var reg=new RegExp('^'+str);
+    return reg.test(this);
+}
+
+String.prototype.endWith=function(str){
+    var reg=new RegExp(str+'$');
+    return reg.test(this);
+}
+
+function getResultData(result) {
+    var data=result;
+    if(isDefined(result.state)){
+        if(result.state==0){
+            alert('成功!');
+        }
+        else{
+            alert(result.describe);
+        }
+        console.log('data');
+        console.log(result.data);
+        if(isDefined(result.data)) {//data is undefined User属性中有个state并且等于0
+            data=result.data;
+        }
+        console.log(data);
+    }
+    return data;
 }
 
 function Condition(page,size) {
@@ -73,34 +107,6 @@ function Condition(page,size) {
         }
     }
 }
-
-function ClassObjectParse() {
-
-}
-
-String.prototype.startWith=function(str){
-    var reg=new RegExp('^'+str);
-    return reg.test(this);
-}
-
-String.prototype.endWith=function(str){
-    var reg=new RegExp(str+'$');
-    return reg.test(this);
-}
-
-/*//是否是类类型的物体 有自定义的构造函数 而不是通常的 function Object()
-function isClassObject(obj) {
-    console.log('isClassObject');
-    if(obj==null)return false;
-    var type=typeof (obj);
-    console.log('type:'+type);
-    if (type == 'undefined') return false;
-    if(type != 'object') return false;
-    var constructTxt=obj.constructor+'';
-    console.log('constructTxt:'+constructTxt);
-    var result=!constructTxt.startWith('function Object()');
-    return result;
-}*/
 
 function EntityDao(name) {
     this.ajax=new Ajax();
