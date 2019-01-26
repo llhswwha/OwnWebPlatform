@@ -113,9 +113,20 @@ function addClickHandler(content,marker){
 	);
 }
 
-	$("#container").append('<div class="mapnav"><input  class="mapSearch" type="text" placeholder="搜索资源、地点、设备" ><button class="icon iconfont icon-sousuo"></button></div><select class="mapCity"><option>南京市</option></select>'
 
-		+ '<div class="mapNavRight"></div>');
+//地图移动
+
+	$("#container").on("click",".goLoction",function () {
+
+		var longitude = $(".longitude").val();
+		var latitude = $(".latitude").val();
+		map.panTo(new BMap.Point(longitude,latitude));
+	});
+	;
+
+	$("#container").append('<div class="mapnav"><input  class="mapSearch" type="text" placeholder="搜索资源、地点、设备" ><button class="icon iconfont icon-sousuo"></button></div><select class="mapCity"><option>南京市</option></select>'
+		+ '<div class="mapNavRight"><div class="mapRightList"><i class="icon iconfont icon-dingwei"></i>定位</div><div class="mapRightList"><i class="icon iconfont icon-caozuo_quanpingfangda"></i>最大化</div><div class="mapRightList"><i class="icon iconfont icon-shaixuan"></i> 图层筛选</div></div>'
+		+'<div class="mapLocation"><div class="left"><div style="height: 50%;box-sizing: border-box;padding-top: 10px;"><span>经度：</span><input class="longitude"/></div><div  style="height: 50%;box-sizing: border-box;padding-top: 10px;"><span>纬度：</span><input class="latitude"/></div></div><div class="goLoction">去定位</div></div>');
 $("body").on("click",".BMap_Marker",function (e) {
 
 	$(".addbox").remove();
@@ -125,7 +136,31 @@ $("body").on("click",".BMap_Marker",function (e) {
 	$(this).append("<div class='addbox' style=''>"+textjd+","+textwd+"</div>")
 	e.stopPropagation();
 })
+//#container  .mapRightList
+	$("#container").on("click",".mapRightList",function () {
 
+		if($(this).text()=="定位"){
+			if($(this).hasClass('active')){
+
+				$(this).removeClass("active");
+				$("#container .mapLocation").hide();
+			}else {
+				$(this).addClass("active");
+				$("#container .mapLocation").show();
+			}
+
+		}else {
+			if($(this).hasClass('active')){
+
+				return;
+			}else {
+				$("#container .mapRightList").removeClass("active");
+				$(this).addClass("active");
+
+			}
+		}
+
+	});
 	$("body").on("click",".addbox",function (e) {
 		e.stopPropagation();
 	});
@@ -133,5 +168,6 @@ $("body").on("click",".BMap_Marker",function (e) {
 	$("body").click(function () {
 		$(".left_nav_box,.top .icon-caidan").removeClass("show");
 		$(".addbox").remove();
+
 	})
 })
