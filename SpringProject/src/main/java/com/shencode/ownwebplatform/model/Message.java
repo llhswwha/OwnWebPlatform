@@ -53,12 +53,15 @@ public class Message<T> {
         this.data = data;
     }
 
-    public void SetSuccess(T data){
+    public void setSuccess(T data){
         setData(data);
         this.state=0;
         this.describe="成功";
     }
-    public void SetFailture(Exception ex){
+    public void setFailure(Exception ex) {
+        System.out.println("setFailure");
+        System.out.println(ex);
+        ex.printStackTrace();
         this.state=1;
         this.describe="失败";
         this.exception=ex.toString();

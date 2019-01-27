@@ -1,8 +1,8 @@
 console.log('communicate.js')
 
 function isDefined(obj) {
-    console.log('isDefined');
-    console.log(typeof (obj));
+    // console.log('isDefined');
+    // console.log(typeof (obj));
     //if (obj == null) return true;
     if (typeof (obj) == "undefined") {
         return false;
@@ -29,17 +29,19 @@ function getResultData(result) {
     var data=result;
     if(isDefined(result.state)){
         if(result.state==0){
-            alert('成功!');
+            //alert('成功!');
+            console.log('getResultData:成功!')
         }
         else{
-            alert(result.describe);
+            //alert(result.describe);
+            console.log('getResultData:'+result.describe)
         }
-        console.log('data');
-        console.log(result.data);
+        /*console.log('data');
+        console.log(result.data);*/
         if(isDefined(result.data)) {//data is undefined User属性中有个state并且等于0
             data=result.data;
         }
-        console.log(data);
+        /*console.log(data);*/
     }
     return data;
 }
@@ -71,7 +73,7 @@ function Condition(page,size) {
     }
     if (typeof this.setPage != 'function') {
         Condition.prototype.setPage = function (page,size) {
-            console.log('condition.setPage');
+            console.log('condition.setPage:'+page+','+size);
             if (typeof (page) == 'undefined') return;
             this.page=page;
             this.size=size;

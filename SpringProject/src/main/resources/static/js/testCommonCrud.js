@@ -262,5 +262,8 @@ $(function () {
         var json=$('#txtCondition').text();
         alert(json);
     });
+    $('#btnClearResult').click(function () {
+        $('#txtResult').text('');
+    })
 })
 

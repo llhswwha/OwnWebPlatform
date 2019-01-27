@@ -2,7 +2,6 @@ package com.shencode.ownwebplatform.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class CommonCrudController {
@@ -34,4 +33,7 @@ public class CommonCrudController {
 
     @RequestMapping("bootstrapTableTemplate")
     public String bootstrapTableTemplate(){return "bootstrap_table_template";}
+
+    @RequestMapping("bootstrapTableTemplate2")
+    public String bootstrapTableTemplate2(){return "bootstrap_table_template";}
 }

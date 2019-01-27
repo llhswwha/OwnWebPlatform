@@ -124,22 +124,26 @@ public class ConditionModel {
                 }
             }
         }
+        generateSort();//解析并生成排序规则
+    }
 
-        //解析并生成排序规则
+    //解析并生成排序规则
+    private void generateSort() {
         Map<String, String> sortMap = this.getSort();
-        if (!CollectionUtils.isEmpty(sortMap)) {
-            for(Iterator i$ = sortMap.keySet().iterator(); i$.hasNext();) {
-                String key = (String)i$.next();
-                String v = sortMap.get(key).toLowerCase();
-                //考虑前端asc,desc没写或者写错的情况。
-                if(v.equals("desc")){//倒叙
-                    addOrder(key,v);
-                }
-                else{
-                    addOrder(key,"asc");//正序
+        if(hashOrderBy.isEmpty())
+            if (!CollectionUtils.isEmpty(sortMap)) {
+                for(Iterator i$ = sortMap.keySet().iterator(); i$.hasNext();) {
+                    String key = (String)i$.next();
+                    String v = sortMap.get(key).toLowerCase();
+                    //考虑前端asc,desc没写或者写错的情况。
+                    if(v.equals("desc")){//倒叙
+                        addOrder(key,v);
+                    }
+                    else{
+                        addOrder(key,"asc");//正序
+                    }
                 }
             }
-        }
     }
 
     public void addAlias(String column) {
@@ -266,10 +270,16 @@ public class ConditionModel {
     }
 
     public Set<String> getColumns() {
+        if(map==null)return new HashSet<>();
+        init();
+        return this.hashCondition.keySet();
+    }
+
+    private void init(){
+        if(map==null)return;
         if(map.size()>0&&hashCondition.size()==0){
             generate();
         }
-        return this.hashCondition.keySet();
     }
 
     public void addOrder(String column, String direction) {
@@ -289,6 +299,7 @@ public class ConditionModel {
     }
 
     public Collection<OrderBy> getOrderBys() {
+        generateSort();
         return this.getHashOrderBy().values();
     }
 
@@ -339,9 +350,7 @@ public class ConditionModel {
         if(map==null){
             return toJsonString();
         }
-        if(map.size()>0&&hashCondition.size()==0){
-            generate();
-        }
+        init();
         StringBuffer sb = new StringBuffer();
         Iterator i$ = this.getColumns().iterator();
 
@@ -361,9 +370,9 @@ public class ConditionModel {
     }
 
     public String toJsonString() {
-        return "MyCondition{" +
+        return "Condition{" +
                 "map=" + map+
-                ", map=" + map+
+                ", sort=" + sort+
                 ", hashAlias=" + hashAlias +
                 ", hashCondition=" + hashCondition +
                 ", hashOrderBy=" + hashOrderBy +

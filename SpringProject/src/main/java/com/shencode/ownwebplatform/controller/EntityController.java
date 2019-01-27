@@ -82,7 +82,7 @@ public abstract class EntityController<T extends BaseEntity,ID> {
 
     @PostMapping("queryPage")
     public Message<Page<T>> queryPage(ConditionModel condition) {
-        System.out.println("queryList");
+        System.out.println("queryPage");
         System.out.println(condition);
         return getService().queryPage(condition);
     }

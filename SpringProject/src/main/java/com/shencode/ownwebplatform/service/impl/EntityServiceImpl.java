@@ -238,9 +238,9 @@ public abstract class EntityServiceImpl<T extends BaseEntity> implements EntityS
         try{
             ConditionQuery queryUtil=new ConditionQuery(entityManager,entityClass,condition);
             List<T> list= queryUtil.findList();
-            msg.SetSuccess(list);
+            msg.setSuccess(list);
         }catch (Exception ex){
-            msg.SetFailture(ex);
+            msg.setFailure(ex);
         }
         return msg;
     }
@@ -255,9 +255,9 @@ public abstract class EntityServiceImpl<T extends BaseEntity> implements EntityS
                 Predicate result=queryUtil.getPredicate(itemRoot,query,criteriaBuilder);
                 return result;
             },pageable);
-            msg.SetSuccess(page);
+            msg.setSuccess(page);
         }catch (Exception ex){
-            msg.SetFailture(ex);
+            msg.setFailure(ex);
         }
         return msg;
     }
@@ -279,8 +279,8 @@ public abstract class EntityServiceImpl<T extends BaseEntity> implements EntityS
 //        Long count= getRepository().count();
         //过滤Active
         Long count=getRepository().countByActive(true);
-        Message<Long> msg=new Message<>(1,"成功");
-        msg.setData(count);
+        Message<Long> msg=new Message<>();
+        msg.setSuccess(count);
         return msg;
     }
 }

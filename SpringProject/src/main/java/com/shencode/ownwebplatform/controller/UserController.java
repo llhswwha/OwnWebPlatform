@@ -28,8 +28,8 @@ public class UserController extends EntityController<User,Integer> {
     @GetMapping("/pagebyname")
     public Page<User>   getUserPageByname(String name,@PageableDefault(value = 15, sort = { "name" }, direction = Sort.Direction.DESC) Pageable pageable)
     {
-        Page<User>  lispage=userService.getUserByName(name,pageable);
-        return  lispage;
+        Page<User>  page=userService.getUserByName(name,pageable);
+        return  page;
     }
 
     @GetMapping("/findUserList")
