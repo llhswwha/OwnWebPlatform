@@ -2,7 +2,7 @@ console.log('testCommonCrud.js')
 function getEntityData(entityName){
     console.log('getEntityData');
     var json=$('#txtResult').text();
-    var data=new Object();
+    var data={};
     if(json==''){
         data.name='用户'+new Date().getMilliseconds()+new Date().getSeconds();
         data.loginName='user'+new Date().getMilliseconds()+new Date().getSeconds();

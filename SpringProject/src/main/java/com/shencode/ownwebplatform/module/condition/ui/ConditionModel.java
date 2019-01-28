@@ -78,7 +78,9 @@ public class ConditionModel {
 
             for(Iterator i$ = map.keySet().iterator(); i$.hasNext(); this.addCondition(column, op, v, matchMode)) {
                 String key = (String)i$.next();
+                key=key.trim();//删除前后空格
                 v = (String)map.get(key);
+                v=v.trim();//删除前后空格
                 if (key.endsWith("eq")) {
                     column = key.substring(0, key.lastIndexOf("-"));
                     op = "eq";

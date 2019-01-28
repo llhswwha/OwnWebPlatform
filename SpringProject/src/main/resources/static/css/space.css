@@ -47,14 +47,25 @@ body{
 }
 /* 界面右边样式 */
 .Resources-right{
-	height:100%;
-	margin-left: 20px;
-	background-color: #fff;
-	display:inline-block;
-	border: 1px solid #e0edf8;
+	width: calc(100% - 240px);
+	height: 100%;
+	box-sizing: border-box;
+	background: #fff;
+	padding: 20px;
+	display: inline-block;
+	float: right;
+}
+.contentBox{
+	height: 100%;
+	width: 100%;
 }
 .right-head{
-	padding:20px;
+	width: 100%;
+	height: 42px;
+}
+.right-head a{
+	box-sizing: border-box;
+
 }
 .textbox_normal{
 	width:183px;
@@ -65,12 +76,13 @@ body{
     cursor: pointer;
 }
 .flush{
-	position: absolute;
-	right: 50px;
-	vertical-align: middle;
-	width: 30px;
+	float: right;
 	height: 30px;
-	border: 1px solid #ddd;
+	border: 1px #cfd5e5 solid;
+	display: inline-block;
+	width: 30px;
+	cursor: pointer;
+	text-align: center;
 }
 /* 编辑地市弹窗样式 */
 .city-list li{

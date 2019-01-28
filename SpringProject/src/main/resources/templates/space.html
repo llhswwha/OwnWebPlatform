@@ -3,11 +3,9 @@
 <head>
 <title>空间资源管理</title>
 	<script type="text/javascript" src="js/plugin/jquery-1.11.3.js"></script>
-	<link rel="stylesheet" type="text/css" href="css/easyui.css">
-	<link rel="stylesheet" type="text/css" href="css/icon.css">
-	<script type="text/javascript" src="js/plugin/jquery.easyui.min.js"></script>
-	<script type="text/javascript" src="js/plugin/easyui-lang-zh_CN.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/public/init.css"/>
+	<link rel="stylesheet" type="text/css" href="bootstrap/bootstrap.css/bootstrap.min.css">
+	<script type="text/javascript" src="bootstrap/bootstrap.js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="css/public/reset.css">
 	<link rel="stylesheet" href="css/iconfont.css">
 	<link rel="stylesheet" type="text/css" href="css/datagridZD.css"/>
@@ -23,7 +21,7 @@
 <body>
 		<div class="contentlist" id="Space_Resources" style="background-color: #eff3f9">
            <div class="Resources-left">
-           	 <div class="left-inside" style="margin:20px;border: 1px solid #ddd;height:calc(100% - 40px);">           
+           	 <div class="left-inside" style="margin:20px;border: 1px solid #ddd;height:calc(100% - 40px);">
            		<div style="padding:10px 0 0 20px;">
               	<span style="font-size:14px;">选择地市</span>
               	<a class="edit">编辑</a>
@@ -38,7 +36,8 @@
               </div>
            </div>
           <div class="Resources-right">
-            <div class="right-head" style="display: flex;">
+			  <div class="contentBox row">
+            <div class="right-head col-lg-12"  id="right-title">
                 <a href="javascript: void(0)" class="btn-custom btn-blue" id="head-crease"  plain="true" style="height: 32px;">创建空间资源</a> 
                 <a href="javascript: void(0)" class="btn-custom btn-white" id="head-edit"  plain="true">修改</a> 
                 <a href="javascript: void(0)" class="btn-custom btn-white" id="head-delete" plain="true">删除</a> 
@@ -49,13 +48,12 @@
                        <span class="icon iconfont icon-sousuo" style="margin-left: 11px;font-size: 17px;cursor: pointer;"></span>
                    </div>
                 </div>
-                <div class="flush">
-                <span class="icon iconfont icon-shuaxin" style="font-size: 16px;cursor: pointer;margin-left: 8px;"></span> 
-                </div> 
+                <span class="icon iconfont icon-shuaxin flush" style="font-size: 16px;cursor: pointer;margin-left: 8px;"></span>
             </div>
             <div id="data_list">
             
             </div>
+			  </div>
            <!--  创建空间管理弹窗 -->
             <div id="message-show" title="空间管理展示页面" buttons="#dlg-buttons" >
             	<form class="etui" style="height: 348px;">

@@ -1,0 +1,17 @@
+[{
+  field: 'id',
+  title: 'ID',
+  sortable:true
+}, {
+  field: 'name',
+  title: '昵称',
+  sortable:true
+}, {
+  field: 'loginName',
+  title: '登录名',
+  sortable:true
+}, {
+  field: 'password',
+  title: '密码',
+  sortable:true
+}]

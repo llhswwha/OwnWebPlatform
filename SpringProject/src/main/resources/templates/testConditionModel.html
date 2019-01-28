@@ -14,19 +14,19 @@
 <script>
     console.log("1");
 
-    var map=new Object();
+    var map={};
     map['loginname']='4';
     map.name='aa';
-    var sort=new Object();
+    var sort={};
     sort['loginname']='asc';
     sort['name']='asc';
-    var conditionModel=new Object();
+    var conditionModel={};
     conditionModel.page=0;
     conditionModel.size=2;
     conditionModel.map=map;
     conditionModel.sort=sort;
 
-    var user=new Object();
+    var user={};
     user.roleList=[];
     user.roleList.push(1);
     user.roleList.push(2);
@@ -82,8 +82,8 @@
         console.log("test1");
     });
 
-    var param2=new Object();
-    var condition=new Object();
+    var param2={};
+    var condition={};
     condition['a']=1;
     condition['b']=3;
     param2.condition=condition;

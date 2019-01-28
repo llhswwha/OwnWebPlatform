@@ -149,6 +149,14 @@ $("body").on("click",".BMap_Marker",function (e) {
 				$("#container .mapLocation").show();
 			}
 
+		}else if($(this).text()=="最大化"){
+			$(this).html('<i class="icon iconfont icon-zuixiaohua"></i>最小化');
+
+			$("#container").css({"position":"fixed","width":"100%","top":"0","z-index":"999"});
+		}else if($(this).text()=="最小化"){
+			$(this).html('<i class="icon iconfont icon-caozuo_quanpingfangda"></i>最大化');
+
+			$("#container").css({"position":"relative"});
 		}else {
 			if($(this).hasClass('active')){
 

@@ -57,8 +57,8 @@ function Condition(page,size) {
     }else{
         this.size=size;
     }
-    this.map=new Object();
-    this.sort=new Object();
+    this.map={};
+    this.sort={};
     if (typeof this.setPropertyByJson != 'function') {
         Condition.prototype.setPropertyByJson = function (json) {
             console.log('condition.setPropertyByJson');
@@ -89,22 +89,22 @@ function Condition(page,size) {
     }
     if (typeof this.addSort != 'function') {
         Condition.prototype.addSort = function (column,sortType) {
-            console.log('condition.addSort');
-            if (typeof (column) == 'undefined') return;
+            console.log('condition.addSort:'+column+","+sortType);
+            if (column==null || typeof (column) == 'undefined') return;
             this.sort[column]=sortType;
         }
     }
     if (typeof this.asc != 'function') {
         Condition.prototype.asc = function (column) {
             console.log('condition.asc');
-            if (typeof (column) == 'undefined') return;
+            if (column==null || typeof (column) == 'undefined') return;
             this.sort[column]='asc';
         }
     }
     if (typeof this.desc != 'function') {
         Condition.prototype.desc = function (column) {
             console.log('condition.desc');
-            if (typeof (column) == 'undefined') return;
+            if (column==null || typeof (column) == 'undefined') return;
             this.sort[column]='desc';
         }
     }
@@ -180,7 +180,7 @@ function EntityDao(name) {
         EntityDao.prototype.getPage = function (page,size,callBack) {
             console.log('dao.getPage');
             var url=this.name+'/page';
-            var condition=new Object();
+            var condition={};
             condition.page=page;
             condition.size=size;
             this.ajax.get(url,condition,callBack);

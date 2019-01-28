@@ -31,28 +31,16 @@
 </table>-->
 
 <div id="toolbar" class="form-inline">
-    <input id="page" class="form-control" style="width: 60px" type="number" value="1" min="1" max="3">
-    <button id="button" class="btn btn-secondary">selectPage</button>
-    <button id="button2" class="btn btn-secondary">prevPage</button>
-    <button id="button3" class="btn btn-secondary">nextPage</button>
+    <input id="txtName" class="form-control" style="width: 120px" type="text" placeholder="昵称" data-name="name">
+    <input id="txtLoginName" class="form-control" style="width: 120px" type="text" placeholder="登录名" data-name="loginName">
+    <button id="btnSearch" class="btn btn-secondary">搜索</button>
+    <button id="btnClearSearch" class="btn btn-secondary">清空</button>
 </div>
 <table id="table"
        data-toolbar="#toolbar"
-       data-search="true"
-       data-show-refresh="true"
-       data-show-toggle="true"
-       data-show-columns="true"
-       data-show-export="true"
-       data-detail-view="true"
-       data-detail-formatter="detailFormatter"
-       data-minimum-count-columns="2"
-       data-show-pagination-switch="true"
-       data-pagination="true"
-       data-id-field="id"
-       data-page-list="[10, 25, 50, 100, ALL]"
-       data-show-footer="false"
-       data-side-pagination="server"
-       data-response-handler="responseHandler"></table>
+       data-page-list="[10,20,30,40]"
+       data-height="450"
+></table>
 <!-- jQuery first, then Popper.js, then Bootstrap JS, and then Bootstrap Table JS -->
 <script src="bootstrap/jquery.min.js"></script>
 <script src="bootstrap/popper.min.js"></script>
@@ -60,10 +48,10 @@
 <script src="bootstrap/core.min.js"></script>
 <script src="bootstrap/bootstrap-table.min.js"></script>
 <script src="js/common/communicate.js"></script>
-<script src="js/common/bootstrapUtil.js"></script>
+<script src="js/common/bootstrap-util.js"></script>
 <script>
     function initTable(){
-        var table=new EntityTable('user','#table');
+        var table=new EntityTable('#table','user');
         var columns=[{
             field: 'id',
             title: 'ID',
@@ -83,27 +71,24 @@
         }];
         table.init(columns);
         table.load();
+        return table;
     }
-    initTable();
-</script>
-<script>
-    var $table = $('#table')
-    var $page = $('#page')
-    var $button = $('#button')
-    var $button2 = $('#button2')
-    var $button3 = $('#button3')
+    var table=initTable();
 
-    //function mounted() {
-        $button.click(function () {
-            $table.bootstrapTable('selectPage', +$page.val())
-        })
-        $button2.click(function () {
-            $table.bootstrapTable('prevPage')
-        })
-        $button3.click(function () {
-            $table.bootstrapTable('nextPage')
-        })
-    //}
+    var $btnSearch = $('#btnSearch');
+    var $txtLoginName = $('#txtLoginName');
+    var $txtName = $('#txtName');
+    var $btnClearSearch=$('#btnClearSearch');
+    $btnSearch.click(function () {
+        var map={};
+        map['name']=$txtName.val();
+        map['loginName']=$txtLoginName.val();
+        table.search(map);
+    })
+    $btnClearSearch.click(function () {
+        table.search(null);
+    })
 </script>
+
 </body>
 </html>

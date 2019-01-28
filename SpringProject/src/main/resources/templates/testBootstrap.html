@@ -7,25 +7,89 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap/all.css">
+    <link rel="stylesheet" href="bootstrap/bootstrap-table.min.css">
 
-
+    <title>实体类通用增删改查</title>
 </head>
 <body>
 <div class="container">
-    <div class="row">
-        <div class="col-6 bg-info">1</div>
-        <div class="col-3 bg-danger">2</div>
-        <div class="col-3 bg-primary">3</div>
-        <div class="col-3">4</div>
-        <div class="col-3">5</div>
-        <div class="col-3">6</div>
-    </div>
+    <h1>实体类通用增删改查</h1>
+    <h2 id="h2EntityText">用户</h2>
 </div>
+<div id="toolbar" class="form-inline">
 
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="bootstrap/jquery.slim.js"></script>
+    <div class="dropdown" >
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownEntityList" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            用户
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item entityClass" href="#entity" data-name="">类型</a>
+            <a class="dropdown-item entityClass active" href="#user" data-name="user">用户</a>
+            <a class="dropdown-item entityClass" href="#role" data-name="role">角色</a>
+            <a class="dropdown-item entityClass" href="#city" data-name="city">地市</a>
+            <a class="dropdown-item entityClass" href="#menu" data-name="menu">菜单</a>
+            <a class="dropdown-item entityClass" href="#spaceRes" data-name="spaceRes">空间资源</a>
+        </div>
+    </div>
+
+    <button id="btnCreate" class="btn btn-primary">创建</button>
+    <button id="btnModify" class="btn btn-primary">修改</button>
+    <button id="btnDelete" class="btn btn-primary">删除</button>
+
+    <input id="txtName" class="form-control" style="width: 120px" type="text" placeholder="昵称" data-name="name">
+    <input id="txtLoginName" class="form-control" style="width: 120px" type="text" placeholder="登录名" data-name="loginName">
+    <button id="btnSearch" class="btn btn-secondary">搜索</button>
+    <button id="btnClearSearch" class="btn btn-secondary">清空</button>
+</div>
+<table id="table"
+       data-toolbar="#toolbar"
+       data-page-list="[10,20,30,40]"
+       data-height="450"
+></table>
+
+<div id="modal" class="modal fade">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <!--<div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" class="form-control" name="name" placeholder="Name">
+                </div>
+                <div class="form-group">
+                    <label>Stars</label>
+                    <input type="number" class="form-control" name="stargazers_count" placeholder="Stars">
+                </div>
+                <div class="form-group">
+                    <label>Forks</label>
+                    <input type="number" class="form-control" name="forks_count" placeholder="Forks">
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <input type="text" class="form-control" name="description" placeholder="Description">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary submit">Submit</button>
+            </div>-->
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS, and then Bootstrap Table JS -->
+<script src="bootstrap/jquery.min.js"></script>
 <script src="bootstrap/popper.min.js"></script>
 <script src="bootstrap/bootstrap.min.js"></script>
+<script src="bootstrap/core.min.js"></script>
+<script src="bootstrap/bootstrap-table.min.js"></script>
+<script src="js/common/communicate.js"></script>
+<script src="js/common/bootstrap-util.js"></script>
+<script src="js/testBootStrapTable.js"></script>
 </body>
 </html>
