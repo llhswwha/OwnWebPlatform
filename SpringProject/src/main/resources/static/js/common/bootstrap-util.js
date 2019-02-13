@@ -1,41 +1,30 @@
 var $alertModal=null;
-function showAlertModal(title, type) {
+//显示提示框
+function showAlertModal(msg, type) {
     if ($alertModal == null) {
-        console.log("showAlertModal 1");
-        console.log($('body'));
-        $('body').append('<div id="alertModalContainer"></div>');
-        $('#alertModalContainer').load('pages/alertModal.html', function () {
-            $alertModal = $('#alertModal').modal({show: false})
-            showAlert(title, type);
+        console.log("showAlertModal 1");//第一次要从文件中加载弹窗
+        var modalContainerId='alertModalContainer';//容器id
+        var pagePath='pages/alertModal.html';//弹窗页面文件
+        var modalId='#alertModal';//弹窗id
+        $('body').append('<div id="'+modalContainerId+'"></div>');//添加容器元素
+        $('#'+modalContainerId).load(pagePath, function () {
+            $alertModal = $(modalId).modal({show: false})
+            showAlert(msg, type);
         });
-
-        /*$('body').append('<div id="alertModalContainer"></div>',function(ele) {
-            console.log("append");
-            console.log(ele);
-            $(ele).load('pages/alertModal.html', function () {
-                $alertModal = $('#alertModal').modal({show: false})
-                showAlert(title, type);
-            });
-        });*/
     } else {
-        console.log("showAlertModal 2");
-        showAlert(title, type);
+        console.log("showAlertModal 2");//后续加载都是在已经页面上了的
+        showAlert(msg, type);
     }
 }
 
-function showAlert(title, type) {
+//显示提示内容
+function showAlert(msg, type) {
     $alertModal.find('#title').attr('class', 'alert alert-' + type || 'success');
-    $alertModal.find('.modal-body').text(title)
+    $alertModal.find('.modal-body').text(msg)
     $alertModal.modal('show');
-    /*$alert.attr('class', 'alert alert-' + type || 'success')
-        .html('<i class="glyphicon glyphicon-check"></i> ' + title).show()
-    setTimeout(function () {
-        $alert.hide()
-    }, 3000)*/
     setTimeout(function () {
         $alertModal.modal('hide');
     }, 3000)
-
 }
 
 function showEntityModal(option) {

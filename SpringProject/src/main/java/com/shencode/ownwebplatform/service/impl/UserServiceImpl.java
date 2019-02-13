@@ -78,13 +78,13 @@ public class UserServiceImpl extends EntityServiceImpl<User> implements UserServ
                         }
 
                     } catch (ParseException e) {
-                        return  new Message(0,e.toString());
+                        return  new Message<>(e);
                     }
                 }
             }
             else
             {
-                return  new Message(0,"用户名密码错误");
+                return  new Message(1,"用户名密码错误");
             }
         }
     }
@@ -112,7 +112,7 @@ public class UserServiceImpl extends EntityServiceImpl<User> implements UserServ
         }
         catch (Exception e)
         {
-            return  new Message(0,e.toString());
+            return  new Message<>(e);
         }
     }
 

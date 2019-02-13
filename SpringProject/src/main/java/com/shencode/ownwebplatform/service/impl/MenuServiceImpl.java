@@ -11,6 +11,7 @@ import com.shencode.ownwebplatform.service.RoleService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -39,7 +40,7 @@ public class MenuServiceImpl extends EntityServiceImpl<Menu> implements MenuServ
         }
         catch (Exception e)
         {
-            return new Message<>(0,e.toString());
+            return new Message(e);
         }
 
     }
@@ -51,11 +52,9 @@ public class MenuServiceImpl extends EntityServiceImpl<Menu> implements MenuServ
         return super.update(menu);
         }catch (Exception e)
         {
-            return  new Message<>(0,e.toString());
+            return  new Message(e);
         }
     }
-
-
 
     //删除菜单(说明：删除菜单时，需要显示该菜单的所有角色都要删除)
     @Override
@@ -68,15 +67,15 @@ public class MenuServiceImpl extends EntityServiceImpl<Menu> implements MenuServ
         }
         catch (Exception e)
         {
-            return  new Message<>(0,e.toString());
+            return  new Message(e);
         }
-
     }
 
 
     private  void  setRoleIds(Menu menu)
     {
         List<Integer> roleIdList=menu.getRoleIdList();
+        if(roleIdList==null)return;
         Set<Role> roleSet=new HashSet<>();
         for (int i=0;i<roleIdList.size();i++)
         {
@@ -84,5 +83,61 @@ public class MenuServiceImpl extends EntityServiceImpl<Menu> implements MenuServ
             roleSet.add(role);
         }
         menu.setRoleSet(roleSet);
+    }
+
+    @Override
+    public Boolean initData() {
+        Long count=getRepository().count();//数量
+        if(count==0){ //数据库中没有菜单
+            Menu menu0=this.addMenu(new Menu("root","root",0));
+            Menu menu1=this.addMenu(new Menu("首页","map",menu0.getId()));
+            Menu menu2=this.addMenu(new Menu("空间资源管理","spaceMng",menu0.getId()));
+            Menu menu21=this.addMenu(new Menu("地市管理","city",menu2.getId()));
+            Menu menu22=this.addMenu(new Menu("空间管理","space",menu2.getId()));
+            Menu menu3=this.addMenu(new Menu("设备管理","devMng",menu0.getId()));
+            Menu menu31=this.addMenu(new Menu("设备类型管理","devType",menu3.getId()));
+            Menu menu32=this.addMenu(new Menu("设备资源管理","dev",menu3.getId()));
+            Menu menu4=this.addMenu(new Menu("系统管理","sysMng",menu0.getId()));
+            Menu menu41=this.addMenu(new Menu("用户管理","user",menu4.getId()));
+            Menu menu42=this.addMenu(new Menu("角色管理","role",menu4.getId()));
+            Menu menu43=this.addMenu(new Menu("菜单管理","menu",menu4.getId()));
+            Menu menu5=this.addMenu(new Menu("监控管理","monitorMng",menu0.getId()));
+            Menu menu6=this.addMenu(new Menu("告警管理","alarmMng",menu0.getId()));
+            Menu menu61=this.addMenu(new Menu("当前告警","realAlarm",menu6.getId()));
+            Menu menu62=this.addMenu(new Menu("历史告警","hisAlarm",menu6.getId()));
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    private Menu addMenu(Menu menu){
+        this.add(menu);
+        return menu;
+    }
+
+    @Override
+    public Menu getRoot(Integer userId) {
+        initData();
+        List<Menu> list=this.getAll();
+        for (int i=0;i<list.size();i++){
+            Menu menu=list.get(i);
+            Menu parent=getParent(list,menu.getPid());
+            if(parent!=null){
+                parent.addItem(menu);
+            }
+        }
+        return list.get(0);
+    }
+
+    public Menu getParent(List<Menu> list,Integer pid){
+        for (int i=0;i<list.size();i++){
+            Menu menu=list.get(i);
+            if(menu.getId()==pid){
+                return menu;
+            }
+        }
+        return null;
     }
 }

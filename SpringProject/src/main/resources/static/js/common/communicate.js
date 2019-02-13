@@ -244,6 +244,20 @@ function UserDao() {
 }
 UserDao.prototype = new EntityDao();
 
+function MenuDao() {
+    this.ajax=new Ajax();
+    this.name='menu';
+    if (typeof this.getRoot != 'function') {
+        MenuDao.prototype.getRoot = function (userId,callBack) {
+            console.log('MenuDao.getRoot:'+userId);
+            var url=this.name+'/root';
+            this.ajax.get(url,userId,callBack);
+        }
+    }
+
+}
+MenuDao.prototype = new EntityDao();
+
 
 //document.write(”<script language=javascript src=’/js/import.js’></script>”);
 

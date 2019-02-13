@@ -5,21 +5,25 @@ import java.util.List;
 //返回信息
 public class Message<T> {
 
-    private  int state;
-    private  String describe;
+    //结果状态 0:成功 1:失败
+    private int state;
+    private String describe;
 
-    private  String exception;
+    private String exception;
 
     private T data;
 
-    public Message(){
+    public Message() {
 
     }
 
-    public Message(int state,String describe)
-    {
-        this.state=state;
-        this.describe=describe;
+    public Message(int state, String describe) {
+        this.state = state;
+        this.describe = describe;
+    }
+
+    public Message(Exception ex) {
+        setFailure(ex);
     }
 
     public void setState(int state) {
@@ -45,6 +49,7 @@ public class Message<T> {
     public void setException(String exception) {
         this.exception = exception;
     }
+
     public T getData() {
         return data;
     }
@@ -53,17 +58,18 @@ public class Message<T> {
         this.data = data;
     }
 
-    public void setSuccess(T data){
+    public void setSuccess(T data) {
         setData(data);
-        this.state=0;
-        this.describe="成功";
+        this.state = 0;
+        this.describe = "成功";
     }
+
     public void setFailure(Exception ex) {
         System.out.println("setFailure");
         System.out.println(ex);
         ex.printStackTrace();
-        this.state=1;
-        this.describe="失败";
-        this.exception=ex.toString();
+        this.state = 1;
+        this.describe = "失败";
+        this.exception = ex.toString();
     }
 }

@@ -19,4 +19,20 @@ public class MenuController extends EntityController<Menu,Integer> {
     public EntityService<Menu, Integer> getService() {
         return service;
     }
+
+    @RequestMapping("init")
+    public Boolean initData(){
+        return service.initData();
+    }
+
+    @RequestMapping("clear")
+    public String clearData(){
+        service.getRepository().deleteAllInBatch();
+        return "success";
+    }
+
+    @RequestMapping("root")
+    public Menu getRoot(Integer userId){
+        return service.getRoot(userId);
+    }
 }

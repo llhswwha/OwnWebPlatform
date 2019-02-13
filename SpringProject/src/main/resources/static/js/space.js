@@ -194,16 +194,18 @@ $(function () {
 	// })
 });
 
+/*
 function showAlertModal(title, type) {
 	$alertModal.find('#title').attr('class','alert alert-' + type || 'success');
 	$alertModal.find('.modal-body').text(title)
 	$alertModal.modal('show');
-	/*$alert.attr('class', 'alert alert-' + type || 'success')
+	/!*$alert.attr('class', 'alert alert-' + type || 'success')
         .html('<i class="glyphicon glyphicon-check"></i> ' + title).show()
     setTimeout(function () {
         $alert.hide()
-    }, 3000)*/
+    }, 3000)*!/
 	setTimeout(function () {
 		$alertModal.modal('hide');
 	},3000)
 }
+*/

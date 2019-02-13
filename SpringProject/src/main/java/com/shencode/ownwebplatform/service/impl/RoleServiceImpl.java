@@ -57,7 +57,7 @@ public class RoleServiceImpl extends EntityServiceImpl<Role> implements RoleServ
         }
         catch (Exception e)
         {
-            return  new Message<>(0,e.toString());
+            return  new Message<>(e);
         }
     }
 
@@ -72,7 +72,7 @@ public class RoleServiceImpl extends EntityServiceImpl<Role> implements RoleServ
         }
         catch (Exception e)
         {
-            return  new Message<>(0,e.toString());
+            return  new Message<>(e);
         }
 
     }
@@ -95,7 +95,7 @@ public class RoleServiceImpl extends EntityServiceImpl<Role> implements RoleServ
         }
         catch (Exception e)
         {
-            return  new Message(0,e.toString());
+            return  new Message<>(e);
         }
     }
 

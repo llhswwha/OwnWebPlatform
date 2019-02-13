@@ -1,0 +1,29 @@
+[{
+  "field": "checked",
+  "title": "",
+  "checkbox": true
+}, {
+  "field": "name",
+  "title": "名称",
+  "sortable":true
+}, {
+  "field": "code",
+  "title": "编号",
+  "sortable":true
+}, {
+  "field": "showOrder",
+  "title": "显示顺序",
+  "sortable":true
+}, {
+  "field": "pid",
+  "title": "父菜单",
+  "sortable":true
+}, {
+  "field": "description",
+  "title": "描述",
+  "sortable":true
+}, {
+  "field": "roleIdList",
+  "title": "角色列表",
+  "sortable":true
+}]

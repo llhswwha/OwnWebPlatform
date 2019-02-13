@@ -278,4 +278,9 @@ public abstract class EntityServiceImpl<T extends BaseEntity> implements EntityS
         msg.setSuccess(count);
         return msg;
     }
+
+    @Override
+    public Boolean initData() {
+        return null;
+    }
 }

@@ -5,5 +5,5 @@ import com.shencode.ownwebplatform.model.Message;
 
 public interface MenuService extends EntityService<Menu,Integer> {
 
-
+    public Menu getRoot(Integer userId);
 }
