@@ -12,7 +12,7 @@ public class ConditionModel {
 
     private Integer page = 0;
     private Integer size = 15;
-    private Map<String, String> map = null;
+    private Map<String, String> map = new HashMap();
 
     public Map<String, String> getSort() {
         return sort;
@@ -22,7 +22,7 @@ public class ConditionModel {
         this.sort = sort;
     }
 
-    private Map<String, String> sort=null;
+    private Map<String, String> sort= new HashMap();
 
     @JsonIgnore
     private Map<String, String> hashAlias = new HashMap();
@@ -67,19 +67,19 @@ public class ConditionModel {
     }
 
     private void generate() {
-
         //解析并生成查询条件
-        Map<String, String> map = this.getMap();
-        if (!CollectionUtils.isEmpty(map)) {
+        Map<String, String> mp = this.getMap();
+
+        if (!CollectionUtils.isEmpty(mp)) {
             String column = null;
             String op = null;
             String v = null;
             String matchMode = "anyMatch";
 
-            for(Iterator i$ = map.keySet().iterator(); i$.hasNext(); this.addCondition(column, op, v, matchMode)) {
+            for(Iterator i$ = mp.keySet().iterator(); i$.hasNext(); this.addCondition(column, op, v, matchMode)) {
                 String key = (String)i$.next();
                 key=key.trim();//删除前后空格
-                v = (String)map.get(key);
+                v = (String)mp.get(key);
                 v=v.trim();//删除前后空格
                 if (key.endsWith("eq")) {
                     column = key.substring(0, key.lastIndexOf("-"));
@@ -272,14 +272,16 @@ public class ConditionModel {
     }
 
     public Set<String> getColumns() {
-        if(map==null)return new HashSet<>();
+        Map mp=getMap();
+        if(mp==null)return new HashSet<>();
         init();
         return this.hashCondition.keySet();
     }
 
     private void init(){
-        if(map==null)return;
-        if(map.size()>0&&hashCondition.size()==0){
+        Map mp=getMap();
+        if(mp==null)return;
+        if(mp.size()>0&&hashCondition.size()==0){
             generate();
         }
     }
@@ -349,7 +351,8 @@ public class ConditionModel {
     }
 
     public String toString() {
-        if(map==null){
+        Map mp=getMap();
+        if(mp==null){
             return toJsonString();
         }
         init();
@@ -400,6 +403,11 @@ public class ConditionModel {
     }
 
     public Map<String, String> getMap() {
+        if(map.containsKey("active")){
+
+        } else{
+            map.put("active-eq","true");//所有的条件加上active=true
+        }
         return map;
     }
 

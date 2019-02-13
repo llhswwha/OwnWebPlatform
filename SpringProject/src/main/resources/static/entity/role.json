@@ -1,0 +1,25 @@
+[{
+  "field": "checked",
+  "title": "",
+  "checkbox": true
+}, {
+  "field": "id",
+  "title": "ID",
+  "sortable":true
+}, {
+  "field": "name",
+  "title": "名称",
+  "sortable":true
+}, {
+  "field": "description",
+  "title": "说明",
+  "sortable":true
+}, {
+  "field": "menu",
+  "title": "关联菜单",
+  "sortable":true
+}, {
+  "field": "role",
+  "title": "关联用户",
+  "sortable":true
+}]

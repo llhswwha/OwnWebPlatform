@@ -1,26 +1,9 @@
 
-/*.syscontent .sysmain{*/
-    /*display: none;*/
-/*}*/
-/*.syscontent .sysmain.active{*/
-    /*display: block;*/
-/*}*/
 
-.butn_list{
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-    padding: 10px 10px;
-    background: #f6f9ff;
-}
 .btn-custom{
     cursor: pointer;
 }
 
-#organ_amend_content{
-    width:100%;
-    height:auto;
-}
 #organ_amend_content tr{
     padding-top:10px;
 }
@@ -32,7 +15,7 @@
 
 }
 #organ_amend_content tr td{
-    width:113px;
+    width:131px;
     position:relative;
 }
 
@@ -61,6 +44,12 @@
     display:none;
 
 }
+
+#myTabContent>.active {
+    display: block;
+    opacity: 1;
+}
+
 #GetDutiesListbox , #GetRoletListbox , #GetPostListbox{
     overflow-x:hidden;
     overflow-y:scroll;
@@ -75,4 +64,13 @@
     color:red;
     width:5px;
     height:5px;
+}
+.form_datetime{
+    border: 1px solid #333333;
+}
+.form_datetime .add-on{
+    background: red;
+    width: 20px;
+    display: inline-block;
+    height: 20px;
 }

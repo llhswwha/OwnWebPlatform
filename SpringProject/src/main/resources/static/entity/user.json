@@ -1,17 +1,29 @@
 [{
-  field: 'id',
-  title: 'ID',
-  sortable:true
+  "field": "checked",
+  "title": "",
+  "checkbox": true
 }, {
-  field: 'name',
-  title: '昵称',
-  sortable:true
+  "field": "id",
+  "title": "ID",
+  "sortable":true
 }, {
-  field: 'loginName',
-  title: '登录名',
-  sortable:true
+  "field": "name",
+  "title": "昵称",
+  "sortable":true
 }, {
-  field: 'password',
-  title: '密码',
-  sortable:true
+  "field": "loginName",
+  "title": "登录名",
+  "sortable":true
+}, {
+  "field": "password",
+  "title": "密码",
+  "sortable":true
+}, {
+  "field": "city.name",
+  "title": "地市",
+  "sortable":true
+}, {
+  "field": "dep",
+  "title": "部门",
+  "sortable":true
 }]

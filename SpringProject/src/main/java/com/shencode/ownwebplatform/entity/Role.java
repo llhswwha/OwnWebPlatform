@@ -19,8 +19,8 @@ public class Role extends BaseEntity {
 
     @Column(name = "name",nullable = false,length = 40)
     private String name; //角色名称
-    @Column(name = "represent")
-    private String represent;  //角色说明
+    @Column(name = "description")
+    private String description;  //角色说明
 
     @ManyToMany
     @JoinTable(name = "t_menurole",joinColumns = {@JoinColumn(name = "roleId")},inverseJoinColumns = {@JoinColumn(name = "menuId")})
@@ -76,8 +76,8 @@ public class Role extends BaseEntity {
         this.name = name;
     }
 
-    public void setRepresent(String represent) {
-        this.represent = represent;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
 
@@ -86,8 +86,8 @@ public class Role extends BaseEntity {
         return name;
     }
 
-    public String getRepresent() {
-        return represent;
+    public String getDescription() {
+        return description;
     }
 
 

@@ -265,5 +265,14 @@ $(function () {
     $('#btnClearResult').click(function () {
         $('#txtResult').text('');
     })
+    $('#btnAddList').click(function () {
+        var entityName=getEntityName();
+        var data=[];
+        data.push({name:'city1',pid:0});
+        data.push({name:'city2',pid:0});
+        console.log('test.addList');
+        var dao=new EntityDao('city');
+        dao.addList(data,showResult);
+    });
 })
 

@@ -1,34 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-    <link rel="stylesheet" type="text/css" href="css/easyui.css">
-    <link rel="stylesheet" type="text/css" href="css/icon.css">
-
-
-
     <link rel="stylesheet" type="text/css" href="css/public/init.css"/>
     <link rel="stylesheet" href="css/public/reset.css">
     <link rel="stylesheet" href="css/iconfont.css">
-    <link rel="stylesheet" type="text/css" href="css/datagridZD.css"/>
+    <!--<link rel="stylesheet" href="http://www.jq22.com/jquery/bootstrap-3.3.4.css">-->
+    <link rel="stylesheet" href="bootstrap/bootstrap.min3.4.css">
+    <link rel="stylesheet" href="bootstrap/all.css">
+    <link rel="stylesheet" href="bootstrap/bootstrap-table.min.css">
     <title>系统管理</title>
     <link rel="stylesheet" href="css/system_management.css">
     <script type="text/javascript" src="js/plugin/jquery-1.11.3.js"></script>
-    <script type="text/javascript" src="js/plugin/jquery.easyui.min.js"></script>
-    <script type="text/javascript" src="js/plugin/easyui-lang-zh_CN.js"></script>
+    <script src="bootstrap/popper.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="bootstrap/bootstrap-select.css">
+
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-datetimepicker.css">
+
+    <script  type="text/javascript"  src="bootstrap/bootstrap.min3.4.js"></script>
+    <script type="text/javascript" src="bootstrap/bootstrap-select.js"></script>
+    <script  type="text/javascript"  src="bootstrap/core.min.js"></script>
+    <script  type="text/javascript"  src="bootstrap/bootstrap-table.min.js"></script>
+
+    <script type="text/javascript" src="bootstrap/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+
+    <script type="text/javascript" src="bootstrap/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="bootstrap/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+    <script  type="text/javascript"  src="js/common/bootstrap-util.js"></script>
+
+
+    <script type="text/javascript" src="js/common/communicate.js"></script>
     <script type="text/javascript" src="js/system_management.js"></script>
+
 
 </head>
 <body>
-<div class="easyui-tabs" fit="true" fitColumns="true">
-    <div title="用户管理">
-        <!--<--表格一内容 用户管理-->
-        <div class="tab-pane fade in active" id="User_management" style="height: 32px;">
+<ul id="myTab" class="nav nav-tabs">
+    <li class="active">
+        <a href="#userbox" data-toggle="tab">用户管理</a>
+    </li>
+    <li><a href="#rolbox" data-toggle="tab">角色管理</a></li>
+
+</ul>
+<div id="myTabContent" class="tab-content">
+    <div class="tab-pane fade in active" id="userbox">
+
+        <div  id="User_management" style="height: 32px;">
             <div class="search_del" style="height: 33px;float: left">
                 <input id="search_people" type="text" name="" value="" class="textbox textbox_normal" placeholder="输入关键字搜索">
                 <button id="search_peo_btn" type="button" class="btn-custom btn-blue btn btn-success">查询</button>
                 <button type="button" class="btn-custom btn-blue btn btn-success" id="btn_clearinput">清空</button>
-                <lable><input name="" type="checkbox" onclick='toggsubcomchang()' value="" />是否显示子部门人员</lable>
             </div>
             <div class="but_list" style="float: right; width:300px; height: 40px; line-height: 40px;">
                 <a href="javascript: void(0)" class="btn-custom btn-blue" id="add_userlist" plain="true">添加</a>
@@ -40,140 +61,168 @@
         </div>
 
         <!--用户数据加载-->
-        <div id="data_list"></div>
+        <table id="data_list"
+               data-toolbar="#User_management"
+               data-page-list="[10,20,30,40]"
+               data-height="450"
+        ></table>
+
+
     </div>
-    <div title="角色管理">
-        <div class="but_list" id="tb_tableView4">
+    <div class="tab-pane fade" id="rolbox">
+        <div id="tb_tableView4">
             <span class="btn-custom btn-blue add_list" id="add_rol_open"  value="角色">添加</span>
             <a href="javascript: void(0)" class="btn-custom btn-blue" id="rol_del_list" plain="true" value="角色">删除</a>
             <a href="javascript: void(0)" class="btn-custom btn-blue" id="rol_edit_list" plain="true" value="角色">编辑</a>
             <a href="javascript: void(0)" class="btn-custom btn-blue" id="rol_power_list" plain="true" value="角色">操作权限</a>
             <a href="javascript: void(0)" class="btn-custom btn-blue" id="rol_user_list" plain="true"  value="角色">关联用户</a>
         </div>
-        <div id="tableView4"></div>
+        <table id="tableView4"
+               data-toolbar="#tb_tableView4"
+               data-page-list="[10,20,30,40]"
+               data-height="450"
+        ></table>
+
     </div>
 
 </div>
-
 <!--用户管理添加弹窗-->
-<div id="User_management_add" class="easyui-window" title="添加用户信息" data-options="modal:true,closed:true" style="background: #ffffff; width: 800px; height: 480px; position: relative;">
-    <div style="padding: 0 0 0 60px">
-        <form id="organ_amend_content" method="post" style="float: left;">
-            <table cellpadding="5">
-                <tr>
-                    <td>登录账号：</td>
-                    <td><input class="textbox textbox_normal loginName" type="text" name="name" data-options="required:true" style="margin-top: 5px; margin-right: 20px;">
-                        <div class="inputxin">*</div></td>
-                    <td>用户姓名：</td>
-                    <td><input class="textbox textbox_normal userName" type="text" name="name" data-options="required:true" style="margin-top: 5px; margin-right: 20px;">
-                        <div class="inputxin">*</div></td>
-                </tr>
-                <tr>
+<div class="modal fade" id="User_management_add" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="User_management_addLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content"  style="width: 800px;height: 520px;overflow:hidden;">
+            <div class="modal-header">
+                <h4 class="modal-title" id="User_management_addLabel">新增用户</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body" style="height: 380px;">
 
-                </tr>
-                <tr>
-                    <td>用户性别：</td>
-                    <td>
-                        <select class="gender" >
-                            <option value="男">男</option>
-                            <option value="女">女</option>
-                        </select>
-                        <div class="inputxin">*</div>
-                    </td>
-                    <td>出生年月：</td>
-                    <td id="time_box">
-                        <input class="birthday" id="start_time11" style="width: 178px; height: 30px; border: 1px solid #cfd5e5; margin-top: 5px;" type="text">
-                        <div class="inputxin">*</div>
-                        <!--<input class="easyui-datebox birthday" style="width:170px"><div class="inputxin">*</div>-->
-                    </td>
-                </tr>
-                <tr>
-                    <td>所属单位:</td>
-                    <td>
-                        <div id="input_orgIDbox" class="easyui-textbox"></div>
+                    <form id="organ_amend_content" method="post" style="float: left;">
+                        <table cellpadding="5">
+                            <tr>
+                                <td>登录账号：</td>
+                                <td><input class="textbox textbox_normal loginName" type="text" name="name" data-options="required:true" style="margin-top: 5px; margin-right: 20px;">
+                                    <div class="inputxin">*</div></td>
+                                <td>用户姓名：</td>
+                                <td><input class="textbox textbox_normal userName" type="text" name="name" data-options="required:true" style="margin-top: 5px; margin-right: 20px;">
+                                    <div class="inputxin">*</div></td>
+                            </tr>
+                            <tr>
+                                <td>密码：</td>
+                                <td><input class="textbox textbox_normal password" type="text" name="name" data-options="required:true" style="margin-top: 5px; margin-right: 20px;">
+                                    <div class="inputxin">*</div></td>
+                                <td>确认密码：</td>
+                                <td><input class="textbox textbox_normal userName" type="text" name="name" data-options="required:true" style="margin-top: 5px; margin-right: 20px;">
+                                    <div class="inputxin">*</div></td>
+                            </tr>
+                            <tr>
+                                <td>用户性别：</td>
+                                <td>
+                                    <select class="gender" >
+                                        <option value="男">男</option>
+                                        <option value="女">女</option>
+                                    </select>
+                                    <div class="inputxin">*</div>
+                                </td>
+                                <td>出生年月：</td>
+                                <td >
+                                    <!--<div class="input-group date form_date col-md-5" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">-->
+                                    <!--<div class="controls input-append date form_datetime" data-date="1979-09-16T05:25:07Z" data-date-format="yyyy MM dd - HH:ii p" data-link-field="dtp_input1">-->
+                                    <div class="controls input-append date form_datetime" data-date-format="yyyy MM dd" data-link-format="yyyy-mm-dd" data-link-field="dtp_input1">
 
-                        <div class="inputxin">*</div>
+                                        <input size="16" type="text" value="" readonly>
 
-                    </td>
-                    <td>岗位:</td>
-                    <td >
-                        <div id="GetPostListboxk" style="background: #fff; filter: alpha(opacity=0); opacity: 0;"></div>
-                        <select class="easyui-textbox postIDList" id="GetPostList" type="text" name="message" data-options="multiline:true"></select>
-                        <div class="inputxin">*</div>
-                        <div id="GetPostListbox"></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>用户角色:</td>
-                    <td>
-                        <div id="GetRoletListboxk" style="background: #fff; filter: alpha(opacity=0); opacity: 0;"></div>
-                        <select id="GetRoletList" class="easyui-textbox roleIDList" name="message" data-options="multiline:true"></select>
-                        <div class="inputxin">*</div>
-                        <div id="GetRoletListbox"></div>
-                    </td>
-                    <td>职位:</td>
-                    <td>
-                        <div id="GetDutiesListboxk" style="background: #fff; filter: alpha(opacity=0); opacity: 0;"></div>
-                        <select class="easyui-textbox dutiesIDList" id="GetDutiesList" name="message" data-options="multiline:true"></select>
-                        <div class="inputxin">*</div>
-                        <div id="GetDutiesListbox"></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>所属区域:</td>
-                    <td><select id="GetDepList" class="easyui-textbox depID" name="message" data-options="required:true"></select>
-                        <div class="inputxin">*</div></td>
-                    <td>所属数据中心:</td>
-                    <td><!--<select id="Sel_DataCenterName" class="easyui-textbox dataCenterID" name="message" data-options="multiline:true"></select>--><input id="Eysel" name="dept" class="easyui-combobox" style="width: 178px; height: 30px; border: 1px solid #cfd5e5; margin-top: 5px;">
-                        <div class="inputxin">*</div></td>
-                </tr>
-                <tr>
-                    <td>公司座机:</td>
-                    <td><input class="textbox textbox_normal cpZJ" name="message" data-options="multiline:true" style="margin-top: 5px; margin-right: 20px;"></input></td>
-                    <td>家庭座机:</td>
-                    <td><input class="textbox textbox_normal homePhone" name="message" data-options="multiline:true" style="margin-top: 5px; margin-right: 20px;"></input></td>
-                </tr>
-                <tr>
-                    <td>公司手机:</td>
-                    <td><input class="textbox textbox_normal workPhone" name="message" data-options="prompt:'公司手机电话',required:true" style="margin-top: 5px; margin-right: 20px;"></input></td>
-                    <td>私人手机:</td>
-                    <td><input class="textbox textbox_normal privatePhone" name="message" data-options="multiline:true" style="margin-top: 5px; margin-right: 20px;"></input>
-                        <div class="inputxin">*</div></td>
-                </tr>
-                <tr>
-                    <td>公司邮箱:</td>
-                    <td><input class="textbox textbox_normal workEmail" name="workEmail" data-options="required:true,validType:'privateEmail'" style="margin-top: 5px; margin-right: 20px;"></input></td>
-                    <td>私人邮箱:</td>
-                    <td><input class="textbox textbox_normal privateEmail" name="privateEmail" data-options="required:true,validType:'privateEmail'" style="margin-top: 5px; margin-right: 20px;"></input>
-                        <div class="inputxin">*</div></td>
-                </tr>
-                <tr>
-                    <td>用户描述：</td>
-                    <td colspan="3"><textarea class="richtextbox richtextbox_normal describe" style="width: 530px;"> </textarea> </td>
-                </tr>
-            </table>
-        </form>
+                                        <span class="add-on"><i class="icon-th"></i></span>
+                                    </div>
+                                    <input type="hidden" id="dtp_input1" value="" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>所属地市:</td>
+                                <td>
+                                    <div id="city" class="easyui-textbox"></div>
+
+                                    <div class="inputxin">*</div>
+
+                                </td>
+                                <td>用户角色:</td>
+                                <td>
+                                    <select class="selectpicker" multiple>
+                                        <option>Mustard</option>
+                                        <option>Ketchup</option>
+                                        <option>Relish</option>
+                                    </select>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td>公司座机:</td>
+                                <td><input class="textbox textbox_normal cpZJ" name="message" data-options="multiline:true" style="margin-top: 5px; margin-right: 20px;"></input></td>
+                                <td>家庭座机:</td>
+                                <td><input class="textbox textbox_normal homePhone" name="message" data-options="multiline:true" style="margin-top: 5px; margin-right: 20px;"></input></td>
+                            </tr>
+                            <tr>
+                                <td>公司手机:</td>
+                                <td><input class="textbox textbox_normal workPhone" name="message" data-options="prompt:'公司手机电话',required:true" style="margin-top: 5px; margin-right: 20px;"></input></td>
+                                <td>私人手机:</td>
+                                <td><input class="textbox textbox_normal privatePhone" name="message" data-options="multiline:true" style="margin-top: 5px; margin-right: 20px;"></input>
+                                    <div class="inputxin">*</div></td>
+                            </tr>
+                            <tr>
+                                <td>公司邮箱:</td>
+                                <td><input class="textbox textbox_normal workEmail" name="workEmail" data-options="required:true,validType:'privateEmail'" style="margin-top: 5px; margin-right: 20px;"></input></td>
+                                <td>私人邮箱:</td>
+                                <td><input class="textbox textbox_normal privateEmail" name="privateEmail" data-options="required:true,validType:'privateEmail'" style="margin-top: 5px; margin-right: 20px;"></input>
+                                    <div class="inputxin">*</div></td>
+                            </tr>
+                            <tr>
+                                <td>用户描述：</td>
+                                <td colspan="3"><textarea class="richtextbox richtextbox_normal describe" style="width: 530px;"> </textarea> </td>
+                            </tr>
+                        </table>
+                    </form>
+
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary"  onclick="clearForm()">确认</button>
+            </div>
+
+        </div>
     </div>
-    <div class="butn_list">
-        <a href="javascript: void(0)" class="btn-custom btn-blue" plain="true" onclick="submitForm()">确认</a>
-        <a href="javascript: void(0)" class="btn-custom btn-white" plain="true" onclick="clearForm()">重置</a>
-    </div>
+
 </div>
 <!--岗位管理添加弹窗-->
-<div id="Post_management_add" class="easyui-window moreaddbox" title="Modal Window" data-options="modal:true,closed:true" style="background: #ffffff; width: 500px; height: 300px;">
-    <p class="top_gaine">
-        <span class="post_head">岗位信息 : </span>
-        <i style="width: 342px;"></i>
-    </p>
-    <div style="width: 300px; height: 150px;margin-left: 90px;">
-        <lable class="dep_nameinp"><i class="symbol_i">*</i><span class="postname">岗位</span>名称:<input id="addPostList" class="textbox textbox_normal depID" name="" data-options="multiline:true" style="width: 203px;margin-top: 5px;"></lable>
-        <div style="clear:both;margin-top: 10px;"></div>
-        <lable><span style="float: left;margin-left:10px; margin-top: 5px;"><span class="postname">岗位</span>描述:</span><textarea class="richtextbox richtextbox_normal describe" style="width: 198px;"></textarea></lable>
+
+<div class="modal fade" id="Post_management_add" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="Post_management_addLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="Post_management_addLabel">新增角色</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+            </div>
+            <div class="modal-body">
+                <div style="width: 300px; height: 150px;margin-left: 90px;">
+                    <lable class="dep_nameinp"><i class="symbol_i">*</i>角色名称:<input id="addPostList" class="textbox textbox_normal depID" name="" data-options="multiline:true" style="width: 203px;margin-top: 5px;"></lable>
+                    <div style="clear:both;margin-top: 10px;"></div>
+                    <lable><span style="float: left;margin-left:10px; margin-top: 5px;">角色描述:</span><textarea class="richtextbox richtextbox_normal describe" style="width: 198px;"></textarea></lable>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default " data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary adddepSubmit">确认</button>
+
+            </div>
+        </div>
     </div>
-    <div class="butn_list">
-        <div class="btn-custom btn-white close_winde" value="#Post_management_add">取消</div>
-        <div class="btn-custom btn-blue adddepSubmit">确认</div>
-    </div>
+
+
+
+
+
 </div>
 
 </body>

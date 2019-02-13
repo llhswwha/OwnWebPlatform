@@ -25,7 +25,8 @@ public class UserController extends EntityController<User,Integer> {
     {
         return userService;
     }
-    @GetMapping("/pagebyname")
+
+    /*@GetMapping("/pagebyname")
     public Page<User>   getUserPageByname(String name,@PageableDefault(value = 15, sort = { "name" }, direction = Sort.Direction.DESC) Pageable pageable)
     {
         Page<User>  page=userService.getUserByName(name,pageable);
@@ -45,41 +46,5 @@ public class UserController extends EntityController<User,Integer> {
         }
         System.out.println(userList);
         return  userList;
-    }
-
-    //添加
-//    @GetMapping("/addUsers") //测试用
-    @PostMapping("/addUsers")
-    public  Message  addUser(User user)
-    {
-       /* //测试
-        User user=new User();
-        user.setUserId("zhangsan");
-        user.setName("张三");
-        user.setPassword(MD5Util.getMD5String("123456"));
-        user.setGender("男");
-        user.setCompanyid(1);
-        user.setPrivatePhone("18327537835");
-        user.setPrivateEmail("163@qq.com");
-        List<Integer>  integerList=new ArrayList<>();
-        integerList.add(1);
-        user.setRoleIdList(integerList);*/
-        return  null;//userService.addUser(user);
-    }
-
-    //修改用户
-    @PostMapping("/updateUser")
-    public  Message  updateUser(User user)
-    {
-        return  null;// userService.updateUser(user);
-    }
-
-
-    //删除用户
-    @PostMapping("/deleteUserById")
-    public  Message  deleteUserById(Integer id)
-    {
-        return  userService.deleteById(id);
-    }
-
+    }*/
 }

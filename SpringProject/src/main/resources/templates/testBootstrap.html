@@ -4,7 +4,6 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="bootstrap/all.css">
@@ -26,9 +25,9 @@
 
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
             <a class="dropdown-item entityClass" href="#entity" data-name="">类型</a>
+            <a class="dropdown-item entityClass" href="#city" data-name="city">地市</a>
             <a class="dropdown-item entityClass active" href="#user" data-name="user">用户</a>
             <a class="dropdown-item entityClass" href="#role" data-name="role">角色</a>
-            <a class="dropdown-item entityClass" href="#city" data-name="city">地市</a>
             <a class="dropdown-item entityClass" href="#menu" data-name="menu">菜单</a>
             <a class="dropdown-item entityClass" href="#spaceRes" data-name="spaceRes">空间资源</a>
         </div>
@@ -37,6 +36,7 @@
     <button id="btnCreate" class="btn btn-primary">创建</button>
     <button id="btnModify" class="btn btn-primary">修改</button>
     <button id="btnDelete" class="btn btn-primary">删除</button>
+    <span class="alert"></span>
 
     <input id="txtName" class="form-control" style="width: 120px" type="text" placeholder="昵称" data-name="name">
     <input id="txtLoginName" class="form-control" style="width: 120px" type="text" placeholder="登录名" data-name="loginName">
@@ -49,38 +49,29 @@
        data-height="450"
 ></table>
 
-<div id="modal" class="modal fade">
-    <div class="modal-dialog modal-sm">
+<div id="modalContainer"> <!-- 模态框容器 -->
+</div>
+
+<div id="alertModal" class="modal fade" role="dialog">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <!--<div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title"></h4>
+            <div class="modal-header">
+                <h5 class="modal-title"><span id="title" class="alert">提示</span></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
-                <div class="form-group">
-                    <label>Name</label>
-                    <input type="text" class="form-control" name="name" placeholder="Name">
-                </div>
-                <div class="form-group">
-                    <label>Stars</label>
-                    <input type="number" class="form-control" name="stargazers_count" placeholder="Stars">
-                </div>
-                <div class="form-group">
-                    <label>Forks</label>
-                    <input type="number" class="form-control" name="forks_count" placeholder="Forks">
-                </div>
-                <div class="form-group">
-                    <label>Description</label>
-                    <input type="text" class="form-control" name="description" placeholder="Description">
-                </div>
+                <p></p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary submit">Submit</button>
-            </div>-->
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+                <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS, and then Bootstrap Table JS -->
 <script src="bootstrap/jquery.min.js"></script>
@@ -90,6 +81,6 @@
 <script src="bootstrap/bootstrap-table.min.js"></script>
 <script src="js/common/communicate.js"></script>
 <script src="js/common/bootstrap-util.js"></script>
-<script src="js/testBootStrapTable.js"></script>
+<script src="js/testBootStrap.js"></script>
 </body>
 </html>

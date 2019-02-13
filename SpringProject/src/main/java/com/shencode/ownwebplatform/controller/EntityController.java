@@ -2,6 +2,7 @@ package com.shencode.ownwebplatform.controller;
 
 
 import com.shencode.ownwebplatform.entity.BaseEntity;
+import com.shencode.ownwebplatform.model.ListParam;
 import com.shencode.ownwebplatform.model.Message;
 import com.shencode.ownwebplatform.module.condition.ui.ConditionModel;
 import com.shencode.ownwebplatform.service.EntityService;
@@ -32,18 +33,45 @@ public abstract class EntityController<T extends BaseEntity,ID> {
         return entity;
     }
 
+    /*
+        1.参数中不加@RequestBody
+            前端：
+            $.ajax({
+                url:url,
+                type:'POST',
+                dataType:'json',
+                data:data,
+                ....(没有contentType: 'application/json')
+        2.参数中加@RequestBody
+            不能用上面的ajax设置，会出异常：Unsupported Media Type
+            前端：
+            $.ajax({
+                url:url,
+                type:'POST',
+                dataType:'json',
+                contentType: 'application/json',//这种方式后端要加@ResquestBody
+                data:JSON.stringify(data),//必须用JSON.stringify转换一下
+                ...
+     */
     @PostMapping("add")
-    public Message<T> add(T entity) {
+    public Message<T> add(@RequestBody T entity) {
         return getService().add(entity);
     }
 
+    @PostMapping("addList")
+    public Message<List<T>> addList(@RequestBody ListParam<T> list) { //@RequestBody这里必须加@RequestBody
+        System.out.println("EntityController.addList");
+        System.out.println(list);
+        return getService().addList(list);
+    }
+
     @PostMapping("update")
-    public Message<T> update(T entity) {
+    public Message<T> update(@RequestBody T entity) {
         return getService().update(entity);
     }
 
     @PutMapping("put")
-    public Message<T> put(T entity) {
+    public Message<T> put(@RequestBody T entity) {
         return getService().update(entity);
     }
 
@@ -74,14 +102,14 @@ public abstract class EntityController<T extends BaseEntity,ID> {
     }
 
     @PostMapping("queryAll")
-    public Message<List<T>> queryList(ConditionModel condition) {
+    public Message<List<T>> queryList(@RequestBody ConditionModel condition) {
         System.out.println("queryAll");
         System.out.println(condition);
         return getService().queryAll(condition);
     }
 
     @PostMapping("queryPage")
-    public Message<Page<T>> queryPage(ConditionModel condition) {
+    public Message<Page<T>> queryPage(@RequestBody ConditionModel condition) {
         System.out.println("queryPage");
         System.out.println(condition);
         return getService().queryPage(condition);

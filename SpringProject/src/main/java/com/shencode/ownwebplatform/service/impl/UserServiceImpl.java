@@ -17,10 +17,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class UserServiceImpl extends EntityServiceImpl<User> implements UserService {
@@ -28,7 +25,6 @@ public class UserServiceImpl extends EntityServiceImpl<User> implements UserServ
     private UserRepository userRepository;
     @Resource
     private CityRepository cityRepository;
-
 
     @Resource
     private  RoleRepository roleRepository;
@@ -43,7 +39,7 @@ public class UserServiceImpl extends EntityServiceImpl<User> implements UserServ
     @Override
     public Message login(String loginName, String password)
     {
-        User user=userRepository.findByLoginName(loginName);
+        User user=userRepository.findByLoginNameAndActive(loginName,true);
         if(user==null)
         {
             return  new Message(0,"用户不存在");
@@ -98,21 +94,36 @@ public class UserServiceImpl extends EntityServiceImpl<User> implements UserServ
         return  userRepository.getUserbyName(name,pageable);
     }
 
-
-
     //添加用户
     @Override
     public Message<User> add(User user) {
-        SetRoles(user);
-        SetCity(user);
-        return super.add(user);
+        try{
+        User user1=userRepository.findByLoginNameAndActive(user.getLoginName(),true);
+        if(user==null) {
+            SetRoles(user);
+            SetCity(user);
+            //todo:判断用户名不能相同
+            return super.add(user);
+        }
+        else
+        {
+            return new Message(0,"该用户已存在！");
+        }
+        }
+        catch (Exception e)
+        {
+            return  new Message(0,e.toString());
+        }
     }
 
     private void SetCity(User user){
         Integer cityId=user.getCityId();
         if(cityId==null)return;
-        City city = cityRepository.findByIdAndActive(cityId,true).get();
-        user.setCity(city);
+        Optional<City> optionalCity=cityRepository.findByIdAndActive(cityId,true);
+        if(optionalCity.isPresent()){
+            City city = optionalCity.get();
+            user.setCity(city);
+        }
     }
 
     private void SetRoles(User user){
@@ -121,8 +132,13 @@ public class UserServiceImpl extends EntityServiceImpl<User> implements UserServ
         Set<Role> roleSet=new HashSet<>();
         for (int i=0;i<roleIdList.size();i++)
         {
-            Role role= roleRepository.findById(roleIdList.get(i)).get();
-            roleSet.add(role);
+            Optional<Role> optionalRole=roleRepository.findById(roleIdList.get(i));
+            if(optionalRole.isPresent()){
+                Role role= optionalRole.get();
+                roleSet.add(role);
+            }else{
+                //todo:角色Id错误，提示给前端？抛出一个异常？
+            }
         }
         user.setRoleSet(roleSet);
     }

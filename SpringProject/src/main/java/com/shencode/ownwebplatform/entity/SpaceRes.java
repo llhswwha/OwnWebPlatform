@@ -40,7 +40,7 @@ public class SpaceRes extends BaseEntity {
     private String charge;   //负责人
     @Column(name = "tel")
     private String tel;     //联系方式
-    @Column(name = "devnum")
+    @Column(name = "devNum")
     private Integer devNum;  //设备数量
 
 

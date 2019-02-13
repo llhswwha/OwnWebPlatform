@@ -39,4 +39,13 @@ public class City extends BaseEntity {
     public String getName() {
         return name;
     }
+
+    @Override
+    public String toString() {
+        return "City{" +
+                "pid=" + pid +
+                ", name='" + name + '\'' +
+                ", id=" + id +
+                '}';
+    }
 }

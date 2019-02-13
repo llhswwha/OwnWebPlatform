@@ -1,0 +1,13 @@
+[{
+  "field": "checked",
+  "title": "",
+  "checkbox": true
+}, {
+  "field": "name",
+  "title": "名称",
+  "sortable":true
+}, {
+  "field": "parent",
+  "title": "上级地市",
+  "sortable":true
+}]

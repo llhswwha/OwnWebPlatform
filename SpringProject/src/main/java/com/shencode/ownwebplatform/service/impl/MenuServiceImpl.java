@@ -33,14 +33,26 @@ public class MenuServiceImpl extends EntityServiceImpl<Menu> implements MenuServ
    //添加菜单
     @Override
     public Message<Menu> add(Menu menu) {
-         setRoleIds(menu);  //为空，添加菜单时一般不同时确定由哪些角色显示
-        return super.add(menu);
+        try {
+            setRoleIds(menu);  //为空，添加菜单时一般不同时确定由哪些角色显示,小几率出现
+            return super.add(menu);
+        }
+        catch (Exception e)
+        {
+            return new Message<>(0,e.toString());
+        }
+
     }
   //修改菜单（决定该菜单由哪些角色可以显示）
     @Override
     public Message<Menu> update(Menu menu) {
+        try{
         setRoleIds(menu);
         return super.update(menu);
+        }catch (Exception e)
+        {
+            return  new Message<>(0,e.toString());
+        }
     }
 
 
@@ -49,9 +61,16 @@ public class MenuServiceImpl extends EntityServiceImpl<Menu> implements MenuServ
     @Override
     public Message<Menu> deleteById(Integer id) {
         //return super.deleteById(id);
-        Menu menu=getActiveEntity(id,true);
-         menu.getRoleSet().clear();
-         return  delete(menu);
+        try{
+            Menu menu=getActiveEntity(id,true);
+            menu.getRoleSet().clear();
+            return  delete(menu);
+        }
+        catch (Exception e)
+        {
+            return  new Message<>(0,e.toString());
+        }
+
     }
 
 

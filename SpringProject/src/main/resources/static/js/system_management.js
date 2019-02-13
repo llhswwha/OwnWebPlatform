@@ -1,36 +1,48 @@
 ﻿
 
 $(document).ready(function () {
-    $("#start_time11").datebox({
-        required: "true",
-        missingMessage: "必填项",
-        formatter: function (date) {
-            var y = date.getFullYear();
-            var m = date.getMonth() + 1;
-            var d = date.getDate();
-            return y + "/" + (m < 10 ? ("0" + m) : m) + "/" + (d < 10 ? ("0" + d) : d);
+    $('.form_datetime').datetimepicker({
+        language:  'zh-CN',
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 2,
+        forceParse: 0
+    });
+//获取角色列表
+
+   var table=userDataList();
+   var roltable= dataRoleList();
+    $('#myTabContent li:eq(0) a').tab('show');
+    $("#Post_management_add .adddepSubmit").click(function () {
+        if($("#addPostList").val()==""){
+            alert("角色名不能为空！");
+            return
+        }
+      //    var data={"id":null,"active":true,"createTime":null,"modifyTime":null,"deleteTime":null,"name":"nnnnn","represent":null,"menuSet":null,"userSet":null,"userIdeList":null,"menuIdList":null};
+    var data={"id":null,"active":true,"createTime":null,"modifyTime":null,"deleteTime":null,"name":$("#addPostList").val(),"represent":$("#Post_management_add .describe").val(),"menuSet":null,"userSet":null,"userIdeList":null,"menuIdList":null};
+var dao=new EntityDao('role');
+var ajaxRolType =$("#Post_management_add").siblings(".panel-header").children(".panel-title").text();
+if(ajaxRolType=="添加角色信息"){
+    dao.add(data,function(result){
+        if(result.state=="0"){
+            alert("角色添加成功！")
         }
     });
-    //start_time11  出生年月
-
-    $("#Post_management_add .adddepSubmit").click(function () {
-
+}else {
+    //修改角色
+    dao.update(data,function(result){
+        if(result.state=="0"){
+            alert("角色修改成功！")
+        }
+    });
+}
 
     });
+//角色下拉
 
-var data_list=dataRoleList();
-var columns=  [[
-    {field: 'id', checkbox: 'true', width: 30},
-    {field: 'name', align: "center", title: "角色名称", width: 170},
-    {field: 'represent', align: "center", title: "备注", width: 170}
-]
-];
-    dataForTable($("#tableView4"),"#tb_tableView4",data_list,columns);
-
-
-    dataForTable($("#data_list"),"#User_management",data_list,columns);
-            var userData= userDataList();
-            console.log(userData);
 
 });
 //新增用户提交
@@ -39,6 +51,8 @@ function submitForm() {
     var loginName = $("#organ_amend_content .loginName").val();
     var userName = $("#organ_amend_content .userName").val();
     var gender=$("#organ_amend_content .gender").val();
+    //find('option:selected').text();
+    // var serverTypeID = $('#ServerType').find('option:selected').attr('value');
     var birthday=$("#organ_amend_content .birthday").val();
     var companyId=$("#organ_amend_content .companyId").val();
     var company=$("#organ_amend_content .company").val();
@@ -54,114 +68,82 @@ function submitForm() {
     var state=$("#organ_amend_content .state").val();
     var roleSet=$("#organ_amend_content .roleSet").val();
     var roleIdList=$("#organ_amend_content .roleIdList").val();
-    $.ajax({
-        type: "post",
-        url: "/ownwebplatform/user/addUsers",
-        data:{loginName : loginName ,name:userName ,password :"123",gender :gender ,birthday :birthday ,companyId :companyId ,company :company ,dep :dep ,companyPhone :companyPhone ,homePhone :homePhone ,workPhone :workPhone ,privatePhone :privatePhone ,workEmail :workEmail ,privateEmail :privateEmail ,represent :represent ,validSityData :validSityData ,state :state ,roleSet :roleSet ,roleIdList :roleIdList},
+    var describe=$("#organ_amend_content .describe").val();
+    var cpZJ=$("#organ_amend_content .cpZJ").val();
+    var password=$("#organ_amend_content .password").val();
 
-        success: function (data) {
-            login_text=data;
-            console.log(data);
-        },error:function () {
-            console.log("ssss")
-        }
-
-    });
-
-
-
-}
-
-//  统一制作easyUI 制作表格
-function dataForTable(tableBox,toolbar,tableData,tableList) {
-
-    tableBox.datagrid({
-        scrollbarSize: 0,
-        rownumbers: false,
-        fitColumns: true,
-        striped: true,
-        pagination: true,
-        pageSize: 15,   //表格中每页显示的行数
-        pageList: [15],
-        fit: true,//固定在底部
-        toolbar: toolbar,
-        data: tableData.slice(0, 15),
-        columns:tableList
-    });
-    var pager = tableBox.datagrid("getPager");
-    pager.pagination({
-        total: tableData.length,
-        layout: ['first', 'prev', 'links', 'next', 'last'],
-        onSelectPage: function (pageNo, pageSize) {
-            var start = (pageNo - 1) * pageSize;
-            var end = start + pageSize;
-            $("#tableView4").datagrid("loadData", tableData.slice(start, end));
-            pager.pagination('refresh', {
-                total: tableData.length,
-                pageNumber: pageNo
-            });
-        }
-    });
-
-
-}
-//获取用户列表
-function userDataList(){
-    var productTypeTree = [];
-    jqueryAjax("/ownwebplatform/user/findUserList",
-        {},
-        function (obj) {
-            var data = obj;
-            productTypeTree = data;
-            console.log(productTypeTree);
+    var data= {"id":null,"active":true,"createTime":null,"modifyTime":null,"deleteTime":null,"loginName":loginName,"name":userName,"password":password,"gender":gender,"birthday":null,"cityId":null,"city":null,"dep":dep,"companyPhone":companyPhone,"homePhone":homePhone,"workPhone":workPhone,"privatePhone":privatePhone,"workEmail":workEmail,"privateEmail":privateEmail,"represent":represent,"validSityData":null,"state":0,"roleSet":null,"roleIdList":null,"describe":describe,"cpZJ":cpZJ}
+  //  var data={"id":null,"active":true,"createTime":null,"modifyTime":null,"deleteTime":null,"name":$("#addPostList").val(),"represent":$("#Post_management_add .describe").val(),"menuSet":null,"userSet":null,"userIdeList":null,"menuIdList":null};
+    var dao=new EntityDao('user');
+    var ajaxRolType =$("#Post_management_add").siblings(".panel-header").children(".panel-title").text();
+   // if(ajaxRolType=="添加角色信息"){
+        dao.add(data,function(result){
+            if(result.state=="0"){
+                alert("用户添加成功！")
+            }
         });
-    return productTypeTree;
+    // }else {
+    //     //修改角色
+    //     dao.update(data,function(result){
+    //         if(result.state=="0"){
+    //             alert("角色修改成功！")
+    //         }
+    //     });
+    // }
+
 }
 //获取角色列表
 function dataRoleList(){
-        var productTypeTree = [];
-        jqueryAjax("/ownwebplatform/role/allRoles",
-            {},
-            function (obj) {
-                var data = obj;
-                productTypeTree = data;
-            });
-        return productTypeTree;
+    var table=new EntityTable('#tableView4','role');
+
+
+        var columns=  [[
+            {field: 'id', checkbox: 'true'},
+            {field: 'name', align: "center", title: "角色名称"},
+            {field: 'represent', align: "center", title: "备注"}
+        ]
+        ];
+    table.init(columns);
+    table.load();
+    return table;
+
+
 }
-function jqueryAjax(url, data, parseFunc) {
-    $.ajax({
-        type: "get",
-        url: url,
-        data: data,
-        dataType: "json",
-        async: false,
-        contentType: 'application/json',
-        success: function (result) {
-            var obj =  result;
-            parseFunc(obj);
-        }
-    });
+//用户列表
+function userDataList(){
+
+    var table=new EntityTable('#data_list','user');
+    var columns=[{
+        field: 'id',
+        title: 'ID',
+        sortable:true
+    }, {
+        field: 'name',
+        title: '昵称',
+        sortable:true
+    }, {
+        field: 'loginName',
+        title: '登录名',
+        sortable:true
+    }, {
+        field: 'password',
+        title: '密码',
+        sortable:true
+    }];
+    table.init(columns);
+    table.load();
+    return table;
 }
+
+
 $(function () {
+
     $("#add_userlist").click(function () {
-        var top = document.body.scrollTop + document.documentElement.scrollTop;
-        $('#User_management_add').window({
-            collapsible: false,
-            minimizable: false,
-            maximizable: false
-        }).window("open").window('resize', {top: top + 40, left: 40});
+
+        $('#User_management_add').modal({backdrop:'static',keyboard:false});
     });
-    $("#post_open_add,#add_rol_open,#Post_editdata,#rol_edit_list").click(function () {
-        // 岗位，角色增加修改
-
-        $("#Post_management_add .textbox ,#Post_management_add .richtextbox").val("");
-        var doname = $(this).attr("value");
-        var textname = $(this).text();
-        $('#Post_management_add').window('open').window('resize', {top: 40, left: 40});
-        $("#Post_management_add").siblings(".panel-header").children(".panel-title").text(textname + doname + "信息");
-        $("#Post_management_add .postname").text(doname);
-        $("#Post_management_add .post_head").text(doname + "信息：");
-
+    $("#add_rol_open,#rol_edit_list").click(function () {
+        $('#Post_management_add').modal({backdrop:'static',keyboard:false});
 
     });
     $(".close_winde").click(function () {
@@ -170,3 +152,5 @@ $(function () {
     });
 
 });
+
+

@@ -122,6 +122,21 @@ function EntityDao(name) {
             this.ajax.get(url,null,callBack);
         }
     }
+    if (typeof this.save != 'function') {
+        EntityDao.prototype.save = function (entity,callBack) {
+            var obj=this;
+            console.log('dao.save');
+            if(entity==null)return;
+            if(entity.id==null || typeof(entity.id) == 'undefined'){
+                obj.add(entity,callBack);
+            }else{
+                //更新 update,put,patch都行
+                obj.update(entity,callBack);
+                //obj.put(entity,callBack);
+                //obj.patch(entity,callBack);
+            }
+        }
+    }
     if (typeof this.add != 'function') {
         EntityDao.prototype.add = function (entity,callBack) {
             console.log('dao.add');
@@ -129,9 +144,15 @@ function EntityDao(name) {
             this.ajax.post(url,entity,callBack);
         }
     }
-
-
-
+    if (typeof this.addList != 'function') {
+        EntityDao.prototype.addList = function (entityList,callBack) {
+            console.log('dao.add');
+            var url=this.name+'/addList';
+            var listParam={};
+            listParam.list=entityList;//这里得封装一层
+            this.ajax.post(url,listParam,callBack);
+        }
+    }
     if (typeof this.update != 'function') {
         EntityDao.prototype.update = function (entity,callBack) {
             console.log('dao.update');
@@ -190,7 +211,7 @@ function EntityDao(name) {
         EntityDao.prototype.queryAll = function (condition,callBack) {
             console.log('dao.queryAll');
             var url=this.name+'/queryAll';
-            condition=JSON.parse(JSON.stringify(condition));//由于Condition类有方法,而jquery的ajax序列化时会把方法一起序列化，导致出问题，这里转换成一般对象
+            //condition=JSON.parse(JSON.stringify(condition));//由于Condition类有方法,而jquery的ajax序列化时会把方法一起序列化，导致出问题，这里转换成一般对象
             this.ajax.post(url,condition,callBack);
         }
     }
@@ -198,8 +219,7 @@ function EntityDao(name) {
         EntityDao.prototype.queryPage = function (condition,callBack) {
             console.log('dao.queryPage');
             var url=this.name+'/queryPage';
-
-            condition=JSON.parse(JSON.stringify(condition));//由于Condition类有方法,而jquery的ajax序列化时会把方法一起序列化，导致出问题，这里转换成一般对象
+            //condition=JSON.parse(JSON.stringify(condition));//由于Condition类有方法,而jquery的ajax序列化时会把方法一起序列化，导致出问题，这里转换成一般对象
             this.ajax.post(url,condition,callBack);
         }
     }
@@ -268,7 +288,14 @@ function Ajax() {
     }
     if (typeof this.post != 'function') {
         Ajax.prototype.post = function (url,data,callBack) {
-            console.log('ajax.post:'+url);
+            //this.post1(url,data,callBack); //后端没有@RequestBody
+            this.post2(url,data,callBack); //后端有@RequestBody
+        }
+    }
+
+    if (typeof this.post1 != 'function') {
+        Ajax.prototype.post1 = function (url,data,callBack) {
+            console.log('ajax.post1:'+url);
             console.log(data);
             $.ajax({
                 url:url,
@@ -292,14 +319,14 @@ function Ajax() {
 
     if (typeof this.post2 != 'function') {
         Ajax.prototype.post2 = function (url,data,callBack) {
-            console.log('ajax.post:'+url);
+            console.log('ajax.post2:'+url);
             console.log(data);
             $.ajax({
                 url:url,
                 type:'POST',
                 dataType:'json',
-                contentType: 'application/json',//这种方式后端无法用实体类直接收到，还要再研究一下
-                data:JSON.stringify(data),
+                contentType: 'application/json',//这种方式后端要加@ResquestBody
+                data:JSON.stringify(data),//必须用JSON.stringify转换一下
                 success:function (result) {
                     console.log('成功')
                     console.log(result);

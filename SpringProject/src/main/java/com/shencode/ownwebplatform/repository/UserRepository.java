@@ -11,11 +11,11 @@ import java.util.List;
 
 public interface UserRepository   extends  EntityRepository<User,Integer> {
 
-   public   User findByLoginName(String loginName);
+   public   User findByLoginNameAndActive(String loginName,boolean active);
 
    public List<User> findAll();
 
-   @Query(" select u from  User u  where u.name like %:n%")
+   @Query(" select u from  User u  where u.name like %:n% and u.active=true ")
    public Page<User> getUserbyName(@Param("n") String name, Pageable pageable);
 
 

@@ -18,7 +18,7 @@ public abstract class BaseEntity /*implements IEntity<Integer>*/ {
     protected Boolean active=true;
 
     //@JsonIgnore
-    @Column(name = "createTime",columnDefinition = " datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP")
+    @Column(name = "createTime")
     protected Date createTime;
 
     //@JsonIgnore

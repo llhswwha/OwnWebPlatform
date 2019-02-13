@@ -1,6 +1,7 @@
 package com.shencode.ownwebplatform.service;
 
 import com.shencode.ownwebplatform.entity.BaseEntity;
+import com.shencode.ownwebplatform.model.ListParam;
 import com.shencode.ownwebplatform.model.Message;
 import com.shencode.ownwebplatform.module.condition.ui.ConditionModel;
 import com.shencode.ownwebplatform.repository.EntityRepository;
@@ -25,7 +26,7 @@ public interface EntityService<T extends BaseEntity,ID> {
 
 
 
-    public Message<List<T>> adds(List<T> tList);
+    public Message<List<T>> addList(ListParam<T> list);
 
     //获取分页
     public Page<T> getPage(Pageable pageable);

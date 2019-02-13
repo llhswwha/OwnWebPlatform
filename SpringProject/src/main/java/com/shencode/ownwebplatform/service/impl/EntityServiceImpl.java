@@ -1,6 +1,7 @@
 package com.shencode.ownwebplatform.service.impl;
 
 import com.shencode.ownwebplatform.entity.BaseEntity;
+import com.shencode.ownwebplatform.model.ListParam;
 import com.shencode.ownwebplatform.model.Message;
 import com.shencode.ownwebplatform.module.condition.ConditionQuery;
 import com.shencode.ownwebplatform.module.condition.ui.ConditionModel;
@@ -53,18 +54,18 @@ public abstract class EntityServiceImpl<T extends BaseEntity> implements EntityS
     //单条添加
     @Override
     public Message<T> add(T entityNew) {
-        System.out.println("add");
+        System.out.println("EntityServiceImpl.add");
         System.out.println(entityNew);
         Message<T> message = null;
         try {
             Integer id=entityNew.getId();
             if(id==null){//一般路径
-                //创建时间，数据库自动获取当前时间，无需添加
+                 entityNew.setCreateTime(new Date());    //创建时间
                 T result = getRepository().save(entityNew);
                 message = new Message(0, "成功");
                 message.setData(result);
             }
-            else{//用户添加路径
+            /*else{//用户添加路径
                 T entity = getEntity(id);
                 if (entity != null) {
                     message = new Message(1, "已存在！");//用户不能重复添加，并且用户名相同时，save就会变成修改原来的用户属性了。
@@ -74,8 +75,7 @@ public abstract class EntityServiceImpl<T extends BaseEntity> implements EntityS
                     message = new Message(0, "成功");
                     message.setData(result);
                 }
-            }
-
+            }*/
         } catch (Exception e) {
             System.out.println(e.toString());
             message = new Message(1, e.toString());
@@ -85,25 +85,20 @@ public abstract class EntityServiceImpl<T extends BaseEntity> implements EntityS
     //多条添加(待验证)
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public  Message<List<T>>  adds(List<T> tList)
-    {
-        Message<List<T>> message =new Message(0,"成功！");
-            for (int i=0;i<=tList.size();i++)
-            {
-                Message  message1=null;
-                try {
-                    T t = tList.get(i);
-                    T result = getRepository().save(t);
-                    message1.setState(0); message1.setDescribe("成功！");
-                }
-                catch (Exception e)
-                {
-                    message.setState(1);
-                    message.setDescribe(message.getDescribe()+","+i+","+e.toString());
-                }
-
+    public  Message<List<T>> addList(ListParam<T> listParam) {
+        Message<List<T>> message = new Message();
+        List<T> list = listParam.getList();
+        if (list == null) return message;
+        try {
+            for (int i = 0; i < list.size(); i++) {
+                T t = list.get(i);
+                T result = getRepository().save(t);
             }
-        return  message;
+            message.setSuccess(list);
+        } catch (Exception e) {
+            message.setFailure(e);
+        }
+        return message;
     }
     //修改
     @Override

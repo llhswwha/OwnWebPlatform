@@ -1,0 +1,12 @@
+[
+  {"field": "checked","align":"center", "title": "","checkbox": true},
+  {"field": "name","align":"center", "title": "名称"},
+  {"field": "city.name","align":"center", "title": "所属地市"},
+  {"field": "area","align":"center", "title": "面积（平方公里）"},
+  {"field": "code","align":"center", "title": "行政区域代码"},
+  {"field": "address","align":"center","title": "政府驻地"},
+  {"field": "charge","align":"center", "title": "负责人"},
+  {"field": "tel","align":"center", "title": "负责人联系方式"},
+  {"field": "devNum","align":"center", "title": "设备数量"}
+
+]

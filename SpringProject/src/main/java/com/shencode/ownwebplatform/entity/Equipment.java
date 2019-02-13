@@ -1,4 +1,6 @@
 package com.shencode.ownwebplatform.entity;
 
-public class DmtNodeinfo {
+public class Equipment {
+
+
 }

@@ -23,8 +23,8 @@ public class Menu extends BaseEntity {
     private String showOrder;
     @Column(name = "pid")
     private String pid;
-    @Column(name = "represent")
-    private String  represent;
+    @Column(name = "description")
+    private String description;
 
 
 
@@ -78,8 +78,8 @@ public class Menu extends BaseEntity {
         this.pid = pid;
     }
 
-    public void setRepresent(String represent) {
-        this.represent = represent;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
 //    public Integer getId() {
@@ -102,7 +102,7 @@ public class Menu extends BaseEntity {
         return pid;
     }
 
-    public String getRepresent() {
-        return represent;
+    public String getDescription() {
+        return description;
     }
 }

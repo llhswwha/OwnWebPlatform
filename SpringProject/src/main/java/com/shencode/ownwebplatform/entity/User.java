@@ -9,7 +9,7 @@ public class User extends BaseEntity {
 
     //@Id
     // @GeneratedValue(strategy = GenerationType.) int 自增
-    @Column(name = "loginName",unique = true)
+    @Column(name = "loginName")
     private String loginName;
     @Column(name = "name",nullable = false)
     private String name;

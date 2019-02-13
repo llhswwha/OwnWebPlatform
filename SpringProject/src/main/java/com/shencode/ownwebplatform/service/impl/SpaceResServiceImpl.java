@@ -43,7 +43,9 @@ public class SpaceResServiceImpl extends EntityServiceImpl<SpaceRes> implements 
     }
 
     private void SetCity(SpaceRes spaceRes){
-        City city = cityRepository.findByIdAndActive(spaceRes.getCityId(),true).get();
+        Integer cityId=spaceRes.getCityId();
+        if(cityId==null)return;
+        City city = cityRepository.findByIdAndActive(cityId,true).get();
         spaceRes.setCity(city);
     }
 }
