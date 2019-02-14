@@ -15,7 +15,7 @@
   "title": "显示顺序",
   "sortable":true
 }, {
-  "field": "pid",
+  "field": "parent.name",
   "title": "父菜单",
   "sortable":true
 }, {

@@ -44,25 +44,19 @@ function clickMenu(){
     change(entityName);
 }
 
+//动态初始化导航菜单
 function initMenu(){
     var menuDao=new MenuDao();
     var userId=0;
     menuDao.getRoot(userId,function(rootMenu){
-        console.log('Menu-----------------------------------');
-        console.log(rootMenu);
-        console.log(rootMenu.items);
-        var $navbar=$('#navbarMenus');
-
+        //console.log('Menu-----------------------------------');
+        //console.log(rootMenu);
+        //console.log(rootMenu.items);
+        var $navbar=$('#navbarMenus');//导航栏的<ul
         for (var i in rootMenu.items){
             var menu=rootMenu.items[i];
-            console.log(menu);
+            //console.log(menu);
             if(menu.items){
-                /*
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">系统管理</a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown"><a class="dropdown-item entityClass" data-name="user" href="#user">用户管理</a></div>
-                </li>
-                 */
                 var id='menu_'+menu.code;
                 $navbar.append('<li class="nav-item dropdown" id='+id+'><a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'+menu.name+'</a><div class="dropdown-menu" aria-labelledby="navbarDropdown"></div></li>');
                 var $li=$('#'+id);

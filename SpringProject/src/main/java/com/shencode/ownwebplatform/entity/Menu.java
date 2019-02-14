@@ -33,8 +33,12 @@ public class Menu extends BaseEntity {
     @Transient
     private List<Integer> roleIdList;
 
+    //子菜单
     @Transient
     private List<Menu> items;
+
+    @Transient
+    private Menu parent;
 
     public Menu(){
 
@@ -117,5 +121,13 @@ public class Menu extends BaseEntity {
             items=new ArrayList<>();
         }
         items.add(menu);
+    }
+
+    public Menu getParent() {
+        return parent;
+    }
+
+    public void setParent(Menu parent) {
+        this.parent = parent;
     }
 }

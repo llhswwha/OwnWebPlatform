@@ -13,69 +13,15 @@
 </head>
 <body>
 
+<!-- 顶部导航栏 -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">莘科自有平台</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto" id="navbarMenus">
-            <!--<li class="nav-item active">
-                <a class="nav-link" href="#">首页 <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown0" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    空间资源管理
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item entityClass" data-name="city" href="#city">地市管理</a>
-                    <a class="dropdown-item entityClass" data-name="spaceRes" href="#spaceRes">空间管理</a>
-                </div>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    设备管理
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">设备类型管理</a>
-                    <a class="dropdown-item" href="#">设备资源管理</a>
-                </div>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    系统管理
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item entityClass" data-name="user" href="#user">用户管理</a>
-                    <a class="dropdown-item entityClass" data-name="role" href="#role">角色管理</a>
-                    <a class="dropdown-item entityClass" data-name="menu" href="#menu">菜单管理</a>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">监控管理</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    告警管理
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">当前告警</a>
-                    <a class="dropdown-item" href="#">历史告警</a>
-                </div>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    测试
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#" id="btnTestAlert">提示框</a>
-                    <a class="dropdown-item" href="#" id="btnTestConfirm">确认框</a>
-                </div>
-            </li>
-            &lt;!&ndash;<li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </li>&ndash;&gt;-->
+           <!-- 菜单动态创建 -->
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -93,6 +39,10 @@
 </nav>
 
 <div class="container">
+    <div>
+        <button id="btnTestAlert" class="btn btn-secondary">提示框</button>
+        <button id="btnTestConfirm" class="btn btn-secondary">确认框</button>
+    </div>
     <div id="toolbar" class="form-inline">
         <button id="btnCreate" class="btn btn-primary">创建</button>
         <button id="btnModify" class="btn btn-primary">修改</button>
@@ -103,8 +53,6 @@
         <input id="txtLoginName" class="form-control" style="width: 120px" type="text" placeholder="登录名" data-name="loginName">
         <button id="btnSearch" class="btn btn-secondary">搜索</button>
         <button id="btnClearSearch" class="btn btn-secondary">清空</button>
-        <!--<button id="btnTestAlert" class="btn btn-secondary">提示框</button>
-        <button id="btnTestConfirm" class="btn btn-secondary">确认框</button>-->
     </div>
     <table id="table"
            data-toolbar="#toolbar"

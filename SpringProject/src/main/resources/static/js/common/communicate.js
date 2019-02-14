@@ -27,7 +27,7 @@ String.prototype.endWith=function(str){
 
 function getResultData(result) {
     var data=result;
-    if(isDefined(result.state)){
+    if(result!=null && isDefined(result.state)){
         if(result.state==0){
             //alert('成功!');
             console.log('getResultData:成功!')
@@ -111,8 +111,16 @@ function Condition(page,size) {
 }
 
 function EntityDao(name) {
-    this.ajax=new Ajax();
-    this.name=name;
+    console.log('EntityDao:'+name);
+    /*this.ajax=new Ajax();
+    this.name=name;*/
+    if (typeof this.init != 'function') {
+        EntityDao.prototype.init = function (name) {
+            this.ajax=new Ajax();
+            this.name=name;
+        }
+    }
+    this.init(name);
 
     //console.log('EntityDao:'+name);
     if (typeof this.template != 'function') {
@@ -211,15 +219,20 @@ function EntityDao(name) {
         EntityDao.prototype.queryAll = function (condition,callBack) {
             console.log('dao.queryAll');
             var url=this.name+'/queryAll';
-            //condition=JSON.parse(JSON.stringify(condition));//由于Condition类有方法,而jquery的ajax序列化时会把方法一起序列化，导致出问题，这里转换成一般对象
             this.ajax.post(url,condition,callBack);
         }
     }
     if (typeof this.queryPage != 'function') {
         EntityDao.prototype.queryPage = function (condition,callBack) {
-            console.log('dao.queryPage');
+             this._queryPage(condition,callBack);
+        }
+    }
+
+    //这个方法用于子类调重写queryPage时调用
+    if (typeof this._queryPage != 'function') {
+        EntityDao.prototype._queryPage = function (condition,callBack) {
+            console.log('dao._queryPage');
             var url=this.name+'/queryPage';
-            //condition=JSON.parse(JSON.stringify(condition));//由于Condition类有方法,而jquery的ajax序列化时会把方法一起序列化，导致出问题，这里转换成一般对象
             this.ajax.post(url,condition,callBack);
         }
     }
@@ -233,6 +246,7 @@ function EntityDao(name) {
 }
 
 function UserDao() {
+    this.init('user');//调用父类的构造函数
     if (typeof this.login != 'function') {
         UserDao.prototype.login = function (user,pass,callBack) {
             console.log('userDao.login');
@@ -240,13 +254,11 @@ function UserDao() {
             //this.ajax.post(url,condition,callBack);
         }
     }
-
 }
 UserDao.prototype = new EntityDao();
 
 function MenuDao() {
-    this.ajax=new Ajax();
-    this.name='menu';
+    this.init('menu');//调用父类的构造函数
     if (typeof this.getRoot != 'function') {
         MenuDao.prototype.getRoot = function (userId,callBack) {
             console.log('MenuDao.getRoot:'+userId);
@@ -254,9 +266,41 @@ function MenuDao() {
             this.ajax.get(url,userId,callBack);
         }
     }
-
 }
 MenuDao.prototype = new EntityDao();
+/*//重写方法
+MenuDao.prototype.queryPage = function (condition,callBack) {
+    console.log('MenuDao.queryPage');
+    this._queryPage(condition,function (result) {
+        var data=getResultData(result);
+        console.log(data);
+        var content=data.content;
+        //[1, 4, -5, 10].find(function(n){return});
+        for(var i in content){
+            var item=content[i];
+            item.parent=content.find(function(n){
+                return n.id==item.pid
+            });
+            console.log(item.parent);
+        }
+        if(callBack!=null){
+            callBack(result);
+        }
+    })
+}*/
+
+function getDao(name) {
+    console.log('getDao:'+name);
+    if(name=='menu'){
+        return new MenuDao();
+    }
+    else if(name=='user'){
+        return new UserDao();
+    }
+    else{
+        return new EntityDao(name);
+    }
+}
 
 
 //document.write(”<script language=javascript src=’/js/import.js’></script>”);

@@ -3,18 +3,18 @@ package com.shencode.ownwebplatform.service.impl;
 import com.shencode.ownwebplatform.entity.Menu;
 import com.shencode.ownwebplatform.entity.Role;
 import com.shencode.ownwebplatform.model.Message;
+import com.shencode.ownwebplatform.module.condition.ui.ConditionModel;
 import com.shencode.ownwebplatform.repository.EntityRepository;
 import com.shencode.ownwebplatform.repository.MenuRepository;
 import com.shencode.ownwebplatform.repository.RoleRepository;
 import com.shencode.ownwebplatform.service.MenuService;
 import com.shencode.ownwebplatform.service.RoleService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class MenuServiceImpl extends EntityServiceImpl<Menu> implements MenuService {
@@ -139,5 +139,31 @@ public class MenuServiceImpl extends EntityServiceImpl<Menu> implements MenuServ
             }
         }
         return null;
+    }
+
+    @Override
+    public Page<Menu> getPage(Pageable pageable) {
+        Page<Menu> page= super.getPage(pageable);
+        SetParent(page);
+        return page;
+    }
+
+    private void SetParent(Page<Menu> page){
+        //todo:这里可以优化一下，不要一个一个的查，暂时到也没问题
+        List<Menu> menus=page.getContent();
+        for(int i=0;i<menus.size();i++){
+            Menu menu=menus.get(i);
+            Optional<Menu> parent=repository.findById(menu.getPid());
+            if(parent.isPresent()){
+                menu.setParent(parent.get());
+            }
+        }
+    }
+
+    @Override
+    public Message<Page<Menu>> queryPage(ConditionModel condition) {
+        Message<Page<Menu>> msg=  super.queryPage(condition);
+        SetParent(msg.getData());
+        return msg;
     }
 }

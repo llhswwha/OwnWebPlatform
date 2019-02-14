@@ -138,7 +138,8 @@ function EntityTable(tableId,entityName) {
     this.entityName=entityName;
     this.tableId=tableId;
     this.table=$(tableId);
-    this.dao=new EntityDao(entityName);
+    //this.dao=new EntityDao(entityName);
+    this.dao=getDao(entityName);
     this.page=1;
     this.size=10;
     this.condition=new Condition();
@@ -187,6 +188,16 @@ function EntityTable(tableId,entityName) {
             obj.table.bootstrapTable('showLoading');
             obj.page=page;
             obj.size=size;
+            if(typeof(sortName) == 'undefined'){
+                sortName=obj.sortName;
+            }else{
+                obj.sortName=sortName;
+            }
+            if(typeof(sortOrder) == 'undefined'){
+                sortOrder=obj.sortOrder;
+            }else{
+                obj.sortOrder=sortOrder;
+            }
             var condition=new Condition();
             condition.setPage(page-1,size);
             condition.addSort(sortName,sortOrder);
@@ -196,7 +207,9 @@ function EntityTable(tableId,entityName) {
             console.log(condition);
             obj.dao.queryPage(condition,function (result) {
                 var data=getResultData(result);
-                obj.table.bootstrapTable('load',data);
+                if(data!=null){
+                    obj.table.bootstrapTable('load',data);
+                }
                 obj.table.bootstrapTable('hideLoading');
             });
         }
@@ -220,7 +233,8 @@ function EntityTable(tableId,entityName) {
             console.log(' --> EntityTable.changeEntity:'+entityName);
             var obj=this;
             obj.entityName=entityName;
-            obj.dao=new EntityDao(entityName);
+            //obj.dao=new EntityDao(entityName);
+            obj.dao=getDao(entityName);
             obj.setOption('columns',columns);//刷新一下
         }
     }
