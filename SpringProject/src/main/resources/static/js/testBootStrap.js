@@ -36,51 +36,26 @@ var entityTable=new EntityTable('','');
 function clickMenu(){
     console.log('click');
     var entityText=$(this).text();
-    entityName=$(this).attr('data-name');
+    var menuId=$(this).attr('menu-id');
+    var menu=getMenu(menuId);
+    var entityName=menu.code;
     //$('#dropdownEntityList').text(entityText);
-    $('#h2EntityText').text(entityText);
+    //$('#h2EntityText').text(entityText);
     $('.entityClass').removeClass('active');
     $(this).addClass('active');
     change(entityName);
-}
-
-//动态初始化导航菜单
-function initMenu(){
-    var menuDao=new MenuDao();
-    var userId=0;
-    menuDao.getRoot(userId,function(rootMenu){
-        //console.log('Menu-----------------------------------');
-        //console.log(rootMenu);
-        //console.log(rootMenu.items);
-        var $navbar=$('#navbarMenus');//导航栏的<ul
-        for (var i in rootMenu.items){
-            var menu=rootMenu.items[i];
-            //console.log(menu);
-            if(menu.items){
-                var id='menu_'+menu.code;
-                $navbar.append('<li class="nav-item dropdown" id='+id+'><a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'+menu.name+'</a><div class="dropdown-menu" aria-labelledby="navbarDropdown"></div></li>');
-                var $li=$('#'+id);
-                var $div=$li.find('.dropdown-menu');
-                for(var j in menu.items){
-                    var subMenu=menu.items[j];
-                    $div.append('<a class="dropdown-item entityClass" data-name="'+subMenu.code+'" href="#'+subMenu.code+'">'+subMenu.name+'</a>');
-                }
-            }
-            else{
-                var li=$navbar.append('<li class="nav-item"><a class="nav-link entityClass" data-name="'+menu.code+'" href="#'+menu.code+'">'+menu.name+'</a></li>');
-            }
-            /*
-            <li class="nav-item"><a class="nav-link" href="#">监控管理</a></li>
-             */
-        }
-
-        $('.entityClass').click(clickMenu);
-    });
-
+    $('.breadcrumb').empty();
+    //<li class="breadcrumb-item"><a href="#">Home</a></li>
+    $('.breadcrumb').append('<li class="breadcrumb-item"><a href="#">首页</a></li>');
+    if(menu.parent!=null && typeof(menu.parent)!='undefined'){
+        $('.breadcrumb').append('<li class="breadcrumb-item"><a class="entityClass" menu-id="'+menu.parent.id+'" href="#'+menu.parent.code+'">'+menu.parent.name+'</a></li>');
+    }
+    $('.breadcrumb').append('<li class="breadcrumb-item"><a class="entityClass" menu-id="'+menu.id+'" href="#'+menu.code+'">'+menu.name+'</a></li>');
+    $('.breadcrumb-item .entityClass').click(clickMenu);//菜单点击事件
 }
 
 $(function(){
-    initMenu();
+    initNavMenu('#navbarMenus',clickMenu);//动态加载菜单
     init(entityName);
     $btnSearch.click(function () {
         var map={};

@@ -1,3 +1,48 @@
+var menuList=[];
+function getMenu(id){
+    return menuList.find(function(i){
+        return i.id==id;
+    })
+}
+//动态初始化导航菜单
+function initNavMenu(navulId,menuClick){
+    var menuDao=new MenuDao();
+    var userId=0;
+    menuList=[];
+    menuDao.getRoot(userId,function(rootMenu){
+        //console.log('Menu-----------------------------------');
+        //console.log(rootMenu);
+        //console.log(rootMenu.items);
+        //var $navbar=$('#navbarMenus');//导航栏的<ul
+        var $ul=$(navulId);
+        for (var i in rootMenu.items){
+            var menu=rootMenu.items[i];
+            menuList.push(menu);
+            //console.log(menu);
+            if(menu.items){
+                var id='menu_'+menu.code;
+                $ul.append('<li class="nav-item dropdown" id='+id+'><a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'+menu.name+'</a><div class="dropdown-menu" aria-labelledby="navbarDropdown"></div></li>');
+                var $li=$('#'+id);
+                var $div=$li.find('.dropdown-menu');
+                for(var j in menu.items){
+                    var subMenu=menu.items[j];
+                    subMenu.parent=menu;
+                    menuList.push(subMenu);
+                    $div.append('<a class="dropdown-item entityClass" menu-id="'+subMenu.id+'" href="#'+subMenu.code+'">'+subMenu.name+'</a>');
+                }
+            }
+            else{
+                var li=$ul.append('<li class="nav-item"><a class="nav-link entityClass" menu-id="'+menu.id+'" href="#'+menu.code+'">'+menu.name+'</a></li>');
+            }
+            /*
+            <li class="nav-item"><a class="nav-link" href="#">监控管理</a></li>
+             */
+        }
+
+        $('.entityClass').click(menuClick);//菜单点击事件
+    });
+}
+
 var $confirmModal=null;
 //显示提示框
 function showConfirmModal(title,msg, callback) {
