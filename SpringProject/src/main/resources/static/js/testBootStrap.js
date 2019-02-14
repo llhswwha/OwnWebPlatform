@@ -116,7 +116,7 @@ $(function(){
         }
     })
     $('#btnDelete').click(function () {
-        var list=entityTable.getSelections();
+        /*var list=entityTable.getSelections();
         console.log(list);
         if(list.length==0){
             showAlertModal('请先选择一行','info');
@@ -135,13 +135,16 @@ $(function(){
                     showAlertModal('删除失败!', 'success');
                 }
             })
-        }
+        }*/
+        entityTable.deleteSelections();
     })
     $('#btnTestAlert').click(function () {
         showAlertModal('测试提示框','info');
     })
     $('#btnTestConfirm').click(function () {
-        showAlertModal('测试提示框','success');
+        showConfirmModal('确认','是否删除',function () {
+            alert('yes');
+        });
     })
 
 });

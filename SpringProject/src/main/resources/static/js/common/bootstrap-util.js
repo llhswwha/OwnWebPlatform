@@ -1,3 +1,35 @@
+var $confirmModal=null;
+//显示提示框
+function showConfirmModal(title,msg, callback) {
+    if ($confirmModal == null) {
+        console.log("showAlertModal 1");//第一次要从文件中加载弹窗
+        var modalContainerId='confirmModalContainer';//容器id
+        var pagePath='pages/confirmModal.html';//弹窗页面文件
+        var modalId='#confirmModal';//弹窗id
+        $('body').append('<div id="'+modalContainerId+'"></div>');//添加容器元素
+        $('#'+modalContainerId).load(pagePath, function () {
+            $confirmModal = $(modalId).modal({show: false})
+            showConfirm(title,msg, callback);
+        });
+    } else {
+        console.log("showAlertModal 2");//后续加载都是在已经页面上了的
+        showConfirm(title,msg, callback);
+    }
+}
+
+//显示提示内容
+function showConfirm(title,msg, callback) {
+    $confirmModal.find('.modal-title').text(title);
+    $confirmModal.find('.modal-body').text(msg)
+    $confirmModal.find('.btn-yes').click(function(){
+        $confirmModal.modal('hide');
+        if(callback!=null){
+            callback();
+        }
+    })
+    $confirmModal.modal('show');
+}
+
 var $alertModal=null;
 //显示提示框
 function showAlertModal(msg, type) {
@@ -245,6 +277,34 @@ function EntityTable(tableId,entityName) {
             var list= obj.table.bootstrapTable('getSelections');//刷新一下
             console.log(list);
             return list;
+        }
+    }
+    if(typeof this.deleteSelections!='function'){
+        EntityTable.prototype.deleteSelections=function () {
+            console.log(' --> EntityTable.deleteSelections');
+            var list=entityTable.getSelections();
+            console.log(list);
+            if(list.length==0){
+                showAlertModal('请先选择一行','info');
+            }
+            else{
+                console.log(list);
+                var entity=list[0];
+                var msg='是否确定删除？';
+                showConfirmModal("确认",msg,function(){
+                    var id=entity.id;
+                    var dao=entityTable.dao;
+                    dao.delete(id,function (result) {
+                        if(result.state==0){
+                            entityTable.load();
+                            showAlertModal('删除成功!', 'success');
+                        }
+                        else{
+                            showAlertModal('删除失败!', 'success');
+                        }
+                    })
+                })
+            }
         }
     }
 }
