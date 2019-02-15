@@ -1,5 +1,14 @@
 console.log('communicate.js')
 
+function loadCityListToComboBox(cb) {
+
+}
+
+function getCityList(callback){
+    var dao=new EntityDao('city');
+    dao.getAll(callback);
+}
+
 function isDefined(obj) {
     // console.log('isDefined');
     // console.log(typeof (obj));
@@ -262,8 +271,8 @@ function MenuDao() {
     if (typeof this.getRoot != 'function') {
         MenuDao.prototype.getRoot = function (userId,callBack) {
             console.log('MenuDao.getRoot:'+userId);
-            var url=this.name+'/root';
-            this.ajax.get(url,userId,callBack);
+            var url=this.name+'/root?userId='+userId;
+            this.ajax.get(url,null,callBack);
         }
     }
 }

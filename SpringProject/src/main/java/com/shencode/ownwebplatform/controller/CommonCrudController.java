@@ -36,4 +36,9 @@ public class CommonCrudController {
 
     @RequestMapping("bootstrapTableTemplate2")
     public String bootstrapTableTemplate2(){return "bootstrap_table_template";}
+
+    @RequestMapping("testVue")
+    public String testVue(){
+        return "testVue";
+    }
 }

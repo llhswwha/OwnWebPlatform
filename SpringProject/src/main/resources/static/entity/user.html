@@ -21,7 +21,8 @@
                 </div>
                 <div class="form-group">
                     <label>地市</label>
-                    <input type="text" class="form-control" name="cityId" placeholder="地市">
+                    <select class="form-control" name="city" placeholder="地市" id="cityList">
+                    </select>
                 </div>
                 <div class="form-group">
                     <label>部门</label>
@@ -30,6 +31,10 @@
                 <div class="form-group">
                     <label>角色</label>
                     <input type="text" class="form-control" name="role" placeholder="角色">
+                </div>
+                <div class="form-group">
+                    <label>工作邮箱</label>
+                    <input type="text" class="form-control" name="workEmail" placeholder="工作邮箱">
                 </div>
             </div>
             <div class="modal-footer">
@@ -40,3 +45,13 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+<script src="js/common/commonUI.js"></script>
+<script>
+    //加载下拉框列表中的数据
+    function loadSelectListData(callback){
+        getCityList(function(list){
+            setComboBoxData('#cityList',list);
+            if(callback!=null)callback();
+        })
+    }
+</script>

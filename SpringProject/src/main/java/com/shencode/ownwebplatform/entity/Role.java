@@ -1,5 +1,7 @@
 package com.shencode.ownwebplatform.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
@@ -23,12 +25,13 @@ public class Role extends BaseEntity {
     private String description;  //角色说明
 
     @ManyToMany
-    @JoinTable(name = "t_menurole",joinColumns = {@JoinColumn(name = "roleId")},inverseJoinColumns = {@JoinColumn(name = "menuId")})
+    @JoinTable(name = "t_menuRole",joinColumns = {@JoinColumn(name = "roleId")},inverseJoinColumns = {@JoinColumn(name = "menuId")})
+    @JsonIgnore
     private Set<Menu> menuSet;   //关联菜单
 
     @ManyToMany
     @JoinTable(name = "t_userrole",joinColumns = {@JoinColumn(name = "roleId")},inverseJoinColumns = {@JoinColumn(name = "userId")})
-    //@JsonIgnore
+    @JsonIgnore
     private  Set<User>  userSet;   //关联用户
 
     public Set<User> getUserSet() {

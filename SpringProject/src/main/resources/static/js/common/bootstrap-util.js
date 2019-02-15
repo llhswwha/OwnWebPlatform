@@ -5,9 +5,9 @@ function getMenu(id){
     })
 }
 //动态初始化导航菜单
-function initNavMenu(navulId,menuClick){
+function initNavMenu(navulId,userId,menuClick){
     var menuDao=new MenuDao();
-    var userId=0;
+    //var userId=0;
     menuList=[];
     menuDao.getRoot(userId,function(rootMenu){
         //console.log('Menu-----------------------------------');
@@ -15,6 +15,7 @@ function initNavMenu(navulId,menuClick){
         //console.log(rootMenu.items);
         //var $navbar=$('#navbarMenus');//导航栏的<ul
         var $ul=$(navulId);
+        $ul.empty();
         for (var i in rootMenu.items){
             var menu=rootMenu.items[i];
             menuList.push(menu);
@@ -32,7 +33,12 @@ function initNavMenu(navulId,menuClick){
                 }
             }
             else{
-                var li=$ul.append('<li class="nav-item"><a class="nav-link entityClass" menu-id="'+menu.id+'" href="#'+menu.code+'">'+menu.name+'</a></li>');
+                if(i==0){
+                    var li=$ul.append('<li class="nav-item active"><a class="nav-link entityClass" menu-id="'+menu.id+'" href="#'+menu.code+'">'+menu.name+'</a></li>');
+                }
+                else{
+                    var li=$ul.append('<li class="nav-item"><a class="nav-link entityClass" menu-id="'+menu.id+'" href="#'+menu.code+'">'+menu.name+'</a></li>');
+                }
             }
             /*
             <li class="nav-item"><a class="nav-link" href="#">监控管理</a></li>
@@ -104,62 +110,104 @@ function showAlert(msg, type) {
     }, 3000)
 }
 
+//将属性设置到界面上
+function setModelControls($entityModal,entity) {
+    var $inputControls = $entityModal.find('input[name]');
+    var $selectControls = $entityModal.find('select[name]');
+    $inputControls.each(function () {
+        var key = $(this).attr('name');
+        var value = getEntityValue(entity, key);
+        $(this).val(value);//设置
+        console.log('set input1:' + key + ',' + value);
+    })
+    $selectControls.each(function () {
+        var key = $(this).attr('name');
+        var value = getEntityValue(entity, key);
+        console.log('set select1:' + key + ',' + value);
+        console.log(value);
+        console.log($(this)[0]);
+        if (value != null) {
+            console.log('id:' + value.id);
+            $(this).val(value.id);//设置
+        } else {
+            console.log('value == null');
+        }
+    })
+}
+
+function getEntityValue(entity,name){
+    var parts=name.split('.');
+    var value = null;
+    if(parts.length==1){
+        value = entity[parts[0]];
+    }else if(parts.length==2){
+        if(entity[parts[0]]!=null){ //.city.name时可能city是null
+            value = entity[parts[0]][parts[1]];
+        }
+    }else{
+        value = entity[key];
+    }
+    return value;
+}
+
+//从界面上获取数据
+function getModelControls($entityModal,entity) {
+    var $inputControls = $entityModal.find('input[name]');
+    var $selectControls = $entityModal.find('select[name]');
+    //从界面上获取属性值
+    //1.input设置简单属性
+    $inputControls.each(function () {
+        var key=$(this).attr('name');
+        var value=$(this).val();
+        entity[key] = value;//设置属性值
+        //console.log('get:'+key+','+value);
+    })
+    //2.select设置关联属性
+    $selectControls.each(function(){
+        var key=$(this).attr('name');
+        var value=$(this).val();
+        var text=$(this).find("option:selected").text();
+        var obj={};//封装成对象
+        obj.id=value;
+        obj.name=text;
+        entity[key] = obj;//设置属性值
+    })
+}
+
 function showEntityModal(option) {
     console.log('function showEntityModal()');
-    //console.log(option);
-
+    console.log(option);
     var title=option.title;
     var entity=option.entity;
     var entityName=option.entityName;
     var modalContainerId='#modalContainer';
     var modalId='#entityModal';
     var validateEntity=option.validateEntity;//验证输入的回调函数
-
-    //console.log('showModal:'+title);
     var isModify=typeof(entity) != 'undefined';
-
-    //console.log("showModal:"+isModify);
-    //console.log(entity);
-    //console.log(typeof(entity));
     var row={};
     if(isModify){
         row=entity;
     }
-    //console.log(row);
     var htmlFile="entity/"+entityName+".html";
     //console.log('htmlFile:'+htmlFile);
     var $modalContainer=$(modalContainerId);
     //console.log($modalContainer);
     $modalContainer.load(htmlFile,function () {
-        console.log('load');
+        console.log('load htmlFile:'+htmlFile);
         var $entityModal = $(modalId).modal({show: false});
-        //console.log($entityModal);
-        var inputControls=$entityModal.find('input[name]');
-        if(isModify) { //设置属性到界面上
-            inputControls.each(function () {
-                var key = $(this).attr('name');
-                var parts=key.split('.');
-                var value = null;
-                if(parts.length==1){
-                    value = row[parts[0]];
-                }else if(parts.length==2){
-                    value = row[parts[0]][parts[1]];
-                }else{
-                    value = row[key];
-                }
-                $(this).val(value);//设置
-                //console.log('set:' + key + ',' + value);
-            })
+        if(isModify) {
+            //设置下拉框的值时需要事先加载下拉框的数据 loadSelectListData就是用于这个作用的 定义在具体的html子页面中 参考:user.html
+            if(typeof(loadSelectListData) == 'function'){
+                loadSelectListData(function () {
+                    setModelControls($entityModal,row);//设置属性到界面上
+                })
+            }else{
+                setModelControls($entityModal,row);//设置属性到界面上
+            }
         }
-
         //点击确定按钮
         $entityModal.find('.submit').click(function () {
-            inputControls.each(function () { //从界面上获取属性值
-                var key=$(this).attr('name');
-                var value=$(this).val();
-                row[key] = value;//获取
-                //console.log('get:'+key+','+value);
-            })
+            getModelControls($entityModal,row);//从界面上获取数据
             console.log(row);
             //验证实体类属性是否填写正确，比如：判断是否为空，输入内容是否合法。
             if(validateEntity!=null){

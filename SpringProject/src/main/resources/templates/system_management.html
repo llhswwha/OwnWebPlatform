@@ -4,8 +4,7 @@
     <link rel="stylesheet" type="text/css" href="css/public/init.css"/>
     <link rel="stylesheet" href="css/public/reset.css">
     <link rel="stylesheet" href="css/iconfont.css">
-    <!--<link rel="stylesheet" href="http://www.jq22.com/jquery/bootstrap-3.3.4.css">-->
-    <link rel="stylesheet" href="bootstrap/bootstrap.min3.4.css">
+    <link rel="stylesheet" href="bootstrap/bootstrap.css">
     <link rel="stylesheet" href="bootstrap/all.css">
     <link rel="stylesheet" href="bootstrap/bootstrap-table.min.css">
     <title>系统管理</title>
@@ -13,26 +12,24 @@
     <script type="text/javascript" src="js/plugin/jquery-1.11.3.js"></script>
     <script src="bootstrap/popper.min.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="bootstrap/bootstrap-select.css">
-
+    <!--<link rel="stylesheet" type="text/css" href="bootstrap/bootstrap-select.css">-->
+    <link rel="stylesheet" href="css/BsMultiSelect.css">
     <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-datetimepicker.css">
 
-    <script  type="text/javascript"  src="bootstrap/bootstrap.min3.4.js"></script>
+    <script  type="text/javascript"  src="bootstrap/bootstrap.js"></script>
     <script type="text/javascript" src="bootstrap/bootstrap-select.js"></script>
+    <!-- Latest compiled and minified CSS -->
+
+
     <script  type="text/javascript"  src="bootstrap/core.min.js"></script>
     <script  type="text/javascript"  src="bootstrap/bootstrap-table.min.js"></script>
-
     <script type="text/javascript" src="bootstrap/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-
     <script type="text/javascript" src="bootstrap/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
     <script type="text/javascript" src="bootstrap/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
     <script  type="text/javascript"  src="js/common/bootstrap-util.js"></script>
 
-
     <script type="text/javascript" src="js/common/communicate.js"></script>
     <script type="text/javascript" src="js/system_management.js"></script>
-
-
 </head>
 <body>
 <ul id="myTab" class="nav nav-tabs">
@@ -146,10 +143,16 @@
                                 </td>
                                 <td>用户角色:</td>
                                 <td>
-                                    <select class="selectpicker" multiple>
-                                        <option>Mustard</option>
-                                        <option>Ketchup</option>
-                                        <option>Relish</option>
+                                    <select name="states" id="example" class="form-control"  multiple="multiple" style="display: none;">
+                                        <option value="AL">Alabama</option>
+                                        <option value="AK">Alaska</option>
+                                        <option value="AZ">Arizona</option>
+                                        <option value="AR">Arkansas</option>
+                                        <option selected value="CA">California</option>
+                                        <option value="CO">Colorado</option>
+                                        <option value="CT">Connecticut</option>
+                                        <option value="DE">Delaware</option>
+
                                     </select>
                                 </td>
                             </tr>
@@ -181,8 +184,6 @@
                             </tr>
                         </table>
                     </form>
-
-
             </div>
 
             <div class="modal-footer">
@@ -225,5 +226,42 @@
 
 </div>
 
+<script src="js/BsMultiSelect.js"></script>
+<script>
+    var daoaa=new EntityDao('role');
+    daoaa.getAll(function(result){
+        console.log(result)
+
+        $("#example").html("");
+        //
+        for(i=0;i<result.length;i++){
+            $("#example").append("<option value='"+result[i].id+"'>"+result[i].name+"</option>");
+        }
+        $("#example").bsMultiSelect();
+        // $("#example").multiselect("destroy").multiselect({
+        //                 // 自定义参数，按自己需求定义
+        //                 nonSelectedText : '--请选择--',
+        //                 maxHeight : 350,
+        //                 includeSelectAllOption : true,
+        //                 numberDisplayed : 5
+        //             });
+    });
+
+</script>
 </body>
+<script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-36251023-1']);
+    _gaq.push(['_setDomainName', 'jqueryscript.net']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+</script>
+
 </html>

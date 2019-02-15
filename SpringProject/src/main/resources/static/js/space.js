@@ -1,14 +1,17 @@
 var cityID = -1 ;  //设置城市删除初始ID为-1
 var spaceCityId = -1;
+var cityName = "";
 $(document).ready(function (){
+    TableExport.init();
 	 getCityList();
-	 dataRoleList();
+	 dataRoleList(spaceCityId);
 });
 
 var entityName='spaceRes';//页面范围内的实体类名称
 var entityTable=null;
 //获取空间资源列表
-function dataRoleList(){
+function dataRoleList(spaceCityId){
+	console.log(spaceCityId);
     /*var entityTable=new EntityTable('#data_list','spaceRes');
     var columns=[
         {"field": "checked", "title": "","checkbox": true},
@@ -26,27 +29,15 @@ function dataRoleList(){
     getEntityColumns(entityName,function (columns) {
         entityTable=new EntityTable('#data_list',entityName);
         entityTable.init(columns);
-        entityTable.load();
+        // entityTable.changeEntity(spaceCityId,columns);
+        //entityTable.load();
+		var map={};
+		var city={};
+		city.id=spaceCityId;
+		map['city-eq']=spaceCityId;
+		entityTable.search(map);
     })
 }
-/*//新增空间资源信息
-function validateSpaceProperty(){
-	var data = new Object();
-	data.name = $("#belongCity").val();
-	data.cityId = 3;
-	data.area = $("#floorArea").val();
-	data.code = $("#areaCode").val();
-	data.address = $("#seat").val();
-	data.charge = $("#leaderName").val();
-	data.tel = $("#leaderPhone").val();
-	if ((data.name&&data.area&&data.address&&data.code&&data.charge&&data.tel)!==""){
-		return data;
-	}else {
-	    alert("请输入完整信息");
-		return false;
-	}
-}*/
-
 //新增空间资源信息
 function validateSpaceProperty(data){
 	if ((data.name&&data.area&&data.address&&data.code&&data.charge&&data.tel)!==""){
@@ -99,9 +90,13 @@ function getCityList() {
 	});
 }
 $(function () {
+	//左边城市导航栏按钮事件
 	$(".left-inside ul").on("click","li",function(){
 		$(this).removeClass("city-item");
 		$(this).addClass("nav").siblings().removeClass("nav").addClass("city-item");
+		var id = $(this).attr("data-id");
+		spaceCityId =id;
+		dataRoleList(spaceCityId);
 	});
 	// 添加城市输入框
 	$("#addCity").click(function () {
@@ -143,56 +138,74 @@ $(function () {
 			delCityName(cityID);
 		}
 	});
-	//空间资源模态框
+	//创建空间资源
 	$("#head-crease").click(function(){
+		var id = $("#cityList").find($("li[class='nav']")).attr("data-id");
+		var name = $("#cityList").find($("li[class='nav']")).attr("value");
+		console.log(id);
+		console.log(name);
+
 		//显示模态框界面
+		var city={};
+		city.name=name;
+		city.id=id;
+		var entity={};
+		entity.city=city;
+
 		showEntityModal({
 			title:$(this).text(),
 			entityName:entityName,
-			validateEntity:validateSpaceProperty
+			validateEntity:validateSpaceProperty,
+			entity:entity
 		});
 		$("#spaceModel input").val("");
-		var id = $("#cityList").find($("li[class='nav']"));
-		console.log(id);
-		spaceCityId =id;
 	});
 	//空间资源删除功能
 	$('#head-delete').click(function () {
-		var list=entityTable.getSelections();
-		if(list.length==0){
-			showAlertModal('请先选择一行','info');
-		}
-		else{
-			var entity=list[0];
-			console.log(entity);
-			var id=entity.id;
-			var dao=entityTable.dao;
-			dao.delete(id,function (result) {
-				if(result.state==0){
-					entityTable.load();
-					showAlertModal('删除成功!', 'success');
-				}
-				else{
-					showAlertModal('删除失败!', 'success');
-				}
-			})
-		}
+		// var list=entityTable.getSelections();
+		// if(list.length==0){
+		// 	showAlertModal('请先选择一行','info');
+		// }
+		// else{
+		// 	var entity=list[0];
+		// 	console.log(entity);
+		// 	var id=entity.id;
+		// 	var dao=entityTable.dao;
+		// 	dao.delete(id,function (result) {
+		// 		if(result.state==0){
+		// 			entityTable.load();
+		// 			showAlertModal('删除成功!', 'success');
+		// 		}
+		// 		else{
+		// 			showAlertModal('删除失败!', 'success');
+		// 		}
+		// 	})
+		// }
+		entityTable.deleteSelections();
 	})
 	//空间资源修改功能
-	// $('#head-edit').click(function () {
-	// 	var list=entityTable.getSelections();
-	// 	if(list.length==0){
-	// 		showAlertModal('请先选择一行','info');
-	// 	}
-	// 	else{
-	// 		var entity=list[0];
-	// 		showEntityModal({
-	// 			title:$(this).text(),
-	// 			entityName:entityName
-	// 		});
-	// 	}
-	// })
-});
+    $('#head-edit').click(function () {
+    var list=entityTable.getSelections();
+	if(list.length==0){
+ 		showAlertModal('请先选择一行','info');
+ 	}
+ 	else{
+ 		var entity=list[0];
+ 		console.log(entity);
+ 		showEntityModal({
+			title:$(this).text(),
+ 			entityName:entityName,
+            entity:entity
+ 		});
+ 	}
+ })
+	//搜索功能
+	$("#search").click(function () {
+	    var map ={};
+		map['name'] = $("#search-input").val();
+        entityTable.search(map);
+	})
+ });
 
 /*
 function showAlertModal(title, type) {

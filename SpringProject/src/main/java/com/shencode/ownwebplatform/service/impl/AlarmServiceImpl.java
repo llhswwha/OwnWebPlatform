@@ -15,4 +15,7 @@ public class AlarmServiceImpl extends EntityServiceImpl<Alarm> implements AlarmS
     public EntityRepository<Alarm, Integer> getRepository() {
         return alarmRepository;
     }
+
+
+
 }

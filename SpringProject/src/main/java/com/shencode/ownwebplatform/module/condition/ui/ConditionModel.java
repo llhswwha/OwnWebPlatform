@@ -12,7 +12,7 @@ public class ConditionModel {
 
     private Integer page = 0;
     private Integer size = 15;
-    private Map<String, String> map = new HashMap();
+    private Map<String, Object> map = new HashMap();
 
     public Map<String, String> getSort() {
         return sort;
@@ -34,12 +34,12 @@ public class ConditionModel {
     public ConditionModel() {
     }
 
-    public ConditionModel(Map<String, String> jsonMap) {
+    public ConditionModel(Map<String, Object> jsonMap) {
         this.setMap(jsonMap);
         this.generate();
     }
 
-    public ConditionModel(Map<String, String> jsonMap, Integer page, Integer size) {
+    public ConditionModel(Map<String, Object> jsonMap, Integer page, Integer size) {
         this.setMap(jsonMap);
         this.setPage(page);
         this.setSize(size);
@@ -68,19 +68,19 @@ public class ConditionModel {
 
     private void generate() {
         //解析并生成查询条件
-        Map<String, String> mp = this.getMap();
+        Map<String, Object> mp = this.getMap();
 
         if (!CollectionUtils.isEmpty(mp)) {
             String column = null;
             String op = null;
-            String v = null;
+            Object v = null;
             String matchMode = "anyMatch";
 
             for(Iterator i$ = mp.keySet().iterator(); i$.hasNext(); this.addCondition(column, op, v, matchMode)) {
                 String key = (String)i$.next();
                 key=key.trim();//删除前后空格
-                v = (String)mp.get(key);
-                v=v.trim();//删除前后空格
+                v = mp.get(key);
+                //v=v.trim();//删除前后空格
                 if (key.endsWith("eq")) {
                     column = key.substring(0, key.lastIndexOf("-"));
                     op = "eq";
@@ -402,7 +402,7 @@ public class ConditionModel {
         this.size = size == null ? 15 : size;
     }
 
-    public Map<String, String> getMap() {
+    public Map<String, Object> getMap() {
         if(map.containsKey("active")){
 
         } else{
@@ -411,7 +411,7 @@ public class ConditionModel {
         return map;
     }
 
-    public void setMap(Map<String, String> map) {
+    public void setMap(Map<String, Object> map) {
         this.map = map;
     }
 

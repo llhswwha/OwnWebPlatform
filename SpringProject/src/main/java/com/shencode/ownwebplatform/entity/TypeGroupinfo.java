@@ -1,6 +1,7 @@
 package com.shencode.ownwebplatform.entity;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 //设备类型监控组
@@ -38,6 +39,17 @@ public class TypeGroupinfo extends  BaseEntity{
     @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
     @JoinColumn(name = "id")
     private Set<TypeNodeinfo>  typeNodeinfoSet;    //监控节点
+
+    @Transient
+    private List<Integer> nodeInfoidList;
+    @Transient
+    public List<Integer> getNodeInfoidList() {
+        return nodeInfoidList;
+    }
+    @Transient
+    public void setNodeInfoidList(List<Integer> nodeInfoidList) {
+        this.nodeInfoidList = nodeInfoidList;
+    }
 
     public String getName() {
         return name;

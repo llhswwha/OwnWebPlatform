@@ -13,13 +13,13 @@ import java.util.Set;
 public class Menu extends BaseEntity {
 
     @Column(name = "name", nullable = false)
-    private String name;
+    private String name;          //菜单名称
     @Column(name = "code")
     private String code;
     @Column(name = "showOrder")
     private Integer showOrder;
     @Column(name = "pid")
-    private Integer pid;
+    private Integer pid;       //上级ID
     @Column(name = "description")
     private String description;
 
@@ -44,10 +44,19 @@ public class Menu extends BaseEntity {
 
     }
 
-    public Menu(String name,String code,Integer pid){
+    public Menu(String name,String code,Integer pid,Integer showOrder,Role role){
         this.name=name;
         this.code=code;
         this.pid=pid;
+        this.showOrder=showOrder;
+        if(role!=null)
+            this.roleSet.add(role);
+    }
+    public Menu(String name,String code,Integer pid,Integer showOrder){
+        this.name=name;
+        this.code=code;
+        this.pid=pid;
+        this.showOrder=showOrder;
     }
 
     @Transient
@@ -129,5 +138,20 @@ public class Menu extends BaseEntity {
 
     public void setParent(Menu parent) {
         this.parent = parent;
+    }
+
+    @Override
+    public String toString() {
+        return "Menu{" +
+                "name='" + name + '\'' +
+                ", code='" + code + '\'' +
+                ", showOrder=" + showOrder +
+                ", pid=" + pid +
+                ", description='" + description + '\'' +
+                ", roleSet=" + roleSet +
+                ", roleIdList=" + roleIdList +
+                ", items=" + items +
+                ", parent=" + parent +
+                '}';
     }
 }

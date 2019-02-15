@@ -1,6 +1,6 @@
 [
   {"field": "checked","align":"center", "title": "","checkbox": true},
-  {"field": "name","align":"center", "title": "名称"},
+  {"field": "name","align":"center", "title": "自然村/市辖区名称"},
   {"field": "city.name","align":"center", "title": "所属地市"},
   {"field": "area","align":"center", "title": "面积（平方公里）"},
   {"field": "code","align":"center", "title": "行政区域代码"},

@@ -68,7 +68,7 @@ $(window).resize(function(){
 // 百度地图API功能 点聚合 $(document.body).height()
 
 $(document).ready(function () {
-var map = new BMap.Map("container",{minZoom:10,maxZoom:17,enableMapClick:false});
+var map = new BMap.Map("container",{minZoom:10,maxZoom:19,enableMapClick:false});
 	map.centerAndZoom(new BMap.Point(118.797239,32.06442), 12);
 	map.enableScrollWheelZoom();
 	//map.addControl(new BMap.NavigationControl());			//缩放按钮

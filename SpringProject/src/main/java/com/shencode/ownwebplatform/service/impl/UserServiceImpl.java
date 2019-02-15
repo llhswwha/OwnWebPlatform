@@ -99,7 +99,7 @@ public class UserServiceImpl extends EntityServiceImpl<User> implements UserServ
     public Message<User> add(User user) {
         try{
         User user1=userRepository.findByLoginNameAndActive(user.getLoginName(),true);
-        if(user==null) {
+        if(user1==null) {
             SetRoles(user);
             SetCity(user);
             //todo:判断用户名不能相同
@@ -107,7 +107,7 @@ public class UserServiceImpl extends EntityServiceImpl<User> implements UserServ
         }
         else
         {
-            return new Message(0,"该用户已存在！");
+            return new Message(1,"该用户已存在！");
         }
         }
         catch (Exception e)

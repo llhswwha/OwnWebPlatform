@@ -7,7 +7,6 @@ function init(name){
 
 function change(name){
     console.log('change:'+name);
-    entityName=name;
     getEntityColumns(name,function (columns) {
         entityTable.changeEntity(name,columns);
         entityTable.load();
@@ -55,15 +54,23 @@ function clickMenu(){
     $('.breadcrumb-item .entityClass').click(clickMenu);//菜单点击事件
 }
 
+function initMenus(){
+    var userId=0;
+    var menuDao=new MenuDao();
+    menuDao.getRoot(userId,function(rootMenu){
+        app.$data.menus=rootMenu.items;
+    });
+}
+
 $(function(){
-    var userId=1;//用户id
-    initNavMenu('#navbarMenus',userId,clickMenu);//动态加载菜单
+    var userId=0;//用户id
+    //initNavMenu('#navbarMenus',userId,clickMenu);//动态加载菜单
+    initMenus();
     init(entityName);
     $btnSearch.click(function () {
         var map={};
         map['name']=$txtName.val();
         map['loginName']=$txtLoginName.val();
-        console.log(map);
         entityTable.search(map);
     })
     $btnClearSearch.click(function () {
@@ -124,5 +131,12 @@ $(function(){
             alert('yes');
         });
     })
+});
 
+var app=new Vue({
+   el:'#app',
+   data:{
+       message:'Hello Vue!',
+       menus:[]
+   }
 });

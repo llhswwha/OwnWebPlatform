@@ -9,4 +9,5 @@ public interface RoleRepository extends  EntityRepository<Role,Integer>
 {
     public List<Role> findAll();
 
+
 }

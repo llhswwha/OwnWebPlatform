@@ -74,3 +74,12 @@
     display: inline-block;
     height: 20px;
 }
+#organ_amend_content .form-control{
+    height: 38px !important;
+    overflow: auto;
+}
+#organ_amend_content .dropdown-menu{
+
+    height: 160px;
+    overflow: auto;
+}

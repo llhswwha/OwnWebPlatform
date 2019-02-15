@@ -31,6 +31,7 @@ public class SpaceResServiceImpl extends EntityServiceImpl<SpaceRes> implements 
     @Override
     public Message<SpaceRes> add(SpaceRes spaceRes)
     {
+        System.out.println(spaceRes);
         SetCity(spaceRes);
         return super.add(spaceRes);
     }

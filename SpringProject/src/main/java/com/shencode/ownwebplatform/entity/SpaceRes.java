@@ -122,4 +122,18 @@ public class SpaceRes extends BaseEntity {
         return devNum;
     }
 
+    @Override
+    public String toString() {
+        return "SpaceRes{" +
+                "name='" + name + '\'' +
+                ", area='" + area + '\'' +
+                ", city=" + city +
+                ", cityId=" + cityId +
+                ", code='" + code + '\'' +
+                ", address='" + address + '\'' +
+                ", charge='" + charge + '\'' +
+                ", tel='" + tel + '\'' +
+                ", devNum=" + devNum +
+                '}';
+    }
 }

@@ -26,4 +26,8 @@
   "field": "dep",
   "title": "部门",
   "sortable":true
+}, {
+  "field": "workEmail",
+  "title": "工作邮箱",
+  "sortable":true
 }]

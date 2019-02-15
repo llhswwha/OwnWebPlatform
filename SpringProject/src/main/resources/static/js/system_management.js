@@ -45,6 +45,11 @@ if(ajaxRolType=="添加角色信息"){
 
 
 });
+$(window).on('load', function () {
+    $('#usertype').selectpicker({
+        'selectedText': 'cat'
+    });
+});
 //新增用户提交
 
 function submitForm() {
