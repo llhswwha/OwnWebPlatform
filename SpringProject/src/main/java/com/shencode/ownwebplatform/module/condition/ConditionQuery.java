@@ -23,7 +23,7 @@ import java.util.List;
 
 public class ConditionQuery<T> {
 
-    private ConditionModel cm;
+    private ConditionModel<T> cm;
     private EntityManager entityManager;
 
     private Class<T> entityClass;

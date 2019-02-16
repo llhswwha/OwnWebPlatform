@@ -308,7 +308,7 @@ function EntityTable(tableId,entityName) {
         }
     }
     if(typeof this.loadData != 'function'){
-        EntityTable.prototype.loadData=function (page, size, sortName, sortOrder,map) {
+        EntityTable.prototype.loadData=function (page, size, sortName, sortOrder,map,entity) {
             var obj=this;
             obj.table.bootstrapTable('showLoading');
             obj.page=page;
@@ -326,6 +326,12 @@ function EntityTable(tableId,entityName) {
             var condition=new Condition();
             condition.setPage(page-1,size);
             condition.addSort(sortName,sortOrder);
+            if(entity!=null){
+                console.log("set condition entity !!!!!!!!!!!!");
+                console.log(entity);
+                condition.entity=entity;
+            }
+
             if(map!=null){
                 condition.map=map;
             }
@@ -340,9 +346,9 @@ function EntityTable(tableId,entityName) {
         }
     }
     if(typeof this.search != 'function'){
-        EntityTable.prototype.search=function(map) {
+        EntityTable.prototype.search=function(map,entity) {
             var obj=this;
-            obj.loadData(obj.page, obj.size, 'id', 'desc', map);
+            obj.loadData(obj.page, obj.size, 'id', 'desc', map,entity);
         }
     }
     if(typeof this.setOption!='function'){

@@ -1,15 +1,13 @@
 package com.shencode.ownwebplatform.service.impl;
 
+import com.shencode.ownwebplatform.entity.City;
 import com.shencode.ownwebplatform.entity.Menu;
 import com.shencode.ownwebplatform.entity.Role;
 import com.shencode.ownwebplatform.entity.User;
 import com.shencode.ownwebplatform.model.MenuComparator;
 import com.shencode.ownwebplatform.model.Message;
 import com.shencode.ownwebplatform.module.condition.ui.ConditionModel;
-import com.shencode.ownwebplatform.repository.EntityRepository;
-import com.shencode.ownwebplatform.repository.MenuRepository;
-import com.shencode.ownwebplatform.repository.RoleRepository;
-import com.shencode.ownwebplatform.repository.UserRepository;
+import com.shencode.ownwebplatform.repository.*;
 import com.shencode.ownwebplatform.service.MenuService;
 import com.shencode.ownwebplatform.service.RoleService;
 import org.springframework.data.domain.Page;
@@ -30,6 +28,9 @@ public class MenuServiceImpl extends EntityServiceImpl<Menu> implements MenuServ
 
     @Resource
     private UserRepository userRepository;
+
+    @Resource
+    private CityRepository cityRepository;
 
     @Override
     public EntityRepository<Menu, Integer> getRepository()
@@ -101,7 +102,7 @@ public class MenuServiceImpl extends EntityServiceImpl<Menu> implements MenuServ
             Menu menu1=this.addMenu(new Menu("首页","map",menu0.getId(),1,role));
             Menu menu2=this.addMenu(new Menu("空间资源管理","spaceMng",menu0.getId(),2,role));
             Menu menu21=this.addMenu(new Menu("地市管理","city",menu2.getId(),21,role));
-            Menu menu22=this.addMenu(new Menu("空间管理","space",menu2.getId(),22,role));
+            Menu menu22=this.addMenu(new Menu("空间管理","spaceRes",menu2.getId(),22,role));
             Menu menu3=this.addMenu(new Menu("设备管理","devMng",menu0.getId(),3,role));
             Menu menu31=this.addMenu(new Menu("设备类型管理","devType",menu3.getId(),31,role));
             Menu menu32=this.addMenu(new Menu("设备资源管理","dev",menu3.getId(),32,role));
@@ -219,5 +220,10 @@ public class MenuServiceImpl extends EntityServiceImpl<Menu> implements MenuServ
         Message<Page<Menu>> msg=  super.queryPage(condition);
         SetParent(msg.getData());
         return msg;
+    }
+
+    @Override
+    public Message<List<Menu>> queryAll(ConditionModel condition) {
+        return super.queryAll(condition);
     }
 }

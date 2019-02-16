@@ -32,10 +32,16 @@ function dataRoleList(spaceCityId){
         // entityTable.changeEntity(spaceCityId,columns);
         //entityTable.load();
 		var map={};
+		map['city-eq']=spaceCityId;//这样的就可以
+
+		var entity={};//这个测试中，暂时没实际用途，需要后端支持
+		entity.id=0;
+		entity.name='name';
 		var city={};
 		city.id=spaceCityId;
-		map['city-eq']=spaceCityId;
-		entityTable.search(map);
+		entity.city=city;
+
+		entityTable.search(map,entity);
     })
 }
 //新增空间资源信息

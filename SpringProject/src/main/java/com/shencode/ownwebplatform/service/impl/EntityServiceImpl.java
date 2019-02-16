@@ -228,7 +228,7 @@ public abstract class EntityServiceImpl<T extends BaseEntity> implements EntityS
     private EntityManager entityManager;//必须有
 
     @Override
-    public Message<List<T>> queryAll(ConditionModel condition){
+    public Message<List<T>> queryAll(ConditionModel<T> condition){
         Message<List<T>> msg=new Message<>();
         try{
             ConditionQuery queryUtil=new ConditionQuery(entityManager,entityClass,condition);
@@ -241,7 +241,7 @@ public abstract class EntityServiceImpl<T extends BaseEntity> implements EntityS
     }
 
     @Override
-    public Message<Page<T>> queryPage(ConditionModel condition){
+    public Message<Page<T>> queryPage(ConditionModel<T> condition){
         Message<Page<T>> msg=new Message<>();
         try{
             ConditionQuery queryUtil=new ConditionQuery(entityManager,entityClass,condition);
@@ -257,7 +257,7 @@ public abstract class EntityServiceImpl<T extends BaseEntity> implements EntityS
         return msg;
     }
 
-    private Pageable getPageable(ConditionModel condition){
+    private Pageable getPageable(ConditionModel<T> condition){
         List<Sort.Order> orders=new ArrayList<>();
         for (OrderBy orderBy : condition.getOrderBys()) {
             if (orderBy.isAsc()) {

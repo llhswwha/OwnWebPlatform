@@ -68,6 +68,7 @@ function Condition(page,size) {
     }
     this.map={};
     this.sort={};
+    this.entity=null;
     if (typeof this.setPropertyByJson != 'function') {
         Condition.prototype.setPropertyByJson = function (json) {
             console.log('condition.setPropertyByJson');

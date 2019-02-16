@@ -7,12 +7,14 @@ import org.springframework.util.StringUtils;
 
 import java.util.*;
 
-public class ConditionModel {
+public class ConditionModel<T> {
     private static final String separator = "-";
 
     private Integer page = 0;
     private Integer size = 15;
     private Map<String, Object> map = new HashMap();
+
+    private T entity;
 
     public Map<String, String> getSort() {
         return sort;
@@ -66,7 +68,7 @@ public class ConditionModel {
         this.setSize(size);
     }
 
-    private void generate() {
+    public void generate() {
         //解析并生成查询条件
         Map<String, Object> mp = this.getMap();
 
@@ -75,7 +77,7 @@ public class ConditionModel {
             String op = null;
             Object v = null;
             String matchMode = "anyMatch";
-
+            hashCondition.clear();
             for(Iterator i$ = mp.keySet().iterator(); i$.hasNext(); this.addCondition(column, op, v, matchMode)) {
                 String key = (String)i$.next();
                 key=key.trim();//删除前后空格
@@ -421,5 +423,14 @@ public class ConditionModel {
 
     public void setHashOrderBy(Map<String, OrderBy> hashOrderBy) {
         this.hashOrderBy = hashOrderBy;
+    }
+
+
+    public T getEntity() {
+        return entity;
+    }
+
+    public void setEntity(T entity) {
+        this.entity = entity;
     }
 }
