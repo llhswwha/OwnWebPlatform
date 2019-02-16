@@ -102,14 +102,14 @@ public abstract class EntityController<T extends BaseEntity,ID> {
     }
 
     @PostMapping("queryAll")
-    public Message<List<T>> queryList(@RequestBody ConditionModel condition) {
+    public Message<List<T>> queryList(@RequestBody ConditionModel<T> condition) {
         System.out.println("queryAll");
         System.out.println(condition);
         return getService().queryAll(condition);
     }
 
     @PostMapping("queryPage")
-    public Message<Page<T>> queryPage(@RequestBody ConditionModel condition) {
+    public Message<Page<T>> queryPage(@RequestBody ConditionModel<T> condition) {
         System.out.println("queryPage");
         System.out.println(condition);
         return getService().queryPage(condition);
@@ -124,6 +124,6 @@ public abstract class EntityController<T extends BaseEntity,ID> {
     public Page<User> findByParam(@QuerydslPredicate(root = User.class) Predicate predicate, Pageable pageable) {
         return userQueryDSLRepository.findAll(predicate,pageable);
     }*/
-  //另一种条件查询方式 继续研究
+  //todo:另一种条件查询方式 继续研究
 }
 

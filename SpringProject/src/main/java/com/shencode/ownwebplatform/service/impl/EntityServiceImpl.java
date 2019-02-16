@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.*;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.*;
@@ -241,7 +242,7 @@ public abstract class EntityServiceImpl<T extends BaseEntity> implements EntityS
     }
 
     @Override
-    public Message<Page<T>> queryPage(ConditionModel<T> condition){
+    public Message<Page<T>> queryPage(ConditionModel<T> condition)  {
         Message<Page<T>> msg=new Message<>();
         try{
             ConditionQuery queryUtil=new ConditionQuery(entityManager,entityClass,condition);

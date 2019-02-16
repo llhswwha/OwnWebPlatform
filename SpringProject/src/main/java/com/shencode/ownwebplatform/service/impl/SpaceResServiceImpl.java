@@ -10,11 +10,15 @@ import com.shencode.ownwebplatform.repository.CityRepository;
 import com.shencode.ownwebplatform.repository.EntityRepository;
 import com.shencode.ownwebplatform.repository.SpaceResRepository;
 import com.shencode.ownwebplatform.service.SpaceResService;
+import com.shencode.ownwebplatform.util.MapUtil;
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.lang.reflect.InvocationTargetException;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -55,21 +59,29 @@ public class SpaceResServiceImpl extends EntityServiceImpl<SpaceRes> implements 
         spaceRes.setCity(city);
     }
 
-    @Override
-    public Message<Page<SpaceRes>> queryPage(ConditionModel<SpaceRes> condition) {
-        //SpaceRes entity=condition.getEntity(); //todo:这里还是不行
+    /*@Override
+    public Message<Page<SpaceRes>> queryPage(ConditionModel<SpaceRes> condition)  {
+        System.out.println("SpaceResService.queryPage");
+
         Map<String,Object> map=condition.getMap();
-        if(map.containsKey("city-eq")){ //todo:这里不够通用，需要前端传一个对象过来
-            Integer cityId=Integer.parseInt(map.get("city-eq")+"");
-            //这里不能用findOne这种的 不然得到的city是代理类 给前端序列化时会出错
-            Optional<City> op=cityRepository.findById(cityId);
-            if(op.isPresent()){
-                City city=op.get();
-                map.put("city-eq",city);
+        if(map.containsKey("city-eq")) { //todo:这里不够通用，需要前端传一个对象过来
+            Integer cityId = Integer.parseInt(map.get("city-eq") + "");
+            City city = new City();
+            city.setId(cityId);//这样也可以，说明前端传一个对象过来的话就可以
+            map.put("city-eq", city);
+            condition.generate();
+        }
+
+        SpaceRes obj=condition.getEntity();
+        System.out.println(obj);
+        if(obj!=null){
+            City city=obj.getCity();
+            if(city!=null){
+                map.put("city-eq", city);
                 condition.generate();
             }
         }
         Message<Page<SpaceRes>> msg=  super.queryPage(condition);
         return msg;
-    }
+    }*/
 }

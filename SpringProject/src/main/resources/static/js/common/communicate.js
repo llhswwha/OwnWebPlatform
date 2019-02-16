@@ -246,6 +246,7 @@ function EntityDao(name) {
             this.ajax.post(url,condition,callBack);
         }
     }
+
     if (typeof this.getCount != 'function') {
         EntityDao.prototype.getCount = function (callBack) {
             console.log('dao.getCount');

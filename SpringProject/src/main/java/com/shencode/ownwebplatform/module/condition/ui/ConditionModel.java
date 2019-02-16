@@ -5,6 +5,9 @@ import com.shencode.ownwebplatform.module.condition.util.JsonUtil;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
+import java.beans.PropertyDescriptor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.*;
 
 public class ConditionModel<T> {
@@ -126,6 +129,24 @@ public class ConditionModel<T> {
                     op = "lk";
                     matchMode = "anyMatch";
                 }
+            }
+        }
+        if(entity!=null){//根据实体类创建查询条件 应用：SpaceRes根据City来过滤
+            try{
+                Class entityClass=entity.getClass();
+                Field[] fields=entityClass.getDeclaredFields();
+                for (int i=0;i<fields.length;i++){
+                    Field field=fields[i];
+                    PropertyDescriptor pd = new PropertyDescriptor(field.getName(), entityClass);
+                    Method rM = pd.getReadMethod();//获得读方法
+                    Object value = rM.invoke(entity);
+                    if(value!=null){
+                        this.addCondition(field.getName(),"eq",value);
+                    }
+                }
+                //todo:这里可以继续扩展成根据一个实体类对象创建复杂的查询条件
+            }catch (Exception ex){
+                System.out.println(ex);
             }
         }
         generateSort();//解析并生成排序规则

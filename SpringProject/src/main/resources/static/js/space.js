@@ -4,45 +4,27 @@ var cityName = "";
 $(document).ready(function (){
     TableExport.init();
 	 getCityList();
-	 dataRoleList(spaceCityId);
+	 dataSpaceList(spaceCityId);
 });
 
 var entityName='spaceRes';//页面范围内的实体类名称
 var entityTable=null;
 //获取空间资源列表
-function dataRoleList(spaceCityId){
+function dataSpaceList(spaceCityId){
 	console.log(spaceCityId);
-    /*var entityTable=new EntityTable('#data_list','spaceRes');
-    var columns=[
-        {"field": "checked", "title": "","checkbox": true},
-        {"field": "name", "title": "名称"},
-        {"field": "city.name", "title": "所属地市"},
-        {"field": "area", "title": "面积（平方公里）"},
-        {"field": "code", "title": "行政区域代码"},
-        {"field": "address","title": "政府驻地"},
-        {"field": "charge", "title": "负责人"},
-        {"field": "tel", "title": "联系方式"}
-    ];
-    entityTable.init(columns);
-    entityTable.load();*/
-    //var entityName='spaceRes';
-    getEntityColumns(entityName,function (columns) {
+    if(entityTable==null){ //初始化部分(getEntityColumns,init)只要执行一次就行
         entityTable=new EntityTable('#data_list',entityName);
-        entityTable.init(columns);
-        // entityTable.changeEntity(spaceCityId,columns);
-        //entityTable.load();
-		var map={};
-		map['city-eq']=spaceCityId;//这样的就可以
+        getEntityColumns(entityName,function (columns) {
+            entityTable.init(columns);
+            var entity={city:{id:spaceCityId}};//这里相当于把city信息传给后端
+            entityTable.search(null,entity);
+        })
+    }
+    else{
+        var entity={city:{id:spaceCityId}};//这里相当于把city信息传给后端
+        entityTable.search(null,entity);
+    }
 
-		var entity={};//这个测试中，暂时没实际用途，需要后端支持
-		entity.id=0;
-		entity.name='name';
-		var city={};
-		city.id=spaceCityId;
-		entity.city=city;
-
-		entityTable.search(map,entity);
-    })
 }
 //新增空间资源信息
 function validateSpaceProperty(data){
@@ -102,7 +84,7 @@ $(function () {
 		$(this).addClass("nav").siblings().removeClass("nav").addClass("city-item");
 		var id = $(this).attr("data-id");
 		spaceCityId =id;
-		dataRoleList(spaceCityId);
+		dataSpaceList(spaceCityId);
 	});
 	// 添加城市输入框
 	$("#addCity").click(function () {

@@ -292,7 +292,7 @@ function EntityTable(tableId,entityName) {
                 },
                 onSort: function (name, order) {
                     console.log('onSort:' + name + ',' + order);
-                    obj.loadData(obj.page, obj.size, name, order);
+                    obj.loadData(obj.page, obj.size, name, order,obj.map,obj.entity);
                 },
                 columns: columns
             };
@@ -313,6 +313,8 @@ function EntityTable(tableId,entityName) {
             obj.table.bootstrapTable('showLoading');
             obj.page=page;
             obj.size=size;
+            obj.map=map;
+            obj.entity=entity;
             if(typeof(sortName) == 'undefined'){
                 sortName=obj.sortName;
             }else{
@@ -346,7 +348,7 @@ function EntityTable(tableId,entityName) {
         }
     }
     if(typeof this.search != 'function'){
-        EntityTable.prototype.search=function(map,entity) {
+        EntityTable.prototype.search=function(map, entity) {
             var obj=this;
             obj.loadData(obj.page, obj.size, 'id', 'desc', map,entity);
         }

@@ -1,6 +1,10 @@
 package com.shencode.ownwebplatform.entity;
 
+import org.apache.commons.beanutils.BeanUtils;
+
 import javax.persistence.*;
+import java.lang.reflect.InvocationTargetException;
+import java.util.LinkedHashMap;
 
 @Entity
 @Table(name = "t_spaceres")
@@ -47,6 +51,12 @@ public class SpaceRes extends BaseEntity {
     public void setCity(City city) {
         this.city = city;
     }
+
+    /*public void setCity(LinkedHashMap map) throws InvocationTargetException, IllegalAccessException {
+        City city=new City();
+        BeanUtils.populate(city,map);
+        this.city = city;
+    }*/
 
     public City getCity() {
         return city;

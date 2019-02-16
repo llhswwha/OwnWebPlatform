@@ -1,12 +1,12 @@
 [
-  {"field": "checked","align":"center", "title": "","checkbox": true},
-  {"field": "name","align":"center", "title": "自然村/市辖区名称"},
-  {"field": "city.name","align":"center", "title": "所属地市"},
-  {"field": "area","align":"center", "title": "面积（平方公里）"},
-  {"field": "code","align":"center", "title": "行政区域代码"},
-  {"field": "address","align":"center","title": "政府驻地"},
-  {"field": "charge","align":"center", "title": "负责人"},
-  {"field": "tel","align":"center", "title": "负责人联系方式"},
-  {"field": "devNum","align":"center", "title": "设备数量"}
+  {"field": "checked","align":"center", "title": "","checkbox": true,"sortable":true},
+  {"field": "name","align":"center", "title": "自然村/市辖区名称","sortable":true},
+  {"field": "city.name","align":"center", "title": "所属地市","sortable":true},
+  {"field": "area","align":"center", "title": "面积（平方公里）","sortable":true},
+  {"field": "code","align":"center", "title": "行政区域代码","sortable":true},
+  {"field": "address","align":"center","title": "政府驻地","sortable":true},
+  {"field": "charge","align":"center", "title": "负责人","sortable":true},
+  {"field": "tel","align":"center", "title": "负责人联系方式","sortable":true},
+  {"field": "devNum","align":"center", "title": "设备数量","sortable":true}
 
 ]
