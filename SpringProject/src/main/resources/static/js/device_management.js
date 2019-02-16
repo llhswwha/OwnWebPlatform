@@ -9,7 +9,19 @@
 // }
 //
 // })
-
+var entityName = 'deviceType';
+var  entityTable=null;
+$(document).ready(function (){
+    TableExport.init();
+    deviceTypeList();
+});
+function deviceTypeList(){
+    getEntityColumns(entityName,function (columns) {
+        entityTable=new EntityTable('#deviceType-list',entityName);
+        entityTable.init(columns);
+        entityTable.load();
+    })
+};
 
 $(".close_winde").click(function () {
 var win = $(this).attr("value");
@@ -17,7 +29,6 @@ var win = $(this).attr("value");
 });
 $("#head-crease").click(function () {
     //Device_attribute  840 480
-
     var top = document.body.scrollTop + document.documentElement.scrollTop;
     $('#Device_attribute').window({
         collapsible: false,

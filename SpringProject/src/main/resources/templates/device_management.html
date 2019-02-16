@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>设备管理</title>
-    <script type="text/javascript" src="js/plugin/jquery-1.11.3.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/easyui.css">
-    <link rel="stylesheet" type="text/css" href="css/icon.css">
-    <script type="text/javascript" src="js/plugin/jquery.easyui.min.js"></script>
-    <script type="text/javascript" src="js/plugin/easyui-lang-zh_CN.js"></script>
+    <title>设备类型管理</title>
+    <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap/all.css">
+    <link rel="stylesheet" href="bootstrap/bootstrap-table.min.css">
     <link rel="stylesheet" type="text/css" href="css/public/init.css"/>
     <link rel="stylesheet" href="css/public/reset.css">
     <link rel="stylesheet" href="css/iconfont.css">
-    <link rel="stylesheet" type="text/css" href="css/datagridZD.css"/>
     <link rel="stylesheet" href="css/device_management.css">
 </head>
 <body>
@@ -25,12 +22,13 @@
             <input type="text" class="page_search" placeholder="输入设备类型名称进行搜索">
             <span class="icon iconfont icon-sousuo"></span>
             <span class="icon iconfont icon-shuaxin"></span>
-
-
-
-
         </div>
-
+        <table id="deviceType-list"
+               data-toolbar="#right-title"
+               data-page-list="[10,20,30,40]"
+               data-height="800"
+        >
+        </table>
     </div>
 
 </div>
@@ -153,7 +151,17 @@
 </div>
 
 </div>
-
+<script src="bootstrap/jquery.min.js"></script>
+<script src="bootstrap/popper.min.js"></script>
+<script src="bootstrap/bootstrap.min.js"></script>
+<script src="bootstrap/core.min.js"></script>
+<script src="bootstrap/bootstrap-table.min.js"></script>
+<script src="js/common/bootstrap-util.js"></script>
+<script type="text/javascript" src="js/common/communicate.js"></script>
+<script src="bootstrap/table-export.js"></script>
+<script src="bootstrap/tableExport.js"></script>
+<script src="bootstrap/jquery.base64.js"></script>
+<script src="bootstrap/main.js"></script>
 <script type="text/javascript" src="js/device_management.js"></script>
 </body>
 </html>

@@ -204,6 +204,10 @@ function showEntityModal(option) {
             }else{
                 setModelControls($entityModal,row);//设置属性到界面上
             }
+        }else{
+            if(typeof(loadSelectListData) == 'function'){ //加载初始化数据
+                loadSelectListData();
+            }
         }
         //点击确定按钮
         $entityModal.find('.submit').click(function () {

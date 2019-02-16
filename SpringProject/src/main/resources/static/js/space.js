@@ -1,10 +1,9 @@
 var cityID = -1 ;  //设置城市删除初始ID为-1
-var spaceCityId = -1;
-var cityName = "";
+var spaceCityId;
 $(document).ready(function (){
     TableExport.init();
 	 getCityList();
-	 dataSpaceList(spaceCityId);
+
 });
 
 var entityName='spaceRes';//页面范围内的实体类名称
@@ -12,19 +11,18 @@ var entityTable=null;
 //获取空间资源列表
 function dataSpaceList(spaceCityId){
 	console.log(spaceCityId);
-    if(entityTable==null){ //初始化部分(getEntityColumns,init)只要执行一次就行
-        entityTable=new EntityTable('#data_list',entityName);
-        getEntityColumns(entityName,function (columns) {
-            entityTable.init(columns);
-            var entity={city:{id:spaceCityId}};//这里相当于把city信息传给后端
-            entityTable.search(null,entity);
-        })
-    }
-    else{
-        var entity={city:{id:spaceCityId}};//这里相当于把city信息传给后端
-        entityTable.search(null,entity);
-    }
-
+	if(entityTable==null){ //初始化部分(getEntityColumns,init)只要执行一次就行
+		entityTable=new EntityTable('#data_list',entityName);
+		getEntityColumns(entityName,function (columns) {
+			entityTable.init(columns);
+			var entity={city:{id:spaceCityId}};//这里相当于把city信息传给后端
+			entityTable.search(null,entity);
+		})
+	}
+	else{
+		var entity={city:{id:spaceCityId}};//这里相当于把city信息传给后端
+		entityTable.search(null,entity);
+	}
 }
 //新增空间资源信息
 function validateSpaceProperty(data){
@@ -75,6 +73,7 @@ function getCityList() {
 			}
 		}
 		$(".left-inside ul li").first().addClass("nav");
+		$(".left-inside ul li").first().click();
 	});
 }
 $(function () {
@@ -130,9 +129,6 @@ $(function () {
 	$("#head-crease").click(function(){
 		var id = $("#cityList").find($("li[class='nav']")).attr("data-id");
 		var name = $("#cityList").find($("li[class='nav']")).attr("value");
-		console.log(id);
-		console.log(name);
-
 		//显示模态框界面
 		var city={};
 		city.name=name;
@@ -192,6 +188,10 @@ $(function () {
 	    var map ={};
 		map['name'] = $("#search-input").val();
         entityTable.search(map);
+	})
+	//刷新功能
+	$(".flush").click(function () {
+		window.location.reload();
 	})
  });
 
